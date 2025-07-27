@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Modulo 3 on My New Hugo Site</title>
-    <link>http://localhost:1313/docs/module3/</link>
-    <description>Recent content in Modulo 3 on My New Hugo Site</description>
+    <title>Modulo 3 on Aprendiendo GIT</title>
+    <link>http://localhost:1313/git-course/docs/module3/</link>
+    <description>Recent content in Modulo 3 on Aprendiendo GIT</description>
     <generator>Hugo</generator>
     <language>en-us</language>
-    <atom:link href="http://localhost:1313/docs/module3/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://localhost:1313/git-course/docs/module3/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Resolving Merge Conflicts</title>
-      <link>http://localhost:1313/docs/module3/git-conflicts/</link>
+      <link>http://localhost:1313/git-course/docs/module3/git-conflicts/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/docs/module3/git-conflicts/</guid>
-      <description>&lt;p&gt;hola&lt;/p&gt;</description>
+      <guid>http://localhost:1313/git-course/docs/module3/git-conflicts/</guid>
+      <description>&lt;h2 id=&#34;1-revisión-de-los-merges-en-los-conflictoa&#34;&gt;&#xD;&#xA;  &lt;strong&gt;1 Revisión de los merges en los conflictoa&lt;/strong&gt;&#xD;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#1-revisi%c3%b3n-de-los-merges-en-los-conflictoa&#34;&gt;#&lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;</description>
     </item>
   </channel>
 </rss>
