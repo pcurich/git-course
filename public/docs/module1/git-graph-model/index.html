@@ -1,0 +1,926 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  El modelo de grafo en Git
+  #
+
+Entender cómo Git representa el historial de cambios como un grafo dirigido acíclico (DAG), y cómo cada commit se conecta con sus antecesores.
+
+  DAG visual
+  #
+
+
+
+
+
+  
+
+
+
+
+
+graph LR
+    A[Commit A] --&gt; B[Commit B]
+    B --&gt; C[Commit C]
+    C --&gt; D[Commit D]
+    B --&gt; E[Feature Branch: Commit E]
+    E --&gt; F[Commit F]
+    F --&gt; G[Merge Commit G]
+    D --&gt; G
+
+    classDef commit fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
+    class A,B,C,D,E,F,G commit;
+    
+
+
+
+  Comandos esenciales para entender el DAG en Git
+  #
+
+
+  
+      
+          🛠 Comando
+          📘 Propósito
+          🧾 Explicación
+      
+  
+  
+      
+          git log --oneline --graph --decorate --all
+          Visualizar el grafo completo de commits
+          Dibuja el DAG con líneas de conexión, nombres de ramas y commits compactos.
+      
+      
+          git show &lt;commit&gt;
+          Inspeccionar un nodo específico
+          Muestra los detalles, cambios y metadatos de un commit individual.
+      
+      
+          git diff &lt;commit1&gt; &lt;commit2&gt;
+          Comparar dos nodos del grafo
+          Permite ver los cambios entre dos commits, útil para estudiar su evolución.
+      
+      
+          git reflog
+          Consultar el historial interno del HEAD
+          Muestra los movimientos recientes, ideal para recuperar commits perdidos.
+      
+      
+          git cat-file -p &lt;commit&gt;
+          Ver el contenido crudo de un commit
+          Revela cómo Git almacena los objetos internamente en el grafo.
+      
+      
+          git rev-parse &lt;ref&gt;
+          Obtener el SHA-1 de una referencia
+          Identifica un nodo del grafo con su hash único.
+      
+      
+          git fsck
+          Verificar la integridad del DAG
+          Comprueba que no existan objetos corruptos o referencias rotas.
+      
+  
+
+
+  Comandos que interactuan con el DAG
+  #
+
+
+
+
+graph LR
+  A[git log] --&gt; DAG[🔗 DAG]
+  B[git show commit] --&gt; DAG
+  C[git diff commit1 commit2] --&gt; DAG
+  D[git reflog] --&gt; DAG
+  E[git cat-file -p commit] --&gt; DAG
+  F[git rev-parse ref] --&gt; DAG
+  G[git fsck] --&gt; DAG
+
+  DAG --&gt; H[Historia de commits]
+  DAG --&gt; I[Relaciones entre nodos]
+  DAG --&gt; J[Estructura interna]
+
+  classDef cmd fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
+  class A,B,C,D,E,F,G cmd;
+
+
+
+
+  
+Este gráfico representa cómo diversos comandos de Git permiten explorar, inspeccionar y verificar el DAG (grafo dirigido acíclico) que modela la historia del proyecto. Cada nodo representa un commit, y las relaciones muestran cómo fluye el desarrollo del código.
+
+
+
+
+  Ejercicio: Explorando el DAG en Git usando comandos
+  #
+
+A continuación, se presenta una simulación guiada por consola para construir y explorar el DAG (grafo dirigido acíclico) en Git. Cada paso está comentado para entender su propósito dentro del modelo.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/module1/git-graph-model/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="Git Graph Model">
+  <meta property="og:description" content="El modelo de grafo en Git#Entender cómo Git representa el historial de cambios como un grafo dirigido acíclico (DAG), y cómo cada commit se conecta con sus antecesores.
+DAG visual#graph LRA[Commit A] --&gt; B[Commit B]B --&gt; C[Commit C]C --&gt; D[Commit D]B --&gt; E[Feature Branch: Commit E]E --&gt; F[Commit F]F --&gt; G[Merge Commit G]D --&gt; GclassDef commit fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;class A,B,C,D,E,F,G commit;Comandos esenciales para entender el DAG en Git#🛠 Comando 📘 Propósito 🧾 Explicación git log --oneline --graph --decorate --all Visualizar el grafo completo de commits Dibuja el DAG con líneas de conexión, nombres de ramas y commits compactos. git show &lt;commit&gt; Inspeccionar un nodo específico Muestra los detalles, cambios y metadatos de un commit individual. git diff &lt;commit1&gt; &lt;commit2&gt; Comparar dos nodos del grafo Permite ver los cambios entre dos commits, útil para estudiar su evolución. git reflog Consultar el historial interno del HEAD Muestra los movimientos recientes, ideal para recuperar commits perdidos. git cat-file -p &lt;commit&gt; Ver el contenido crudo de un commit Revela cómo Git almacena los objetos internamente en el grafo. git rev-parse &lt;ref&gt; Obtener el SHA-1 de una referencia Identifica un nodo del grafo con su hash único. git fsck Verificar la integridad del DAG Comprueba que no existan objetos corruptos o referencias rotas. Comandos que interactuan con el DAG#graph LRA[git log] --&gt; DAG[🔗 DAG]B[git show commit] --&gt; DAGC[git diff commit1 commit2] --&gt; DAGD[git reflog] --&gt; DAGE[git cat-file -p commit] --&gt; DAGF[git rev-parse ref] --&gt; DAGG[git fsck] --&gt; DAGDAG --&gt; H[Historia de commits]DAG --&gt; I[Relaciones entre nodos]DAG --&gt; J[Estructura interna]classDef cmd fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;class A,B,C,D,E,F,G cmd;Este gráfico representa cómo diversos comandos de Git permiten explorar, inspeccionar y verificar el DAG (grafo dirigido acíclico) que modela la historia del proyecto. Cada nodo representa un commit, y las relaciones muestran cómo fluye el desarrollo del código.Ejercicio: Explorando el DAG en Git usando comandos#A continuación, se presenta una simulación guiada por consola para construir y explorar el DAG (grafo dirigido acíclico) en Git. Cada paso está comentado para entender su propósito dentro del modelo.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Graph Model | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/module1/git-graph-model/">
+<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.74d83436b7c90aac939ed3d35a4cf32490ea250f507401d2cb6012518bf4c0c2.js" integrity="sha256-dNg0NrfJCqyTntPTWkzzJJDqJQ9QdAHSy2ASUYv0wMI=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-494ba3d784b4edbfa0d8bfc979335f06" class="toggle" checked />
+    <label for="section-494ba3d784b4edbfa0d8bfc979335f06" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-graph-model/" class="active">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="toggle"  />
+    <label for="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
+    <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
+      <a href="/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Graph Model</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#el-modelo-de-grafo-en-git"><strong>El modelo de grafo en Git</strong></a></li>
+    <li><a href="#dag-visual"><strong>DAG visual</strong></a></li>
+    <li><a href="#comandos-esenciales-para-entender-el-dag-en-git"><strong>Comandos esenciales para entender el DAG en Git</strong></a></li>
+    <li><a href="#comandos-que-interactuan-con-el-dag"><strong>Comandos que interactuan con el DAG</strong></a></li>
+    <li><a href="#ejercicio-explorando-el-dag-en-git-usando-comandos"><strong>Ejercicio: Explorando el DAG en Git usando comandos</strong></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="el-modelo-de-grafo-en-git">
+  <strong>El modelo de grafo en Git</strong>
+  <a class="anchor" href="#el-modelo-de-grafo-en-git">#</a>
+</h2>
+<p>Entender cómo Git representa el historial de cambios como un grafo dirigido acíclico (DAG), y cómo cada commit se conecta con sus antecesores.</p>
+<h2 id="dag-visual">
+  <strong>DAG visual</strong>
+  <a class="anchor" href="#dag-visual">#</a>
+</h2>
+
+
+<script src="/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+graph LR
+    A[Commit A] --> B[Commit B]
+    B --> C[Commit C]
+    C --> D[Commit D]
+    B --> E[Feature Branch: Commit E]
+    E --> F[Commit F]
+    F --> G[Merge Commit G]
+    D --> G
+
+    classDef commit fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
+    class A,B,C,D,E,F,G commit;
+    
+</pre>
+
+<h2 id="comandos-esenciales-para-entender-el-dag-en-git">
+  <strong>Comandos esenciales para entender el DAG en Git</strong>
+  <a class="anchor" href="#comandos-esenciales-para-entender-el-dag-en-git">#</a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>🛠 Comando</th>
+          <th>📘 Propósito</th>
+          <th>🧾 Explicación</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>git log --oneline --graph --decorate --all</code></td>
+          <td>Visualizar el grafo completo de commits</td>
+          <td>Dibuja el DAG con líneas de conexión, nombres de ramas y commits compactos.</td>
+      </tr>
+      <tr>
+          <td><code>git show &lt;commit&gt;</code></td>
+          <td>Inspeccionar un nodo específico</td>
+          <td>Muestra los detalles, cambios y metadatos de un commit individual.</td>
+      </tr>
+      <tr>
+          <td><code>git diff &lt;commit1&gt; &lt;commit2&gt;</code></td>
+          <td>Comparar dos nodos del grafo</td>
+          <td>Permite ver los cambios entre dos commits, útil para estudiar su evolución.</td>
+      </tr>
+      <tr>
+          <td><code>git reflog</code></td>
+          <td>Consultar el historial interno del HEAD</td>
+          <td>Muestra los movimientos recientes, ideal para recuperar commits perdidos.</td>
+      </tr>
+      <tr>
+          <td><code>git cat-file -p &lt;commit&gt;</code></td>
+          <td>Ver el contenido crudo de un commit</td>
+          <td>Revela cómo Git almacena los objetos internamente en el grafo.</td>
+      </tr>
+      <tr>
+          <td><code>git rev-parse &lt;ref&gt;</code></td>
+          <td>Obtener el SHA-1 de una referencia</td>
+          <td>Identifica un nodo del grafo con su hash único.</td>
+      </tr>
+      <tr>
+          <td><code>git fsck</code></td>
+          <td>Verificar la integridad del DAG</td>
+          <td>Comprueba que no existan objetos corruptos o referencias rotas.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="comandos-que-interactuan-con-el-dag">
+  <strong>Comandos que interactuan con el DAG</strong>
+  <a class="anchor" href="#comandos-que-interactuan-con-el-dag">#</a>
+</h2>
+
+
+<pre class="mermaid">
+graph LR
+  A[git log] --> DAG[🔗 DAG]
+  B[git show commit] --> DAG
+  C[git diff commit1 commit2] --> DAG
+  D[git reflog] --> DAG
+  E[git cat-file -p commit] --> DAG
+  F[git rev-parse ref] --> DAG
+  G[git fsck] --> DAG
+
+  DAG --> H[Historia de commits]
+  DAG --> I[Relaciones entre nodos]
+  DAG --> J[Estructura interna]
+
+  classDef cmd fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
+  class A,B,C,D,E,F,G cmd;
+
+</pre>
+
+<blockquote class="book-hint info">
+  
+Este gráfico representa cómo diversos comandos de Git permiten explorar, inspeccionar y verificar el DAG (grafo dirigido acíclico) que modela la historia del proyecto. Cada nodo representa un commit, y las relaciones muestran cómo fluye el desarrollo del código.
+
+</blockquote>
+
+<h2 id="ejercicio-explorando-el-dag-en-git-usando-comandos">
+  <strong>Ejercicio: Explorando el DAG en Git usando comandos</strong>
+  <a class="anchor" href="#ejercicio-explorando-el-dag-en-git-usando-comandos">#</a>
+</h2>
+<p>A continuación, se presenta una simulación guiada por consola para construir y explorar el DAG (grafo dirigido acíclico) en Git. Cada paso está comentado para entender su propósito dentro del modelo.</p>
+<details open><summary>Comandos</summary>
+  <div class="markdown-inner">
+    
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Inicializar un repositorio vacío
+</span></span><span style="display:flex;"><span>git init demo-dag
+</span></span><span style="display:flex;"><span>cd demo-dag
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Crear el primer archivo y hacer el commit inicial
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Inicio del proyecto&#34;</span> &gt; index.txt
+</span></span><span style="display:flex;"><span>git add index.txt
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;🔨 Commit inicial&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Crear una rama de desarrollo
+</span></span><span style="display:flex;"><span>git branch develop
+</span></span><span style="display:flex;"><span>git checkout develop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Añadir una función en develop
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Función A implementada&#34;</span> &gt;&gt; index.txt
+</span></span><span style="display:flex;"><span>git commit -am <span style="color:#e6db74">&#34;🧩 Añadir función A&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Crear rama de feature y añadir login
+</span></span><span style="display:flex;"><span>git checkout -b feature/login
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Login básico&#34;</span> &gt;&gt; index.txt
+</span></span><span style="display:flex;"><span>git commit -am <span style="color:#e6db74">&#34;🔐 Crear login básico&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Visualizar el grafo actual
+</span></span><span style="display:flex;"><span>git log --oneline --graph --decorate --all
+</span></span><span style="display:flex;"><span>:: Muestra commits conectados como nodos del DAG, junto con ramas y decoraciones
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Fusionar rama de login en develop
+</span></span><span style="display:flex;"><span>git checkout develop
+</span></span><span style="display:flex;"><span>git merge feature/login -m <span style="color:#e6db74">&#34;🔗 Fusionar login en develop&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Comparar commits
+</span></span><span style="display:flex;"><span>git diff HEAD~<span style="color:#ae81ff">1</span> HEAD
+</span></span><span style="display:flex;"><span>:: Muestra diferencias entre el último y penúltimo commit
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Inspeccionar un commit específico
+</span></span><span style="display:flex;"><span>git show HEAD
+</span></span><span style="display:flex;"><span>:: Muestra detalles, cambios y metadatos del commit actual
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Ver movimientos del HEAD y hashes
+</span></span><span style="display:flex;"><span>git reflog
+</span></span><span style="display:flex;"><span>git rev-parse HEAD
+</span></span><span style="display:flex;"><span>:: Permite rastrear navegación y obtener hash único de HEAD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Examinar contenido interno del commit
+</span></span><span style="display:flex;"><span>git cat-file -p HEAD
+</span></span><span style="display:flex;"><span>:: Visualiza cómo Git representa el commit como nodo del DAG
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Verificar integridad del repositorio
+</span></span><span style="display:flex;"><span>git fsck
+</span></span><span style="display:flex;"><span>:: Chequea que no haya corrupción en el grafo</span></span></code></pre></div>
+
+
+  </div>
+</details>
+
+<details ><summary>Gráfico</summary>
+  <div class="markdown-inner">
+    
+    
+
+<pre class="mermaid">
+        gitGraph
+            commit id: "🔨 Commit inicial"
+            branch develop
+            commit id: "🧩 Función A (develop)"
+            branch feature/login
+            commit id: "🔐 Login básico (feature/login)"
+            checkout develop
+            merge feature/login tag: "🔗 Merge login -> develop"
+            commit id: "🛠 Ajustes post-merge (develop)"
+            checkout main
+            merge develop tag: "🚀 Merge develop -> main"
+
+    </pre>
+
+
+  </div>
+</details>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#el-modelo-de-grafo-en-git"><strong>El modelo de grafo en Git</strong></a></li>
+    <li><a href="#dag-visual"><strong>DAG visual</strong></a></li>
+    <li><a href="#comandos-esenciales-para-entender-el-dag-en-git"><strong>Comandos esenciales para entender el DAG en Git</strong></a></li>
+    <li><a href="#comandos-que-interactuan-con-el-dag"><strong>Comandos que interactuan con el DAG</strong></a></li>
+    <li><a href="#ejercicio-explorando-el-dag-en-git-usando-comandos"><strong>Ejercicio: Explorando el DAG en Git usando comandos</strong></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1 ¿Qué es un Git ID?
+  #
+
+
+Un Git ID es el nombre de un objeto git
+Cada commit en Git tiene un identificador único: un hash SHA-1 de 40 caracteres.
+Este ID garantiza la integridad, unicidad y trazabilidad de cada cambio.
+Git usa estos IDs para comparar, referenciar y verificar commits.
+
+
+  2 Tipos de Git Objects
+  #
+
+Git almacena todo como objetos en #.git/objects#. Hay cuatro tipos principales:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/module1/git-id/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="Git ID">
+  <meta property="og:description" content="1 ¿Qué es un Git ID?#Un Git ID es el nombre de un objeto git Cada commit en Git tiene un identificador único: un hash SHA-1 de 40 caracteres. Este ID garantiza la integridad, unicidad y trazabilidad de cada cambio. Git usa estos IDs para comparar, referenciar y verificar commits. 2 Tipos de Git Objects#Git almacena todo como objetos en #.git/objects#. Hay cuatro tipos principales:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git ID | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/module1/git-id/">
+<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.74d83436b7c90aac939ed3d35a4cf32490ea250f507401d2cb6012518bf4c0c2.js" integrity="sha256-dNg0NrfJCqyTntPTWkzzJJDqJQ9QdAHSy2ASUYv0wMI=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-494ba3d784b4edbfa0d8bfc979335f06" class="toggle" checked />
+    <label for="section-494ba3d784b4edbfa0d8bfc979335f06" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-id/" class="active">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="toggle"  />
+    <label for="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
+    <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
+      <a href="/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git ID</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-un-git-id"><strong>1 ¿Qué es un Git ID?</strong></a></li>
+    <li><a href="#2-tipos-de-git-objects"><strong>2 Tipos de Git Objects</strong></a></li>
+    <li><a href="#3-comandos-para-visualizar-objetos-git">3 <strong>Comandos para visualizar objetos Git</strong></a></li>
+    <li><a href="#4-cómo-se-genera-un-git-id"><strong>4 ¿Cómo se genera un Git ID?</strong></a></li>
+    <li><a href="#5-shortening-git-ids"><strong>5 Shortening Git IDs</strong></a></li>
+    <li><a href="#5-visualización-del-flujo-de-objetos"><strong>5 Visualización del flujo de objetos</strong></a></li>
+    <li><a href="#6-ejercicio-crear-objetos-git-manualmente"><strong>6 Ejercicio: Crear objetos Git manualmente</strong></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-qué-es-un-git-id">
+  <strong>1 ¿Qué es un Git ID?</strong>
+  <a class="anchor" href="#1-qu%c3%a9-es-un-git-id">#</a>
+</h2>
+<ul>
+<li>Un Git ID es el nombre de un objeto git</li>
+<li>Cada commit en Git tiene un identificador único: un hash SHA-1 de 40 caracteres.</li>
+<li>Este ID garantiza la integridad, unicidad y trazabilidad de cada cambio.</li>
+<li>Git usa estos IDs para comparar, referenciar y verificar commits.</li>
+</ul>
+<h2 id="2-tipos-de-git-objects">
+  <strong>2 Tipos de Git Objects</strong>
+  <a class="anchor" href="#2-tipos-de-git-objects">#</a>
+</h2>
+<p>Git almacena todo como objetos en <strong>#<code>.git/objects</code>#</strong>. Hay cuatro tipos principales:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Tipo de objeto</th>
+          <th>Contenido</th>
+          <th>Función principal</th>
+          <th>Comando para inspección</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Blob</strong></td>
+          <td>Contenido de archivos</td>
+          <td>Almacena el contenido puro de un archivo</td>
+          <td><code>git cat-file -p &lt;hash&gt;</code></td>
+      </tr>
+      <tr>
+          <td><strong>Tree</strong></td>
+          <td>Estructura de directorios</td>
+          <td>Relaciona blobs y otros trees para formar jerarquías</td>
+          <td><code>git cat-file -p &lt;tree_hash&gt;</code></td>
+      </tr>
+      <tr>
+          <td><strong>Commit</strong></td>
+          <td>Snapshot + metadatos</td>
+          <td>Registra el estado del proyecto y sus padres</td>
+          <td><code>git show &lt;commit_hash&gt;</code></td>
+      </tr>
+      <tr>
+          <td><strong>Tag</strong></td>
+          <td>Referencia anotada</td>
+          <td>Marca versiones importantes con metadatos opcionales</td>
+          <td><code>git cat-file -p &lt;tag_hash&gt;</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-comandos-para-visualizar-objetos-git">
+  3 <strong>Comandos para visualizar objetos Git</strong>
+  <a class="anchor" href="#3-comandos-para-visualizar-objetos-git">#</a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Comando</th>
+          <th>Propósito</th>
+          <th>Ejemplo de uso</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>git cat-file -t &lt;hash&gt;</code></td>
+          <td>Ver el tipo de objeto (blob, tree, commit…)</td>
+          <td><code>git cat-file -t abc1234</code></td>
+      </tr>
+      <tr>
+          <td><code>git cat-file -p &lt;hash&gt;</code></td>
+          <td>Mostrar el contenido del objeto</td>
+          <td><code>git cat-file -p abc1234</code></td>
+      </tr>
+      <tr>
+          <td><code>git show &lt;hash&gt;</code></td>
+          <td>Ver detalles de commits, tags o blobs</td>
+          <td><code>git show abc1234</code></td>
+      </tr>
+      <tr>
+          <td><code>git ls-tree &lt;tree_hash&gt;</code></td>
+          <td>Listar contenido de un objeto tipo tree</td>
+          <td><code>git ls-tree abc1234</code></td>
+      </tr>
+      <tr>
+          <td><code>git rev-parse HEAD</code></td>
+          <td>Obtener el hash del commit actual</td>
+          <td><code>git rev-parse HEAD</code></td>
+      </tr>
+      <tr>
+          <td><code>git fsck --full</code></td>
+          <td>Verificar y listar todos los objetos</td>
+          <td><code>git fsck --full</code></td>
+      </tr>
+      <tr>
+          <td><code>git log --oneline --graph</code></td>
+          <td>Visualizar commits como nodos del DAG</td>
+          <td><code>git log --oneline --graph</code></td>
+      </tr>
+      <tr>
+          <td><code>git hash-object -w archivo.txt</code></td>
+          <td>Crear un blob manualmente y ver su hash</td>
+          <td><code>git hash-object -w archivo.txt</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-cómo-se-genera-un-git-id">
+  <strong>4 ¿Cómo se genera un Git ID?</strong>
+  <a class="anchor" href="#4-c%c3%b3mo-se-genera-un-git-id">#</a>
+</h2>
+<ul>
+<li>Git calcula el SHA-1 del contenido + tipo + metadatos.</li>
+<li>Un cambio mínimo en el contenido genera un ID completamente distinto.</li>
+</ul>
+<p><strong>Ejemplo</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>echo &#34;Hola mundo&#34; | git hash-object --stdin 
+</span></span></code></pre></div><p>ó</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>echo &#34;Hola mundo&#34; &gt; fileA.txt
+</span></span><span style="display:flex;"><span>git hash-object fileA.txt  
+</span></span></code></pre></div><p><strong>Resultado</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>110d7b83bb98c919773ff9b9ee781e71bad210ec</span></span></code></pre></div>
+<h2 id="5-shortening-git-ids">
+  <strong>5 Shortening Git IDs</strong>
+  <a class="anchor" href="#5-shortening-git-ids">#</a>
+</h2>
+<ul>
+<li>Git permite usar abreviaciones del hash (por ejemplo, los primeros 7–10 caracteres).</li>
+<li>Esto facilita la lectura y referencia en comandos como:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>git log --oneline
+</span></span><span style="display:flex;"><span>git show abc1234
+</span></span><span style="display:flex;"><span>git rev-parse --short HEAD
+</span></span></code></pre></div><p>Puedes configurar la longitud con:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>git config --global core.abbrev 10
+</span></span></code></pre></div><h2 id="5-visualización-del-flujo-de-objetos">
+  <strong>5 Visualización del flujo de objetos</strong>
+  <a class="anchor" href="#5-visualizaci%c3%b3n-del-flujo-de-objetos">#</a>
+</h2>
+
+
+<script src="/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+graph TD
+    A[Blob: archivo.txt] --> T[Tree: raíz]
+    B[Blob: main.js] --> T
+    T --> C[Commit: snapshot]
+    C --> Tag[Tag: v1.0]
+    classDef obj fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
+    class A,B,T,C,Tag obj;
+</pre>
+
+<h2 id="6-ejercicio-crear-objetos-git-manualmente">
+  <strong>6 Ejercicio: Crear objetos Git manualmente</strong>
+  <a class="anchor" href="#6-ejercicio-crear-objetos-git-manualmente">#</a>
+</h2>
+<p>Este ejercicio permite crear un blob, un tree, y finalmente un commit, sin usar <strong>#<code>git add</code>#</strong> ni <strong>#<code>git commit</code>#</strong>. Todo se hace con comandos internos para revelar cómo Git construye su modelo de objetos.</p>
+<p>🎯 <strong>Objetivos del ejercicio</strong></p>
+<ul>
+<li>Comprender cómo Git representa archivos como blobs.</li>
+<li>Ver cómo los trees organizan blobs en estructuras de directorios.</li>
+<li>Aprender cómo los commits conectan trees y forman el DAG.</li>
+<li>Manipular objetos directamente para entender la arquitectura interna.</li>
+</ul>
+<p>🖥️ <strong>Comandos</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-powershell" data-lang="powershell"><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Paso <span style="color:#ae81ff">1</span> Inicializar un repositorio vacío
+</span></span><span style="display:flex;"><span>git init git-objects-demo
+</span></span><span style="display:flex;"><span>cd git-objects-demo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Paso <span style="color:#ae81ff">2</span> Crear un archivo y generar su blob
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;console.log(&#39;Hola mundo&#39;);&#34;</span> &gt; main.js
+</span></span><span style="display:flex;"><span>git hash-object -w main.js
+</span></span><span style="display:flex;"><span>:: Guarda el contenido como blob y devuelve su SHA-<span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Paso <span style="color:#ae81ff">3</span> Crear un árbol que apunte al blob
+</span></span><span style="display:flex;"><span>git ls-files --stage
+</span></span><span style="display:flex;"><span>:: Verifica el blob en el índice (debe estar vacío aún)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git update-index --add main.js
+</span></span><span style="display:flex;"><span>:: Añade el blob al índice
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git write-tree
+</span></span><span style="display:flex;"><span>:: Crea un objeto tree con los blobs del índice
+</span></span><span style="display:flex;"><span>:: Devuelve el SHA-<span style="color:#ae81ff">1</span> del tree
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Paso <span style="color:#ae81ff">4</span> Crear un commit que apunte al tree
+</span></span><span style="display:flex;"><span>GIT_AUTHOR_NAME=<span style="color:#e6db74">&#34;Pedro&#34;</span> GIT_AUTHOR_EMAIL=<span style="color:#e6db74">&#34;pedro[[@]]example.com&#34;</span> \
+</span></span><span style="display:flex;"><span>git commit-tree &lt;tree_hash&gt; -m <span style="color:#e6db74">&#34;🔨 Commit manual con main.js&#34;</span>
+</span></span><span style="display:flex;"><span>:: Crea un commit que apunta al tree, sin HEAD ni rama
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Paso <span style="color:#ae81ff">5</span> Verificar el commit
+</span></span><span style="display:flex;"><span>git cat-file -p &lt;commit_hash&gt;
+</span></span><span style="display:flex;"><span>:: Muestra el contenido del commit<span style="color:#960050;background-color:#1e0010">:</span> autor, fecha, mensaje y tree
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>:: <span style="color:#960050;background-color:#1e0010">✅</span> Paso <span style="color:#ae81ff">6</span> Crear una rama que apunte al commit
+</span></span><span style="display:flex;"><span>git branch manual-commit &lt;commit_hash&gt;
+</span></span><span style="display:flex;"><span>git checkout manual-commit
+</span></span><span style="display:flex;"><span>:: Ahora HEAD apunta al commit creado manualmente</span></span></code></pre></div>
+<p>🎨 <strong>Estilo visual</strong></p>
+
+
+<pre class="mermaid">
+sequenceDiagram
+  participant Usuario
+  participant Git
+
+  Usuario->>Git: git init git-objects-demo
+  Git-->>Usuario: Inicializa repositorio vacío
+
+  Usuario->>Git: echo "Hola mundo" > main.js
+  Usuario->>Git: git hash-object -w main.js
+  Git-->>Usuario: Crea blob y devuelve SHA-1
+
+  Usuario->>Git: git update-index --add main.js
+  Git-->>Usuario: Añade blob al índice
+
+  Usuario->>Git: git write-tree
+  Git-->>Usuario: Crea objeto tree y devuelve SHA-1
+
+  Usuario->>Git: git commit-tree tree_hash -m "Commit manual"
+  Git-->>Usuario: Crea commit que apunta al tree
+
+  Usuario->>Git: git branch manual-commit commit_hash
+  Usuario->>Git: git checkout manual-commit
+  Git-->>Usuario: HEAD apunta al commit creado
+
+  Usuario->>Git: git cat-file -p commit_hash
+  Git-->>Usuario: Muestra contenido del commit
+
+</pre>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-un-git-id"><strong>1 ¿Qué es un Git ID?</strong></a></li>
+    <li><a href="#2-tipos-de-git-objects"><strong>2 Tipos de Git Objects</strong></a></li>
+    <li><a href="#3-comandos-para-visualizar-objetos-git">3 <strong>Comandos para visualizar objetos Git</strong></a></li>
+    <li><a href="#4-cómo-se-genera-un-git-id"><strong>4 ¿Cómo se genera un Git ID?</strong></a></li>
+    <li><a href="#5-shortening-git-ids"><strong>5 Shortening Git IDs</strong></a></li>
+    <li><a href="#5-visualización-del-flujo-de-objetos"><strong>5 Visualización del flujo de objetos</strong></a></li>
+    <li><a href="#6-ejercicio-crear-objetos-git-manualmente"><strong>6 Ejercicio: Crear objetos Git manualmente</strong></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
