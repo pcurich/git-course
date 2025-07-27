@@ -1,0 +1,46 @@
+# This is a basic workflow to help you get started with Actions  
+name: CI  
+
+# Controls when the action will run. Triggers the workflow on push or pull request  
+# events but only for the master branch  
+on:  
+  push:  
+    branches: [master]  
+  pull_request:  
+    branches: [master]
+    
+#A workflow run is made up of one or more jobs that can run sequentially or in parallel  
+jobs:  
+  #This workflow contains a single job called "build"  
+  build:  
+    #The type of runner that the job will run on  
+    runs-on: ubuntu-latest.  
+    
+    # Steps represent a sequence of tasks that will be executed as part of the job.  
+    steps:  
+    # Checks-out your repository under SGITHUB_WORKSPACE, so your job can access it  
+    - uses: actions/checkout@v2
+
+    #Set HUGO enviroment
+    - name: Hugo setup
+      # You may pin to the exact commit or the version.
+      # uses: peaceiris/actions-hugo@75d2e84710de30f6ff7268e08f310b60ef14033f
+      uses: peaceiris/actions-hugo@v3.0.0
+      with:
+        extended: true
+
+    # Build Site
+    - name: Build HUGO Site
+      run: hugo
+
+    # Commit site to new branch
+    - name: Deploy to GH Pages
+      uses: crazy-max/ghaction-github-pages@v4.2.0
+      with:
+        targert_branch: gh-pages
+        build_dir: public
+      env:
+        GITHUB_TOKEN: ${{ secret.GITHUB_TOKEN }}
+    
+          
+    
