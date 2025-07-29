@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1. Branch Labels &amp; HEAD
+  #
+
+
+  1.1. Conceptos Clave
+  #
+
+
+Branch labels son punteros móviles a commits.
+HEAD es el puntero simbólico al commit actual (usualmente el último de la rama activa).
+
+
+
+
+
+  
+
+
+
+
+
+graph LR
+  A[Commit A] --&gt; B[Commit B] --&gt; C[Commit C]
+  C --&gt;|master| HEAD
+
+
+
+  ¿Qué es un commit en Git?
+  #
+
+Un commit representa un punto específico en el historial del repositorio. Es una instantánea del estado de los archivos (y sus metadatos) en un momento dado. Cada commit tiene:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/module1/git-references/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="Git References">
+  <meta property="og:description" content="1. Branch Labels &amp; HEAD#1.1. Conceptos Clave#Branch labels son punteros móviles a commits. HEAD es el puntero simbólico al commit actual (usualmente el último de la rama activa). graph LRA[Commit A] --&gt; B[Commit B] --&gt; C[Commit C]C --&gt;|master| HEAD¿Qué es un commit en Git?#Un commit representa un punto específico en el historial del repositorio. Es una instantánea del estado de los archivos (y sus metadatos) en un momento dado. Cada commit tiene:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git References | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/module1/git-references/">
+<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.74d83436b7c90aac939ed3d35a4cf32490ea250f507401d2cb6012518bf4c0c2.js" integrity="sha256-dNg0NrfJCqyTntPTWkzzJJDqJQ9QdAHSy2ASUYv0wMI=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-494ba3d784b4edbfa0d8bfc979335f06" class="toggle" checked />
+    <label for="section-494ba3d784b4edbfa0d8bfc979335f06" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-references/" class="active">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="toggle"  />
+    <label for="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
+    <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
+      <a href="/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git References</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-branch-labels--head"><strong>1. Branch Labels &amp; HEAD</strong></a>
+      <ul>
+        <li><a href="#11-conceptos-clave"><strong>1.1. Conceptos Clave</strong></a></li>
+        <li><a href="#12-estado-de-head-y-ramas"><strong>1.2. Estado de HEAD y ramas</strong></a></li>
+        <li><a href="#13-ejercicio-práctico"><strong>1.3. Ejercicio práctico</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#2-referencias-a-commits-anteriores-"><strong>2. Referencias a commits anteriores (~ y ^)</strong></a>
+      <ul>
+        <li><a href="#21-uso-semántico"><strong>2.1 Uso semántico</strong></a></li>
+        <li><a href="#22-accesos-relativos"><strong>2.2 Accesos relativos</strong></a></li>
+        <li><a href="#23-ejemplo-1"><strong>2.3 Ejemplo 1</strong></a></li>
+        <li><a href="#24-ejemplo-2"><strong>2.4 Ejemplo 2</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#3-tags-en-git"><strong>3. Tags en Git</strong></a>
+      <ul>
+        <li><a href="#31-concepto"><strong>3.1. Concepto</strong></a></li>
+        <li><a href="#32-tipos-de-tags"><strong>3.2. Tipos de tags</strong></a></li>
+        <li><a href="#33-comandos-útiles"><strong>3.3 Comandos útiles</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#4-head-y-las-referencias-simbólicas"><strong>4. HEAD y las Referencias Simbólicas</strong></a>
+      <ul>
+        <li><a href="#41-comportamientos-comunes"><strong>4.1 Comportamientos comunes</strong></a></li>
+        <li><a href="#42-ejemplo"><strong>4.2 Ejemplo</strong></a></li>
+        <li><a href="#43-diagrama-explicativo"><strong>4.3 Diagrama explicativo</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-branch-labels--head">
+  <strong>1. Branch Labels &amp; HEAD</strong>
+  <a class="anchor" href="#1-branch-labels--head">#</a>
+</h2>
+<h3 id="11-conceptos-clave">
+  <strong>1.1. Conceptos Clave</strong>
+  <a class="anchor" href="#11-conceptos-clave">#</a>
+</h3>
+<ul>
+<li>Branch labels son punteros móviles a commits.</li>
+<li>HEAD es el puntero simbólico al commit actual (usualmente el último de la rama activa).</li>
+</ul>
+
+
+<script src="/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+graph LR
+  A[Commit A] --> B[Commit B] --> C[Commit C]
+  C -->|master| HEAD
+</pre>
+
+<h4 id="qué-es-un-commit-en-git">
+  ¿Qué es un commit en Git?
+  <a class="anchor" href="#qu%c3%a9-es-un-commit-en-git">#</a>
+</h4>
+<p>Un commit representa un punto específico en el historial del repositorio. Es una instantánea del estado de los archivos (y sus metadatos) en un momento dado. Cada commit tiene:</p>
+<ul>
+<li>Un hash único que lo identifica.</li>
+<li>Uno o más padres, salvo el inicial.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Tu mensaje aquí&#34;</span> 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Esto crea un nuevo commit, que hereda como “padre” el commit anterior.</span>
+</span></span></code></pre></div><h4 id="qué-es-un-padre">
+  ¿Qué es un padre?
+  <a class="anchor" href="#qu%c3%a9-es-un-padre">#</a>
+</h4>
+<p>Un padre es simplemente el commit que precede a otro en el historial. Es la conexión que mantiene la estructura en forma de grafo dirigido (DAG). Git usa estas relaciones para reconstruir la línea de tiempo y las fusiones.</p>
+<ul>
+<li>Cuando usas HEAD^, estás accediendo al padre directo del commit apuntado por HEAD.</li>
+</ul>
+<h4 id="diferencia-entre-commit-y-padre">
+  Diferencia entre “commit” y “padre”
+  <a class="anchor" href="#diferencia-entre-commit-y-padre">#</a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Concepto</th>
+          <th>Descripción</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Commit</td>
+          <td>Nodo en el historial; contiene cambios, mensaje, autor y referencia única.</td>
+      </tr>
+      <tr>
+          <td>Padre</td>
+          <td>Relación entre commits; indica de dónde proviene un commit específico.</td>
+      </tr>
+  </tbody>
+</table>
+<p>Todos los padres son commits, pero no todos los commits son padres (ej. un commit puede no tener hijos si es el último).</p>
+<h4 id="ejemplo-visual">
+  Ejemplo visual
+  <a class="anchor" href="#ejemplo-visual">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>C0 --- C1 --- C2 <span style="color:#f92672">(</span>HEAD<span style="color:#f92672">)</span>
+</span></span></code></pre></div><ul>
+<li>C2 es un commit (el actual).</li>
+<li>C1 es su padre directo, accesible con HEAD^.</li>
+<li>C0 es abuelo, accesible con HEAD^^ o HEAD~2.
+Y si C2 fuera un merge, podría tener dos padres:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>           C2 <span style="color:#f92672">(</span>merge<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>          /    <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>     C1-B1     C1-B2
+</span></span></code></pre></div><ul>
+<li>HEAD^ → primer padre (normalmente, rama activa).</li>
+<li>HEAD^2 → segundo padre (la rama fusionada).</li>
+</ul>
+<h3 id="12-estado-de-head-y-ramas">
+  <strong>1.2. Estado de HEAD y ramas</strong>
+  <a class="anchor" href="#12-estado-de-head-y-ramas">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Estado</th>
+          <th>HEAD apunta a</th>
+          <th>Efecto en commits nuevos</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Rama activa</td>
+          <td>Último commit de la rama</td>
+          <td>Se agregan a la rama</td>
+      </tr>
+      <tr>
+          <td>Detached HEAD</td>
+          <td>Commit específico</td>
+          <td>No se agregan a ninguna rama</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="13-ejercicio-práctico">
+  <strong>1.3. Ejercicio práctico</strong>
+  <a class="anchor" href="#13-ejercicio-pr%c3%a1ctico">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout master
+</span></span><span style="display:flex;"><span>git log --oneline --graph --decorate
+</span></span></code></pre></div><p>Haz checkout a un commit específico y observa el estado de HEAD:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout commit_id 
+</span></span></code></pre></div><h2 id="2-referencias-a-commits-anteriores-">
+  <strong>2. Referencias a commits anteriores (~ y ^)</strong>
+  <a class="anchor" href="#2-referencias-a-commits-anteriores-">#</a>
+</h2>
+<h3 id="21-uso-semántico">
+  <strong>2.1 Uso semántico</strong>
+  <a class="anchor" href="#21-uso-sem%c3%a1ntico">#</a>
+</h3>
+<ul>
+<li>^: padre directo del commit.</li>
+<li>~n: n commits hacia atrás en línea directa.</li>
+</ul>
+
+
+<pre class="mermaid">
+graph TD
+  A["Commit A (HEAD~3)"]
+  B["Commit B (HEAD~2)"]
+  C["Commit C (HEAD^ o HEAD~1)"]
+  D["Commit D (HEAD)"]
+
+  A --> B --> C --> D
+
+</pre>
+
+<h3 id="22-accesos-relativos">
+  <strong>2.2 Accesos relativos</strong>
+  <a class="anchor" href="#22-accesos-relativos">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Referencia</th>
+          <th>Qué muestra</th>
+          <th>Equivalente a</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEAD^</td>
+          <td>Padre directo del commit actual</td>
+          <td>HEAD~1</td>
+      </tr>
+      <tr>
+          <td>HEAD^^</td>
+          <td>Abuelo del commit actual</td>
+          <td>HEAD~2</td>
+      </tr>
+      <tr>
+          <td>HEAD^^^</td>
+          <td>Bisabuelo (tercer padre en la cadena)</td>
+          <td>HEAD~3</td>
+      </tr>
+      <tr>
+          <td>HEAD~1</td>
+          <td>Un commit atrás en línea directa</td>
+          <td>HEAD^</td>
+      </tr>
+      <tr>
+          <td>HEAD~2</td>
+          <td>Dos commits atrás en línea directa</td>
+          <td>HEAD^^</td>
+      </tr>
+      <tr>
+          <td>HEAD~3</td>
+          <td>Tres commits atrás en línea directa</td>
+          <td>HEAD^^^</td>
+      </tr>
+      <tr>
+          <td>HEAD^2</td>
+          <td>Segundo padre en un commit con múltiples padres (merge)</td>
+          <td>-</td>
+      </tr>
+      <tr>
+          <td>HEAD~4</td>
+          <td>Cuatro commits atrás</td>
+          <td>HEAD^^^^</td>
+      </tr>
+      <tr>
+          <td>master^</td>
+          <td>Padre del último commit en la rama master</td>
+          <td>master~1</td>
+      </tr>
+      <tr>
+          <td>HEAD~0</td>
+          <td>El commit actual (sin retroceder)</td>
+          <td>HEAD</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="23-ejemplo-1">
+  <strong>2.3 Ejemplo 1</strong>
+  <a class="anchor" href="#23-ejemplo-1">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --oneline
+</span></span><span style="display:flex;"><span>git show HEAD^
+</span></span><span style="display:flex;"><span>git show HEAD~2
+</span></span></code></pre></div><h3 id="24-ejemplo-2">
+  <strong>2.4 Ejemplo 2</strong>
+  <a class="anchor" href="#24-ejemplo-2">#</a>
+</h3>
+
+
+<pre class="mermaid">
+gitGraph
+   commit id: "C0 (main)" tag: "Inicio"
+   branch B1
+   checkout B1
+   commit id: "C1-B1"
+   commit id: "C2-B1"
+   checkout main
+   branch B2
+   checkout B2
+   commit id: "C1-B2"
+   commit id: "C2-B2"
+   checkout main
+   branch B3
+   checkout B3
+   commit id: "C1-B3"
+   commit id: "C2-B3"
+   checkout B1
+   merge B2 tag: "C3 (Merge B1+B2)"
+   checkout B3
+   merge B1 tag: "C4 (Merge C3+B3)"
+</pre>
+
+<table>
+  <thead>
+      <tr>
+          <th>Commit</th>
+          <th>Qué representa</th>
+          <th>Comando desde HEAD</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>C4 (Final Merge)</td>
+          <td>Último commit (merge de B3 + C3)</td>
+          <td><code>HEAD</code></td>
+      </tr>
+      <tr>
+          <td>C3 (Merge B1+B2)</td>
+          <td>Primer padre del merge final</td>
+          <td><code>HEAD^</code></td>
+      </tr>
+      <tr>
+          <td>C2-B3</td>
+          <td>Segundo padre del merge final</td>
+          <td><code>HEAD^2</code></td>
+      </tr>
+      <tr>
+          <td>C2-B1</td>
+          <td>Padre izquierdo del merge de B1 y B2</td>
+          <td><code>HEAD^^</code></td>
+      </tr>
+      <tr>
+          <td>C2-B2</td>
+          <td>Segundo padre del merge entre B1 y B2</td>
+          <td><code>HEAD^2^</code></td>
+      </tr>
+      <tr>
+          <td>C1-B1</td>
+          <td>Commit anterior en la rama B1</td>
+          <td><code>HEAD^^~1</code></td>
+      </tr>
+      <tr>
+          <td>C1-B2</td>
+          <td>Commit anterior en la rama B2</td>
+          <td><code>HEAD^2^~1</code></td>
+      </tr>
+      <tr>
+          <td>C1-B3</td>
+          <td>Commit anterior en la rama B3</td>
+          <td><code>HEAD^2~1</code></td>
+      </tr>
+      <tr>
+          <td>C0 (main)</td>
+          <td>Ancestro común</td>
+          <td><code>HEAD^^~2</code></td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git show HEAD 
+</span></span><span style="display:flex;"><span>git log --graph --oneline --all
+</span></span></code></pre></div><h2 id="3-tags-en-git">
+  <strong>3. Tags en Git</strong>
+  <a class="anchor" href="#3-tags-en-git">#</a>
+</h2>
+<h3 id="31-concepto">
+  <strong>3.1. Concepto</strong>
+  <a class="anchor" href="#31-concepto">#</a>
+</h3>
+<ul>
+<li>Los tags son referencias fijas (no móviles) a commits.</li>
+<li>Muy útiles para marcar versiones o hitos importantes.</li>
+</ul>
+
+
+<pre class="mermaid">
+graph LR
+  A[Commit A] --> B[Commit B] --> C[Commit C]
+  C -->|v1.0| Tag
+</pre>
+
+<h3 id="32-tipos-de-tags">
+  <strong>3.2. Tipos de tags</strong>
+  <a class="anchor" href="#32-tipos-de-tags">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Tipo</th>
+          <th>Descripción</th>
+          <th>Ejemplo</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Lightweight</td>
+          <td>Puntero directo al commit</td>
+          <td>git tag v1.0</td>
+      </tr>
+      <tr>
+          <td>Annotated</td>
+          <td>Incluye metadatos y mensaje</td>
+          <td>git tag -a v1.0 -m &ldquo;Release v1.0&rdquo;</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="33-comandos-útiles">
+  <strong>3.3 Comandos útiles</strong>
+  <a class="anchor" href="#33-comandos-%c3%batiles">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git tag <span style="color:#75715e">#Muestra todos los tags en el repositorio</span>
+</span></span><span style="display:flex;"><span>git tag v1.0 commit_id <span style="color:#75715e">#Especifica a que commit se coloca el tag (default HEAD)</span>
+</span></span><span style="display:flex;"><span>git tag -a v1.0 -m <span style="color:#e6db74">&#34;Versión estable&#34;</span>
+</span></span><span style="display:flex;"><span>git show v1.0
+</span></span><span style="display:flex;"><span>git push &lt;remote&gt; &lt;tagneme&gt; <span style="color:#75715e">#Envia un solo tag</span>
+</span></span><span style="display:flex;"><span>git push &lt;remote&gt; --tags <span style="color:#75715e">#Envia todos los tags</span>
+</span></span></code></pre></div><h2 id="4-head-y-las-referencias-simbólicas">
+  <strong>4. HEAD y las Referencias Simbólicas</strong>
+  <a class="anchor" href="#4-head-y-las-referencias-simb%c3%b3licas">#</a>
+</h2>
+<p>Una referencia simbólica (symbolic reference) es un alias que apunta a otra referencia en Git. El ejemplo más común es HEAD, que normalmente apunta simbólicamente al nombre de una rama (como refs/heads/master), en lugar de a un commit específico.</p>
+<ul>
+<li>Si HEAD está vinculado simbólicamente a una rama, los commits nuevos se agregan a esa rama.</li>
+<li>Si HEAD se encuentra detached, entonces apunta directamente a un commit y no actualiza ninguna rama.</li>
+</ul>
+<h3 id="41-comportamientos-comunes">
+  <strong>4.1 Comportamientos comunes</strong>
+  <a class="anchor" href="#41-comportamientos-comunes">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Estado de HEAD</th>
+          <th>Tipo de referencia</th>
+          <th>Apunta a</th>
+          <th>Comportamiento</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>HEAD normal</td>
+          <td>Simbólica</td>
+          <td><code>refs/heads/main</code></td>
+          <td>Nuevos commits en rama</td>
+      </tr>
+      <tr>
+          <td>HEAD detached</td>
+          <td>Directa</td>
+          <td>ID de commit (<code>abc123</code>)</td>
+          <td>No afecta ramas</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="42-ejemplo">
+  <strong>4.2 Ejemplo</strong>
+  <a class="anchor" href="#42-ejemplo">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Ver la ruta simbólica de HEAD</span>
+</span></span><span style="display:flex;"><span>cat .git/HEAD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Resultado posible:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ref: refs/heads/main</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Cambiar a un commit específico (estado detached HEAD)</span>
+</span></span><span style="display:flex;"><span>git checkout commit_id
+</span></span><span style="display:flex;"><span>cat .git/HEAD
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Resultado:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># commit_id (ya no es una referencia simbólica)</span>
+</span></span></code></pre></div><h3 id="43-diagrama-explicativo">
+  <strong>4.3 Diagrama explicativo</strong>
+  <a class="anchor" href="#43-diagrama-explicativo">#</a>
+</h3>
+
+
+<pre class="mermaid">
+graph TD
+  subgraph Git Internals
+    A[refs/heads/main → Commit D]
+    B[HEAD → refs/heads/main]
+  end
+
+  style B fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
+</pre>
+
+<p>Este diagrama muestra que HEAD apunta simbólicamente a refs/heads/main, que a su vez apunta al commit actual. Si haces checkout a un commit específico, HEAD se desconecta de main y deja de ser simbólica.</p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-branch-labels--head"><strong>1. Branch Labels &amp; HEAD</strong></a>
+      <ul>
+        <li><a href="#11-conceptos-clave"><strong>1.1. Conceptos Clave</strong></a></li>
+        <li><a href="#12-estado-de-head-y-ramas"><strong>1.2. Estado de HEAD y ramas</strong></a></li>
+        <li><a href="#13-ejercicio-práctico"><strong>1.3. Ejercicio práctico</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#2-referencias-a-commits-anteriores-"><strong>2. Referencias a commits anteriores (~ y ^)</strong></a>
+      <ul>
+        <li><a href="#21-uso-semántico"><strong>2.1 Uso semántico</strong></a></li>
+        <li><a href="#22-accesos-relativos"><strong>2.2 Accesos relativos</strong></a></li>
+        <li><a href="#23-ejemplo-1"><strong>2.3 Ejemplo 1</strong></a></li>
+        <li><a href="#24-ejemplo-2"><strong>2.4 Ejemplo 2</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#3-tags-en-git"><strong>3. Tags en Git</strong></a>
+      <ul>
+        <li><a href="#31-concepto"><strong>3.1. Concepto</strong></a></li>
+        <li><a href="#32-tipos-de-tags"><strong>3.2. Tipos de tags</strong></a></li>
+        <li><a href="#33-comandos-útiles"><strong>3.3 Comandos útiles</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#4-head-y-las-referencias-simbólicas"><strong>4. HEAD y las Referencias Simbólicas</strong></a>
+      <ul>
+        <li><a href="#41-comportamientos-comunes"><strong>4.1 Comportamientos comunes</strong></a></li>
+        <li><a href="#42-ejemplo"><strong>4.2 Ejemplo</strong></a></li>
+        <li><a href="#43-diagrama-explicativo"><strong>4.3 Diagrama explicativo</strong></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
