@@ -1,6 +1,6 @@
 ---
 title: "Resolving Merge Conflicts"
-weight: 1
+weight: 31
 # bookFlatSection: false
 # bookToc: true
 # bookHidden: false

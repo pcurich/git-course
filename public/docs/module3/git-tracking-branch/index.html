@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/git-course/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=git-course/livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1 ¿Qué es una tracking branch?
+  #
+
+Una tracking branch es una rama local que está vinculada a una rama remota. De forma local el nombre de una rama de rastreo comienza con el nombre remoto, luego una barra diagonal y despues el nombre de la rama (&lt;remote&gt;/&lt;branch&gt;). Su función principal es hacer seguimiento de los cambios en el remoto, facilitando comandos como:
+git pull        # Trae cambios del remoto a tu rama local
+git push        # Envía tus commits al remoto correspondiente
+Se crean automáticamente al clonar un repo o manualmente con opciones como --set-upstream.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/git-course/docs/module3/git-tracking-branch/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
+  <meta property="og:title" content="Git Tracking Branch">
+  <meta property="og:description" content="1 ¿Qué es una tracking branch?#Una tracking branch es una rama local que está vinculada a una rama remota. De forma local el nombre de una rama de rastreo comienza con el nombre remoto, luego una barra diagonal y despues el nombre de la rama (&lt;remote&gt;/&lt;branch&gt;). Su función principal es hacer seguimiento de los cambios en el remoto, facilitando comandos como:
+git pull # Trae cambios del remoto a tu rama local git push # Envía tus commits al remoto correspondiente Se crean automáticamente al clonar un repo o manualmente con opciones como --set-upstream.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Tracking Branch | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="http://localhost:1313/git-course/docs/module3/git-tracking-branch/">
+<link rel="stylesheet" href="/git-course/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.76212a8ff2e474094cb1cb5e35b029f4f3b5467e55d661fdb4c81775134caab4.js" integrity="sha256-diEqj/LkdAlMscteNbAp9PO1Rn5V1mH9tMgXdRNMqrQ=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ced1875accb8fad23f2d2a8d0896f35" class="toggle"  />
+    <label for="section-4ced1875accb8fad23f2d2a8d0896f35" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="toggle"  />
+    <label for="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b530e2350b399098d44c10912763c0d4" class="toggle" checked />
+    <label for="section-b530e2350b399098d44c10912763c0d4" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="active">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
+    <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/git-course/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Tracking Branch</h3>
+
+  <label for="toc-control">
+    
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-una-tracking-branch"><strong>1 ¿Qué es una tracking branch?</strong></a></li>
+    <li><a href="#2-qué-es"><strong>2 ¿Qué es <code>HEAD</code> en Git?</strong></a>
+      <ul>
+        <li><a href="#21-head-y-las-tracking-branches">2.1 <code>HEAD</code> y las tracking branches</a></li>
+        <li><a href="#22-resumen-estados-de-head-en-relación-con-la-rama-remota">2.2 Resumen: Estados de HEAD en relación con la rama remota</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-visualización-de-nombres-de-tracking-branches">3 <strong>Visualización de nombres de tracking branches</strong></a>
+      <ul>
+        <li><a href="#31-comandos-clave">3.1 Comandos clave</a></li>
+        <li><a href="#32-ejemplo-cli-visualización-y-cambio-del-head-remoto">3.2 Ejemplo CLI: visualización y cambio del HEAD remoto</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-visualización-del-estado-de-seguimiento-tracking-status">4 <strong>Visualización del estado de seguimiento (tracking status)</strong></a>
+      <ul>
+        <li><a href="#41-comandos-clave">4.1 Comandos clave</a></li>
+        <li><a href="#412-ejemplo-cli-rama-main-con-commits-nuevos-estado-ahead">4.12 Ejemplo CLI: rama main con commits nuevos (estado ahead)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-qué-es-una-tracking-branch">
+  <strong>1 ¿Qué es una tracking branch?</strong>
+  <a class="anchor" href="#1-qu%c3%a9-es-una-tracking-branch">#</a>
+</h2>
+<p>Una tracking branch es una rama local que está vinculada a una rama remota. De forma local el nombre de una rama de rastreo comienza con el nombre remoto, luego una barra diagonal y despues el nombre de la rama (<code>&lt;remote&gt;/&lt;branch&gt;</code>). Su función principal es hacer seguimiento de los cambios en el remoto, facilitando comandos como:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git pull        <span style="color:#75715e"># Trae cambios del remoto a tu rama local</span>
+</span></span><span style="display:flex;"><span>git push        <span style="color:#75715e"># Envía tus commits al remoto correspondiente</span>
+</span></span></code></pre></div><p>Se crean automáticamente al clonar un repo o manualmente con opciones como <code>--set-upstream</code>.</p>
+
+
+<pre class="mermaid">
+flowchart LR
+  subgraph Local_Repo
+    C[Commit A] --> A["main (local)"]
+    D[Commit B] --> A
+  end
+
+  subgraph Remote_Repo
+    F[Commit C] --> E[origin/main]
+    G[Commit D] --> E
+  end
+
+  %% tracking relationship (visual punteado)
+  A -. tracking branch .-> E
+
+  %% flujo conceptual de sincronización
+  A --> X[git push]
+  E --> Y[git fetch/pull]
+
+</pre>
+
+<h2 id="2-qué-es">
+  <strong>2 ¿Qué es <code>HEAD</code> en Git?</strong>
+  <a class="anchor" href="#2-qu%c3%a9-es">#</a>
+</h2>
+<p><code>HEAD</code> es un puntero que indica tu posición actual en el historial de commits. En una situación normal, <code>HEAD</code> apunta a la rama activa (por ejemplo, <code>master</code>), y esa rama a su vez apunta a su último commit.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Ver el puntero actual</span>
+</span></span><span style="display:flex;"><span>git rev-parse HEAD     <span style="color:#75715e"># Muestra el hash del commit actual</span>
+</span></span><span style="display:flex;"><span>git symbolic-ref HEAD  <span style="color:#75715e"># Muestra a qué rama está apuntando HEAD (ej: refs/heads/master)</span>
+</span></span></code></pre></div><h3 id="21-head-y-las-tracking-branches">
+  2.1 <code>HEAD</code> y las tracking branches
+  <a class="anchor" href="#21-head-y-las-tracking-branches">#</a>
+</h3>
+<p>Cuando trabajas con una rama local que sigue a una remota (origin/master), el flujo se ve así:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>HEAD → master → Commit X
+</span></span><span style="display:flex;"><span>       ↑
+</span></span><span style="display:flex;"><span>       tracking: origin/master → Commit Y
+</span></span></code></pre></div><h4 id="qué-implica-esto">
+  ¿Qué implica esto?
+  <a class="anchor" href="#qu%c3%a9-implica-esto">#</a>
+</h4>
+<ul>
+<li>Si origin/master tiene commits nuevos que no están en master, Git te avisará que tu rama local está <code>behind</code>.</li>
+<li>Si tu master local tiene commits que no están en origin/master, Git dirá que estás <code>ahead</code>.</li>
+<li>Esto se puede verificar con</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status         <span style="color:#75715e"># Indicará si estás ahead/behind</span>
+</span></span><span style="display:flex;"><span>git fetch          <span style="color:#75715e"># Trae datos actualizados del remoto</span>
+</span></span><span style="display:flex;"><span>git branch -vv     <span style="color:#75715e"># Muestra el tracking y la distancia con el remoto</span>
+</span></span></code></pre></div><h4 id="ejemplo">
+  Ejemplo
+  <a class="anchor" href="#ejemplo">#</a>
+</h4>
+<p>Supongamos que estás en master, que está vinculado a origin/master.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># HEAD apunta a master</span>
+</span></span><span style="display:flex;"><span>HEAD → master
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># master sigue a origin/master</span>
+</span></span><span style="display:flex;"><span>master ──▶ origin/master
+</span></span></code></pre></div><p>Ahora haces un nuevo commit en <code>master</code> local:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Nuevo contenido&#34;</span> &gt; archivo.txt
+</span></span><span style="display:flex;"><span>git add archivo.txt
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Cambios locales&#34;</span>
+</span></span></code></pre></div><p>El commit existe en master, pero aún no en origin/master. Si ejecutas:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
+</span></span></code></pre></div><p>Verás algo como:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Your branch is ahead of <span style="color:#e6db74">&#39;origin/master&#39;</span> by <span style="color:#ae81ff">1</span> commit.
+</span></span></code></pre></div><p>Esto indica que HEAD está en una rama local que tiene cambios no sincronizados con su rama remota tracking</p>
+<h3 id="22-resumen-estados-de-head-en-relación-con-la-rama-remota">
+  2.2 Resumen: Estados de HEAD en relación con la rama remota
+  <a class="anchor" href="#22-resumen-estados-de-head-en-relaci%c3%b3n-con-la-rama-remota">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Estado local</th>
+          <th><code>HEAD</code> apunta a&hellip;</th>
+          <th>Relación con rama remota (<code>origin/&lt;branch&gt;</code>)</th>
+          <th>Acción sugerida</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Synced</td>
+          <td>Último commit de la rama local</td>
+          <td>Mismo commit que rama remota</td>
+          <td>Ninguna, estás al día</td>
+      </tr>
+      <tr>
+          <td>Ahead</td>
+          <td>Commit más nuevo que el remoto</td>
+          <td>Local tiene commits que el remoto no tiene</td>
+          <td><code>git push</code> para sincronizar</td>
+      </tr>
+      <tr>
+          <td>Behind</td>
+          <td>Commit más antiguo que el remoto</td>
+          <td>Remoto tiene commits nuevos</td>
+          <td><code>git pull</code> para actualizar</td>
+      </tr>
+      <tr>
+          <td>Diverged</td>
+          <td>Commit exclusivo en ambos lados</td>
+          <td>Cada uno tiene commits no compartidos</td>
+          <td><code>git pull --rebase</code> o merge</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-visualización-de-nombres-de-tracking-branches">
+  3 <strong>Visualización de nombres de tracking branches</strong>
+  <a class="anchor" href="#3-visualizaci%c3%b3n-de-nombres-de-tracking-branches">#</a>
+</h2>
+<p>Cuando trabajas con ramas que rastrean remotas (tracking branches), es útil entender cómo visualizar esa relación desde distintos comandos</p>
+<h3 id="31-comandos-clave">
+  3.1 Comandos clave
+  <a class="anchor" href="#31-comandos-clave">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Comando</th>
+          <th>¿Para qué sirve?</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>git branch</td>
+          <td>Lista ramas locales</td>
+      </tr>
+      <tr>
+          <td>git branch &ndash;all</td>
+          <td>Lista locales + remotas (remotes/origin/&hellip;)</td>
+      </tr>
+      <tr>
+          <td>git branch -vv</td>
+          <td>Muestra qué rama local sigue a qué remota, y si está ahead/behind</td>
+      </tr>
+      <tr>
+          <td>git log origin/master &ndash;oneline</td>
+          <td>Ver historial remoto sin cambiar de rama</td>
+      </tr>
+      <tr>
+          <td>git symbolic-ref HEAD</td>
+          <td>Ver qué rama está apuntando HEAD (ej: refs/heads/master)</td>
+      </tr>
+      <tr>
+          <td>git remote set-head origin <code>&lt;branch&gt;</code></td>
+          <td>Cambia la rama por defecto del remoto (ej. develop)</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="32-ejemplo-cli-visualización-y-cambio-del-head-remoto">
+  3.2 Ejemplo CLI: visualización y cambio del HEAD remoto
+  <a class="anchor" href="#32-ejemplo-cli-visualizaci%c3%b3n-y-cambio-del-head-remoto">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Ver todas las ramas (locales + remotas)</span>
+</span></span><span style="display:flex;"><span>git branch --all
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Salida esperada</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># * main</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   remotes/origin/HEAD -&gt; origin/master</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   remotes/origin/main</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   remotes/origin/develop</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver a qué rama apunta HEAD del remoto</span>
+</span></span><span style="display:flex;"><span>git symbolic-ref refs/remotes/origin/HEAD
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># remotes/origin/master</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cambiar HEAD remoto a &#39;develop&#39;</span>
+</span></span><span style="display:flex;"><span>git remote set-head origin develop
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Confirmar cambio</span>
+</span></span><span style="display:flex;"><span>git symbolic-ref refs/remotes/origin/HEAD
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># remotes/origin/develop</span>
+</span></span></code></pre></div>
+
+<pre class="mermaid">
+flowchart LR
+  subgraph Local
+    A[main]
+    B[develop]
+  end
+  subgraph Remote [origin]
+    C[origin/main]
+    D[origin/develop]
+    E["origin/HEAD ➜ origin/develop"]
+  end
+
+  A -. tracks .-> C
+  B -. tracks .-> D
+</pre>
+
+<p>ramas locales y su relación con remota</p>
+<h2 id="4-visualización-del-estado-de-seguimiento-tracking-status">
+  4 <strong>Visualización del estado de seguimiento (tracking status)</strong>
+  <a class="anchor" href="#4-visualizaci%c3%b3n-del-estado-de-seguimiento-tracking-status">#</a>
+</h2>
+<h3 id="41-comandos-clave">
+  4.1 Comandos clave
+  <a class="anchor" href="#41-comandos-clave">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Comando</th>
+          <th>Función</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>git status</td>
+          <td>Muestra si la rama local está ahead, behind, o up to date</td>
+      </tr>
+      <tr>
+          <td>git fetch</td>
+          <td>Actualiza la información remota sin alterar tu historial local</td>
+      </tr>
+      <tr>
+          <td>git log &ndash;all &ndash;oneline &ndash;graph</td>
+          <td>Visualiza commits con relación entre ramas, ideal para entender divergencias</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="412-ejemplo-cli-rama-main-con-commits-nuevos-estado-ahead">
+  4.12 Ejemplo CLI: rama main con commits nuevos (estado ahead)
+  <a class="anchor" href="#412-ejemplo-cli-rama-main-con-commits-nuevos-estado-ahead">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Ver estado actual</span>
+</span></span><span style="display:flex;"><span>git status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Salida esperada</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># On branch main</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Your branch is ahead of &#39;origin/main&#39; by 2 commits.</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Visualización gráfica del historial</span>
+</span></span><span style="display:flex;"><span>git log --all --oneline --graph
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ejemplo de salida:</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># * 9e3a7d2 (main) Fix typo in docs</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># * b2c61e4 Add helper module</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># | * 5d2f5b1 (origin/main) Initial commit</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># |/</span>
+</span></span></code></pre></div>
+
+<pre class="mermaid">
+gitGraph
+   commit id: "Commit remoto" tag: "origin/main"
+   commit id: "Commit local 1"
+   commit id: "Commit local 2" tag: "HEAD ➜ main"
+</pre>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-una-tracking-branch"><strong>1 ¿Qué es una tracking branch?</strong></a></li>
+    <li><a href="#2-qué-es"><strong>2 ¿Qué es <code>HEAD</code> en Git?</strong></a>
+      <ul>
+        <li><a href="#21-head-y-las-tracking-branches">2.1 <code>HEAD</code> y las tracking branches</a></li>
+        <li><a href="#22-resumen-estados-de-head-en-relación-con-la-rama-remota">2.2 Resumen: Estados de HEAD en relación con la rama remota</a></li>
+      </ul>
+    </li>
+    <li><a href="#3-visualización-de-nombres-de-tracking-branches">3 <strong>Visualización de nombres de tracking branches</strong></a>
+      <ul>
+        <li><a href="#31-comandos-clave">3.1 Comandos clave</a></li>
+        <li><a href="#32-ejemplo-cli-visualización-y-cambio-del-head-remoto">3.2 Ejemplo CLI: visualización y cambio del HEAD remoto</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-visualización-del-estado-de-seguimiento-tracking-status">4 <strong>Visualización del estado de seguimiento (tracking status)</strong></a>
+      <ul>
+        <li><a href="#41-comandos-clave">4.1 Comandos clave</a></li>
+        <li><a href="#412-ejemplo-cli-rama-main-con-commits-nuevos-estado-ahead">4.12 Ejemplo CLI: rama main con commits nuevos (estado ahead)</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
