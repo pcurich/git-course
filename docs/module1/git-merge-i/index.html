@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1 ¿Qué es un merge en Git?
+  #
+
+Un merge en Git es una operación que integra el historial de dos ramas distintas en una sola. Esto permite unir cambios realizados en flujos paralelos de trabajo, manteniendo la coherencia del proyecto.
+Internamente, Git compara los historiales de las ramas implicadas para encontrar su antecesor común (conocido como base del merge), y luego aplica los cambios divergentes.
+
+  2 ¿Cómo afecta al DAG?
+  #
+
+Git no trabaja con archivos directamente, sino con un grafo acíclico dirigido (DAG) de commits. Cada merge altera esta estructura:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/module1/git-merge-i/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="Git Merge I">
+  <meta property="og:description" content="1 ¿Qué es un merge en Git?#Un merge en Git es una operación que integra el historial de dos ramas distintas en una sola. Esto permite unir cambios realizados en flujos paralelos de trabajo, manteniendo la coherencia del proyecto.
+Internamente, Git compara los historiales de las ramas implicadas para encontrar su antecesor común (conocido como base del merge), y luego aplica los cambios divergentes.
+2 ¿Cómo afecta al DAG?#Git no trabaja con archivos directamente, sino con un grafo acíclico dirigido (DAG) de commits. Cada merge altera esta estructura:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Merge I | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/module1/git-merge-i/">
+<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.74d83436b7c90aac939ed3d35a4cf32490ea250f507401d2cb6012518bf4c0c2.js" integrity="sha256-dNg0NrfJCqyTntPTWkzzJJDqJQ9QdAHSy2ASUYv0wMI=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-494ba3d784b4edbfa0d8bfc979335f06" class="toggle" checked />
+    <label for="section-494ba3d784b4edbfa0d8bfc979335f06" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-merge-i/" class="active">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="toggle"  />
+    <label for="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
+    <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
+      <a href="/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Merge I</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-un-merge-en-git"><strong>1 ¿Qué es un merge en Git?</strong></a></li>
+    <li><a href="#2-cómo-afecta-al-dag"><strong>2 ¿Cómo afecta al DAG?</strong></a></li>
+    <li><a href="#3-tipos-de-merge-en-git"><strong>3 Tipos de merge en Git</strong></a>
+      <ul>
+        <li><a href="#31-fast-forward"><strong>3.1 Fast-forward</strong></a></li>
+        <li><a href="#32-merge-commit"><strong>3.2 Merge commit</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#4-visualizaciones-del-concepto-de-merge"><strong>4 Visualizaciones del concepto de merge</strong></a></li>
+    <li><a href="#4-tabla-resumen"><strong>4 Tabla resumen</strong></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-qué-es-un-merge-en-git">
+  <strong>1 ¿Qué es un merge en Git?</strong>
+  <a class="anchor" href="#1-qu%c3%a9-es-un-merge-en-git">#</a>
+</h2>
+<p>Un merge en Git es una operación que integra el historial de dos ramas distintas en una sola. Esto permite unir cambios realizados en flujos paralelos de trabajo, manteniendo la coherencia del proyecto.</p>
+<p>Internamente, Git compara los historiales de las ramas implicadas para encontrar su antecesor común (conocido como base del merge), y luego aplica los cambios divergentes.</p>
+<h2 id="2-cómo-afecta-al-dag">
+  <strong>2 ¿Cómo afecta al DAG?</strong>
+  <a class="anchor" href="#2-c%c3%b3mo-afecta-al-dag">#</a>
+</h2>
+<p>Git no trabaja con archivos directamente, sino con un grafo acíclico dirigido (DAG) de commits. Cada merge altera esta estructura:</p>
+<ul>
+<li>En un merge commit, se crea un nodo con dos padres: uno de la rama actual y otro de la rama fusionada.</li>
+<li>En un fast-forward, el puntero simplemente avanza sin modificar la topología del DAG.</li>
+</ul>
+<p><strong>¿Cuándo ocurre un merge?</strong></p>
+<table>
+  <thead>
+      <tr>
+          <th>Situación</th>
+          <th>Ejemplo técnico</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Finalizar una rama de desarrollo</td>
+          <td><code>git merge feature/login</code></td>
+      </tr>
+      <tr>
+          <td>Unificar cambios tras resolución de conflictos</td>
+          <td><code>git merge bugfix/menu</code></td>
+      </tr>
+      <tr>
+          <td>Colaboración multiusuario con ramas divergentes</td>
+          <td><code>git merge otra_rama</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-tipos-de-merge-en-git">
+  <strong>3 Tipos de merge en Git</strong>
+  <a class="anchor" href="#3-tipos-de-merge-en-git">#</a>
+</h2>
+<h3 id="31-fast-forward">
+  <strong>3.1 Fast-forward</strong>
+  <a class="anchor" href="#31-fast-forward">#</a>
+</h3>
+<p>Es una estrategia de fusión en Git donde la rama base no ha avanzado desde que se bifurcó la rama secundaria. En este caso, Git simplemente mueve el puntero de la rama base al último commit de la rama secundaria, sin crear un nuevo commit de merge.
+No modifica la estructura del DAG, y se percibe como una extensión lineal del historial</p>
+<h4 id="antes-vs-después-en-el-dag">
+  Antes vs. después en el DAG
+  <a class="anchor" href="#antes-vs-despu%c3%a9s-en-el-dag">#</a>
+</h4>
+<h5 id="situación-antes-del-merge">
+  Situación antes del merge
+  <a class="anchor" href="#situaci%c3%b3n-antes-del-merge">#</a>
+</h5>
+
+
+<script src="/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+gitGraph
+    commit id:"A" tag:"main"
+    commit id:"B"
+    branch featureX
+    checkout featureX
+    commit id:"C"
+</pre>
+
+<ul>
+<li>main apunta a A.</li>
+<li>featureX contiene nuevos commits (B, C) que no existen en main.</li>
+</ul>
+<h5 id="después-del-merge-fast-forward">
+  Después del merge fast-forward
+  <a class="anchor" href="#despu%c3%a9s-del-merge-fast-forward">#</a>
+</h5>
+
+
+<pre class="mermaid">
+gitGraph
+    commit id:"A"
+    commit id:"B"
+    commit id:"C" tag:"main"
+</pre>
+
+<ul>
+<li>main avanza hasta C (el mismo nodo que featureX).</li>
+<li>No se genera nuevo commit de merge.</li>
+<li>Se conserva historia limpia y lineal.</li>
+</ul>
+<h4 id="comparativa-local-vs-remoto">
+  Comparativa: Local vs. Remoto
+  <a class="anchor" href="#comparativa-local-vs-remoto">#</a>
+</h4>
+<h5 id="repositorio-local">
+  Repositorio Local
+  <a class="anchor" href="#repositorio-local">#</a>
+</h5>
+<ul>
+<li>Ideal para flujos individuales o ramas que no sufrieron interferencia.</li>
+<li>Ejemplo:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge featureX
+</span></span></code></pre></div><ul>
+<li>Si main no cambió desde el nacimiento de featureX, el merge será fast-forward</li>
+</ul>
+<h5 id="repositorio-remoto">
+  Repositorio Remoto
+  <a class="anchor" href="#repositorio-remoto">#</a>
+</h5>
+<ul>
+<li>Si otros contribuyeron a <code>main</code>, Git <strong>no permite fast-forward</strong> automáticamente.</li>
+<li>En Pull Requests, se suele generar <strong>merge commit</strong> para preservar historial de colaboración.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fetch origin
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge --ff-only origin/featureX
+</span></span></code></pre></div><p><code>--ff-only</code> garantiza que solo se ejecuta el merge si es fast-forward.</p>
+<h4 id="escenarios-comunes-de-uso">
+  Escenarios comunes de uso
+  <a class="anchor" href="#escenarios-comunes-de-uso">#</a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Contexto</th>
+          <th>Estrategia recomendada</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Desarrollo aislado</td>
+          <td>Fast-forward</td>
+      </tr>
+      <tr>
+          <td>Hotfix rápido</td>
+          <td>Fast-forward</td>
+      </tr>
+      <tr>
+          <td>Feature terminada sin conflictos</td>
+          <td>Fast-forward</td>
+      </tr>
+      <tr>
+          <td>Revisión de cambios entre equipos</td>
+          <td>Merge commit</td>
+      </tr>
+      <tr>
+          <td>Pull Request en GitHub</td>
+          <td>Merge commit (por defecto)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="buenas-prácticas">
+  Buenas prácticas
+  <a class="anchor" href="#buenas-pr%c3%a1cticas">#</a>
+</h4>
+<p>Usar fast-forward cuando:</p>
+<ul>
+<li>Se desea un historial limpio y lineal.</li>
+<li>No hubo interferencias con la rama base (<code>main</code>).</li>
+<li>El trabajo fue exclusivo de una rama y puede integrarse sin perder contexto.</li>
+</ul>
+<p>Evitar fast-forward cuando:</p>
+<ul>
+<li>Se quiere conservar la separación lógica del trabajo (ej. colaboraciones).</li>
+<li>Se desea tener trazabilidad de integración por revisiones o QA.</li>
+<li>Se usa un modelo como Git Flow, donde cada integración tiene importancia documental.</li>
+</ul>
+<h4 id="ejemplo">
+  Ejemplo
+  <a class="anchor" href="#ejemplo">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># flujo local con fast-forward</span>
+</span></span><span style="display:flex;"><span>git checkout featureX
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Desarrollo terminado&#34;</span>
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge featureX  <span style="color:#75715e"># merge rápido, sin conflictos</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># visualizar el DAG (simplificado)</span>
+</span></span><span style="display:flex;"><span>git log --oneline --graph --all
+</span></span></code></pre></div><h3 id="32-merge-commit">
+  <strong>3.2 Merge commit</strong>
+  <a class="anchor" href="#32-merge-commit">#</a>
+</h3>
+<p>Un merge commit es un tipo de fusión en Git que genera un nuevo commit con dos padres, unificando dos historiales divergentes. Es usado cuando ambas ramas han progresado desde el punto de bifurcación y no puede aplicarse una estrategia fast-forward.</p>
+<p>Este tipo de merge:</p>
+<ul>
+<li>Preserva la historia completa de ambas ramas.</li>
+<li>Mantiene la topología del DAG acíclico.</li>
+<li>Crea un punto claro de integración para auditoría, revisión y navegación.</li>
+</ul>
+<h4 id="antes-y-después-de-ejecutar-el-merge">
+  Antes y Después de ejecutar el merge
+  <a class="anchor" href="#antes-y-despu%c3%a9s-de-ejecutar-el-merge">#</a>
+</h4>
+<h5 id="situación-antes-del-merge-historial-divergente">
+  Situación antes del merge (historial divergente)
+  <a class="anchor" href="#situaci%c3%b3n-antes-del-merge-historial-divergente">#</a>
+</h5>
+
+
+<pre class="mermaid">
+gitGraph
+    commit id:"A"
+    commit id:"B"
+    branch featureX
+    checkout featureX
+    commit id:"C"
+    checkout main
+    commit id:"D"
+</pre>
+
+<ul>
+<li>featureX tiene commit C exclusivo.</li>
+<li>main avanzó hasta D, separándose del punto de bifurcación B.</li>
+</ul>
+<h5 id="después-del-merge-commit">
+  Después del merge commiT
+  <a class="anchor" href="#despu%c3%a9s-del-merge-commit">#</a>
+</h5>
+
+
+<pre class="mermaid">
+gitGraph
+    commit id:"A"
+    commit id:"B"
+    branch featureX
+    checkout featureX
+    commit id:"C"
+    checkout main
+    commit id:"D"
+    merge featureX tag:"Merge commit"
+</pre>
+
+<h4 id="ejemplos-prácticos-local-vs-remoto">
+  Ejemplos prácticos: local vs remotO
+  <a class="anchor" href="#ejemplos-pr%c3%a1cticos-local-vs-remoto">#</a>
+</h4>
+<h5 id="en-repositorio-local">
+  En repositorio local
+  <a class="anchor" href="#en-repositorio-local">#</a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge featureX
+</span></span></code></pre></div><ul>
+<li>Si main y featureX tienen commits distintos → se genera merge commit.</li>
+<li>Puedes verificar con</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --graph --oneline
+</span></span></code></pre></div><h5 id="en-repositorio-remoto">
+  En repositorio remoto
+  <a class="anchor" href="#en-repositorio-remoto">#</a>
+</h5>
+<p>Opción: Merge commit por defecto en Pull Request
+Al aceptar un PR, GitHub genera un merge commit por defecto (a menos que elijas squash o rebase). Ejemplo visual:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>*   Merge pull request <span style="color:#75715e">#42 from featureX</span>
+</span></span><span style="display:flex;"><span>|<span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>| * commit C
+</span></span><span style="display:flex;"><span>* | commit D
+</span></span></code></pre></div><p>Si se hace merge local y luego push</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge featureX  <span style="color:#75715e"># crea merge commit</span>
+</span></span><span style="display:flex;"><span>git push origin main  <span style="color:#75715e"># sube DAG completo al remoto</span>
+</span></span></code></pre></div><h4 id="escenario-de-uso">
+  Escenario de uso
+  <a class="anchor" href="#escenario-de-uso">#</a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Escenario</th>
+          <th>¿Por qué usar merge commit?</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Pull Requests entre ramas divergentes</td>
+          <td>Auditoría clara, contexto colaborativo</td>
+      </tr>
+      <tr>
+          <td>Integración de hotfix urgente mientras se desarrolla un feature</td>
+          <td>Separación lógica del flujo</td>
+      </tr>
+      <tr>
+          <td>Revisión de ramas por QA antes de despliegue</td>
+          <td>Permite rastrear qué fue revisado y cuándo</td>
+      </tr>
+      <tr>
+          <td>Implementaciones por múltiples desarrolladores</td>
+          <td>Documenta el momento exacto de integración</td>
+      </tr>
+      <tr>
+          <td>Uso de Git Flow u otros flujos estructurados</td>
+          <td>Cada fase tiene su propio commit de merge documentado</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="buenas-prácticas-al-usar-merge-commit">
+  Buenas prácticas al usar merge commit
+  <a class="anchor" href="#buenas-pr%c3%a1cticas-al-usar-merge-commit">#</a>
+</h4>
+<ul>
+<li>Escribe mensajes claros en los commits de merge. Ejemplo:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git merge featureX -m <span style="color:#e6db74">&#34;Merge &#39;featureX&#39;: añade soporte a OAuth&#34;</span>
+</span></span></code></pre></div><ul>
+<li>Evita conflictos innecesarios sincronizando tu rama base:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git pull origin main
+</span></span></code></pre></div><ul>
+<li>No borres ramas antes del merge. Preserva el historial para auditar.</li>
+<li>Documenta fusiones importantes en la historia del proyecto, especialmente si están ligadas a releases, QA o decisiones de negocio.</li>
+</ul>
+<h2 id="4-visualizaciones-del-concepto-de-merge">
+  <strong>4 Visualizaciones del concepto de merge</strong>
+  <a class="anchor" href="#4-visualizaciones-del-concepto-de-merge">#</a>
+</h2>
+<p><strong>Diagrama 1</strong>: Merge commit (historia bifurcada + unificación)
+
+
+<pre class="mermaid">
+gitGraph
+    commit id:"A"
+    commit id:"B"
+    branch featureX
+    checkout featureX
+    commit id:"C"
+    checkout main
+    commit id:"D"
+    merge featureX tag:"Merge commit"
+</pre>
+</p>
+<p>El commit final tiene dos padres: uno de main, otro de featureX.</p>
+<p><strong>Diagrama 2</strong>: Fast-forward (avance lineal del puntero)
+
+
+<pre class="mermaid">
+gitGraph
+    commit id:"A"
+    commit id:"B"
+    branch featureY
+    checkout featureY
+    commit id:"C"
+    checkout main
+    merge featureY
+
+</pre>
+</p>
+<p>main simplemente avanza al commit C. No hay nuevos nodos.</p>
+<h2 id="4-tabla-resumen">
+  <strong>4 Tabla resumen</strong>
+  <a class="anchor" href="#4-tabla-resumen">#</a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Tipo de merge</th>
+          <th>Crea commit nuevo</th>
+          <th>Conserva historia de ambas ramas</th>
+          <th>Uso recomendado</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Fast-forward</td>
+          <td>No</td>
+          <td>Parcial</td>
+          <td>Proyectos lineales</td>
+      </tr>
+      <tr>
+          <td>Merge commit</td>
+          <td>Sí</td>
+          <td>Completa</td>
+          <td>Equipos colaborativos</td>
+      </tr>
+  </tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-un-merge-en-git"><strong>1 ¿Qué es un merge en Git?</strong></a></li>
+    <li><a href="#2-cómo-afecta-al-dag"><strong>2 ¿Cómo afecta al DAG?</strong></a></li>
+    <li><a href="#3-tipos-de-merge-en-git"><strong>3 Tipos de merge en Git</strong></a>
+      <ul>
+        <li><a href="#31-fast-forward"><strong>3.1 Fast-forward</strong></a></li>
+        <li><a href="#32-merge-commit"><strong>3.2 Merge commit</strong></a></li>
+      </ul>
+    </li>
+    <li><a href="#4-visualizaciones-del-concepto-de-merge"><strong>4 Visualizaciones del concepto de merge</strong></a></li>
+    <li><a href="#4-tabla-resumen"><strong>4 Tabla resumen</strong></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
