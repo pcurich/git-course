@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
-<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+<head><script src="/git-course/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=git-course/livereload" data-no-instant defer></script>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="
-  El modelo de grafo en Git
+  1. El modelo de grafo en Git
   #
 
 Entender cómo Git representa el historial de cambios como un grafo dirigido acíclico (DAG), y cómo cada commit se conecta con sus antecesores.
 
-  DAG visual
+  2. DAG visual
   #
 
 
@@ -30,14 +30,12 @@ graph LR
     E --&gt; F[Commit F]
     F --&gt; G[Merge Commit G]
     D --&gt; G
-
     classDef commit fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
     class A,B,C,D,E,F,G commit;
-    
 
 
 
-  Comandos esenciales para entender el DAG en Git
+  3. Comandos esenciales para entender el DAG en Git
   #
 
 
@@ -87,10 +85,6 @@ graph LR
   
 
 
-  Comandos que interactuan con el DAG
-  #
-
-
 
 
 graph LR
@@ -124,21 +118,21 @@ Este gráfico representa cómo diversos comandos de Git permiten explorar, inspe
 A continuación, se presenta una simulación guiada por consola para construir y explorar el DAG (grafo dirigido acíclico) en Git. Cada paso está comentado para entender su propósito dentro del modelo.">
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
-<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/module1/git-graph-model/">
-  <meta property="og:site_name" content="My New Hugo Site">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/git-course/docs/module1/git-graph-model/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
   <meta property="og:title" content="Git Graph Model">
-  <meta property="og:description" content="El modelo de grafo en Git#Entender cómo Git representa el historial de cambios como un grafo dirigido acíclico (DAG), y cómo cada commit se conecta con sus antecesores.
-DAG visual#graph LRA[Commit A] --&gt; B[Commit B]B --&gt; C[Commit C]C --&gt; D[Commit D]B --&gt; E[Feature Branch: Commit E]E --&gt; F[Commit F]F --&gt; G[Merge Commit G]D --&gt; GclassDef commit fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;class A,B,C,D,E,F,G commit;Comandos esenciales para entender el DAG en Git#🛠 Comando 📘 Propósito 🧾 Explicación git log --oneline --graph --decorate --all Visualizar el grafo completo de commits Dibuja el DAG con líneas de conexión, nombres de ramas y commits compactos. git show &lt;commit&gt; Inspeccionar un nodo específico Muestra los detalles, cambios y metadatos de un commit individual. git diff &lt;commit1&gt; &lt;commit2&gt; Comparar dos nodos del grafo Permite ver los cambios entre dos commits, útil para estudiar su evolución. git reflog Consultar el historial interno del HEAD Muestra los movimientos recientes, ideal para recuperar commits perdidos. git cat-file -p &lt;commit&gt; Ver el contenido crudo de un commit Revela cómo Git almacena los objetos internamente en el grafo. git rev-parse &lt;ref&gt; Obtener el SHA-1 de una referencia Identifica un nodo del grafo con su hash único. git fsck Verificar la integridad del DAG Comprueba que no existan objetos corruptos o referencias rotas. Comandos que interactuan con el DAG#graph LRA[git log] --&gt; DAG[🔗 DAG]B[git show commit] --&gt; DAGC[git diff commit1 commit2] --&gt; DAGD[git reflog] --&gt; DAGE[git cat-file -p commit] --&gt; DAGF[git rev-parse ref] --&gt; DAGG[git fsck] --&gt; DAGDAG --&gt; H[Historia de commits]DAG --&gt; I[Relaciones entre nodos]DAG --&gt; J[Estructura interna]classDef cmd fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;class A,B,C,D,E,F,G cmd;Este gráfico representa cómo diversos comandos de Git permiten explorar, inspeccionar y verificar el DAG (grafo dirigido acíclico) que modela la historia del proyecto. Cada nodo representa un commit, y las relaciones muestran cómo fluye el desarrollo del código.Ejercicio: Explorando el DAG en Git usando comandos#A continuación, se presenta una simulación guiada por consola para construir y explorar el DAG (grafo dirigido acíclico) en Git. Cada paso está comentado para entender su propósito dentro del modelo.">
+  <meta property="og:description" content="1. El modelo de grafo en Git#Entender cómo Git representa el historial de cambios como un grafo dirigido acíclico (DAG), y cómo cada commit se conecta con sus antecesores.
+2. DAG visual#graph LRA[Commit A] --&gt; B[Commit B]B --&gt; C[Commit C]C --&gt; D[Commit D]B --&gt; E[Feature Branch: Commit E]E --&gt; F[Commit F]F --&gt; G[Merge Commit G]D --&gt; GclassDef commit fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;class A,B,C,D,E,F,G commit;3. Comandos esenciales para entender el DAG en Git#🛠 Comando 📘 Propósito 🧾 Explicación git log --oneline --graph --decorate --all Visualizar el grafo completo de commits Dibuja el DAG con líneas de conexión, nombres de ramas y commits compactos. git show &lt;commit&gt; Inspeccionar un nodo específico Muestra los detalles, cambios y metadatos de un commit individual. git diff &lt;commit1&gt; &lt;commit2&gt; Comparar dos nodos del grafo Permite ver los cambios entre dos commits, útil para estudiar su evolución. git reflog Consultar el historial interno del HEAD Muestra los movimientos recientes, ideal para recuperar commits perdidos. git cat-file -p &lt;commit&gt; Ver el contenido crudo de un commit Revela cómo Git almacena los objetos internamente en el grafo. git rev-parse &lt;ref&gt; Obtener el SHA-1 de una referencia Identifica un nodo del grafo con su hash único. git fsck Verificar la integridad del DAG Comprueba que no existan objetos corruptos o referencias rotas. graph LRA[git log] --&gt; DAG[🔗 DAG]B[git show commit] --&gt; DAGC[git diff commit1 commit2] --&gt; DAGD[git reflog] --&gt; DAGE[git cat-file -p commit] --&gt; DAGF[git rev-parse ref] --&gt; DAGG[git fsck] --&gt; DAGDAG --&gt; H[Historia de commits]DAG --&gt; I[Relaciones entre nodos]DAG --&gt; J[Estructura interna]classDef cmd fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;class A,B,C,D,E,F,G cmd;Este gráfico representa cómo diversos comandos de Git permiten explorar, inspeccionar y verificar el DAG (grafo dirigido acíclico) que modela la historia del proyecto. Cada nodo representa un commit, y las relaciones muestran cómo fluye el desarrollo del código.Ejercicio: Explorando el DAG en Git usando comandos#A continuación, se presenta una simulación guiada por consola para construir y explorar el DAG (grafo dirigido acíclico) en Git. Cada paso está comentado para entender su propósito dentro del modelo.">
   <meta property="og:locale" content="en_us">
   <meta property="og:type" content="article">
     <meta property="article:section" content="docs">
-<title>Git Graph Model | My New Hugo Site</title>
-<link rel="icon" href="/favicon.png" >
-<link rel="manifest" href="/manifest.json">
-<link rel="canonical" href="http://localhost:1313/docs/module1/git-graph-model/">
-<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
-  <script defer src="/fuse.min.js"></script>
-  <script defer src="/en.search.min.74d83436b7c90aac939ed3d35a4cf32490ea250f507401d2cb6012518bf4c0c2.js" integrity="sha256-dNg0NrfJCqyTntPTWkzzJJDqJQ9QdAHSy2ASUYv0wMI=" crossorigin="anonymous"></script>
+<title>Git Graph Model | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="http://localhost:1313/git-course/docs/module1/git-graph-model/">
+<link rel="stylesheet" href="/git-course/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.8553b6183aa901f601fc856b0e8a606992cd1a04e0793c178988b98f2859a70d.js" integrity="sha256-hVO2GDqpAfYB/IVrDopgaZLNGgTgeTwXiYi5jyhZpw0=" crossorigin="anonymous"></script>
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -154,7 +148,7 @@ https://github.com/alex-shpak/hugo-book
         
   <nav>
 <h2 class="book-brand">
-  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
   </a>
 </h2>
 
@@ -192,7 +186,7 @@ https://github.com/alex-shpak/hugo-book
   
     <input type="checkbox" id="section-494ba3d784b4edbfa0d8bfc979335f06" class="toggle" checked />
     <label for="section-494ba3d784b4edbfa0d8bfc979335f06" class="flex">
-      <a role="button" class="flex-auto ">Modulo 2</a>
+      <a role="button" class="flex-auto ">Modulo 1</a>
     </label>
   
 
@@ -206,7 +200,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/module1/git-locations/" class="">Git Locations</a>
+    <a href="/git-course/docs/module1/git-started/" class="">Git Started</a>
   
 
         </li>
@@ -219,7 +213,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/module1/git-graph-model/" class="active">Git Graph Model</a>
+    <a href="/git-course/docs/module1/git-new-repo/" class="">Git New Repo</a>
   
 
         </li>
@@ -232,7 +226,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/module1/git-id/" class="">Git ID</a>
+    <a href="/git-course/docs/module1/git-locations/" class="">Git Locations</a>
   
 
         </li>
@@ -245,7 +239,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/module1/git-references/" class="">Git References</a>
+    <a href="/git-course/docs/module1/git-graph-model/" class="active">Git Graph Model</a>
   
 
         </li>
@@ -258,7 +252,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/module1/git-branch/" class="">Git Branch</a>
+    <a href="/git-course/docs/module1/git-id/" class="">Git ID</a>
   
 
         </li>
@@ -271,10 +265,25 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/module1/git-merge-i/" class="">Git Merge I</a>
+    <a href="/git-course/docs/module1/git-recovery/" class="">Git Recovery</a>
   
 
         </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-diff/" class="">Git Diff</a>
+  
+
+        </li>
+      
+    
       
     
   </ul>
@@ -289,7 +298,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/example/" class="">Example Site</a>
+    <a href="/git-course/docs/example/" class="">Example Site</a>
   
 
           
@@ -302,7 +311,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
   
 
           
@@ -315,7 +324,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
   
 
         </li>
@@ -328,7 +337,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
   
 
         </li>
@@ -362,7 +371,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
   
 
           
@@ -375,7 +384,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
   
 
         </li>
@@ -387,6 +396,152 @@ https://github.com/alex-shpak/hugo-book
       
     
   </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ced1875accb8fad23f2d2a8d0896f35" class="toggle"  />
+    <label for="section-4ced1875accb8fad23f2d2a8d0896f35" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b530e2350b399098d44c10912763c0d4" class="toggle"  />
+    <label for="section-b530e2350b399098d44c10912763c0d4" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rebase/" class="">Git Rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rewriting-history/" class="">Git Rewriting History</a>
+  
 
         </li>
       
@@ -416,7 +571,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
   
 
         </li>
@@ -429,7 +584,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
   
 
         </li>
@@ -442,7 +597,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/details/" class="">Details</a>
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
   
 
         </li>
@@ -455,7 +610,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
   
 
         </li>
@@ -468,7 +623,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
   
 
         </li>
@@ -481,7 +636,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
   
 
         </li>
@@ -494,7 +649,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
   
 
         </li>
@@ -509,7 +664,7 @@ https://github.com/alex-shpak/hugo-book
   
     <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
     <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
-      <a href="/docs/shortcodes/section/" class="flex-auto ">Section</a>
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
     </label>
   
 
@@ -523,7 +678,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
   
 
         </li>
@@ -536,7 +691,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
   
 
         </li>
@@ -554,7 +709,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
   
 
         </li>
@@ -580,7 +735,7 @@ https://github.com/alex-shpak/hugo-book
 <ul>
   
   <li>
-    <a href="/posts/"  >
+    <a href="/git-course/posts/"  >
         Blog
       </a>
   </li>
@@ -609,14 +764,14 @@ https://github.com/alex-shpak/hugo-book
         
   <div class="flex align-center justify-between">
   <label for="menu-control">
-    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
   <h3>Git Graph Model</h3>
 
   <label for="toc-control">
     
-    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
     
   </label>
 </div>
@@ -628,10 +783,9 @@ https://github.com/alex-shpak/hugo-book
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#el-modelo-de-grafo-en-git"><strong>El modelo de grafo en Git</strong></a></li>
-    <li><a href="#dag-visual"><strong>DAG visual</strong></a></li>
-    <li><a href="#comandos-esenciales-para-entender-el-dag-en-git"><strong>Comandos esenciales para entender el DAG en Git</strong></a></li>
-    <li><a href="#comandos-que-interactuan-con-el-dag"><strong>Comandos que interactuan con el DAG</strong></a></li>
+    <li><a href="#1-el-modelo-de-grafo-en-git"><strong>1. El modelo de grafo en Git</strong></a></li>
+    <li><a href="#2-dag-visual"><strong>2. DAG visual</strong></a></li>
+    <li><a href="#3-comandos-esenciales-para-entender-el-dag-en-git"><strong>3. Comandos esenciales para entender el DAG en Git</strong></a></li>
     <li><a href="#ejercicio-explorando-el-dag-en-git-usando-comandos"><strong>Ejercicio: Explorando el DAG en Git usando comandos</strong></a></li>
   </ul>
 </nav>
@@ -645,18 +799,18 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown book-article"><h2 id="el-modelo-de-grafo-en-git">
-  <strong>El modelo de grafo en Git</strong>
-  <a class="anchor" href="#el-modelo-de-grafo-en-git">#</a>
+  <article class="markdown book-article"><h2 id="1-el-modelo-de-grafo-en-git">
+  <strong>1. El modelo de grafo en Git</strong>
+  <a class="anchor" href="#1-el-modelo-de-grafo-en-git">#</a>
 </h2>
 <p>Entender cómo Git representa el historial de cambios como un grafo dirigido acíclico (DAG), y cómo cada commit se conecta con sus antecesores.</p>
-<h2 id="dag-visual">
-  <strong>DAG visual</strong>
-  <a class="anchor" href="#dag-visual">#</a>
+<h2 id="2-dag-visual">
+  <strong>2. DAG visual</strong>
+  <a class="anchor" href="#2-dag-visual">#</a>
 </h2>
 
 
-<script src="/mermaid.min.js"></script>
+<script src="/git-course/mermaid.min.js"></script>
 
   <script>mermaid.initialize({
   "flowchart": {
@@ -678,15 +832,13 @@ graph LR
     E --> F[Commit F]
     F --> G[Merge Commit G]
     D --> G
-
     classDef commit fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10;
     class A,B,C,D,E,F,G commit;
-    
 </pre>
 
-<h2 id="comandos-esenciales-para-entender-el-dag-en-git">
-  <strong>Comandos esenciales para entender el DAG en Git</strong>
-  <a class="anchor" href="#comandos-esenciales-para-entender-el-dag-en-git">#</a>
+<h2 id="3-comandos-esenciales-para-entender-el-dag-en-git">
+  <strong>3. Comandos esenciales para entender el DAG en Git</strong>
+  <a class="anchor" href="#3-comandos-esenciales-para-entender-el-dag-en-git">#</a>
 </h2>
 <table>
   <thead>
@@ -734,10 +886,6 @@ graph LR
       </tr>
   </tbody>
 </table>
-<h2 id="comandos-que-interactuan-con-el-dag">
-  <strong>Comandos que interactuan con el DAG</strong>
-  <a class="anchor" href="#comandos-que-interactuan-con-el-dag">#</a>
-</h2>
 
 
 <pre class="mermaid">
@@ -894,10 +1042,9 @@ Este gráfico representa cómo diversos comandos de Git permiten explorar, inspe
   
 <nav id="TableOfContents">
   <ul>
-    <li><a href="#el-modelo-de-grafo-en-git"><strong>El modelo de grafo en Git</strong></a></li>
-    <li><a href="#dag-visual"><strong>DAG visual</strong></a></li>
-    <li><a href="#comandos-esenciales-para-entender-el-dag-en-git"><strong>Comandos esenciales para entender el DAG en Git</strong></a></li>
-    <li><a href="#comandos-que-interactuan-con-el-dag"><strong>Comandos que interactuan con el DAG</strong></a></li>
+    <li><a href="#1-el-modelo-de-grafo-en-git"><strong>1. El modelo de grafo en Git</strong></a></li>
+    <li><a href="#2-dag-visual"><strong>2. DAG visual</strong></a></li>
+    <li><a href="#3-comandos-esenciales-para-entender-el-dag-en-git"><strong>3. Comandos esenciales para entender el DAG en Git</strong></a></li>
     <li><a href="#ejercicio-explorando-el-dag-en-git-usando-comandos"><strong>Ejercicio: Explorando el DAG en Git usando comandos</strong></a></li>
   </ul>
 </nav>

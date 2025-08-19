@@ -1,6 +1,6 @@
 ---
 title: "Git Merge I"
-weight: 16
+weight: 26
 # bookFlatSection: false
 # bookToc: true
 # bookHidden: false

@@ -1,6 +1,6 @@
 ---
 title: "Git Branch"
-weight: 15
+weight: 25
 # bookFlatSection: false
 # bookToc: true
 # bookHidden: false

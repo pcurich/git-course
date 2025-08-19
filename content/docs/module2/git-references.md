@@ -1,6 +1,6 @@
 ---
 title: "Git References"
-weight: 14
+weight: 24
 # bookFlatSection: false
 # bookToc: true
 # bookHidden: false

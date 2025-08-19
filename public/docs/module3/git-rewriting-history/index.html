@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/git-course/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=git-course/livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1 Rewriting History en Git
+  #
+
+Reescribir la historia en Git permite modificar commits existentes, ya sea para corregir errores, pulir el historial, simplificar la integración, o preparar el proyecto para revisión o publicación. Esta sección cubre:
+
+git commit --amend
+git rebase -i (interactivo)
+Squash merge (--squash)
+Commits seleccionados (cherry-pick)
+
+
+  1.1 Amending
+  #
+
+
+  ¿Qué es Amend?
+  #
+
+git commit --amend permite modificar el último commit sin crear uno nuevo. Puede usarse para:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/git-course/docs/module3/git-rewriting-history/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
+  <meta property="og:title" content="Git Rewriting History">
+  <meta property="og:description" content="1 Rewriting History en Git#Reescribir la historia en Git permite modificar commits existentes, ya sea para corregir errores, pulir el historial, simplificar la integración, o preparar el proyecto para revisión o publicación. Esta sección cubre:
+git commit --amend git rebase -i (interactivo) Squash merge (--squash) Commits seleccionados (cherry-pick) 1.1 Amending#¿Qué es Amend?#git commit --amend permite modificar el último commit sin crear uno nuevo. Puede usarse para:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Rewriting History | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="http://localhost:1313/git-course/docs/module3/git-rewriting-history/">
+<link rel="stylesheet" href="/git-course/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.8553b6183aa901f601fc856b0e8a606992cd1a04e0793c178988b98f2859a70d.js" integrity="sha256-hVO2GDqpAfYB/IVrDopgaZLNGgTgeTwXiYi5jyhZpw0=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-494ba3d784b4edbfa0d8bfc979335f06" class="toggle"  />
+    <label for="section-494ba3d784b4edbfa0d8bfc979335f06" class="flex">
+      <a role="button" class="flex-auto ">Modulo 1</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-started/" class="">Git Started</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-new-repo/" class="">Git New Repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-recovery/" class="">Git Recovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-diff/" class="">Git Diff</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="toggle"  />
+    <label for="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4ced1875accb8fad23f2d2a8d0896f35" class="toggle"  />
+    <label for="section-4ced1875accb8fad23f2d2a8d0896f35" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-b530e2350b399098d44c10912763c0d4" class="toggle" checked />
+    <label for="section-b530e2350b399098d44c10912763c0d4" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rebase/" class="">Git Rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rewriting-history/" class="active">Git Rewriting History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
+    <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/git-course/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Rewriting History</h3>
+
+  <label for="toc-control">
+    
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-rewriting-history-en-git"><strong>1 Rewriting History en Git</strong></a>
+      <ul>
+        <li><a href="#11-amending">1.1 Amending</a></li>
+        <li><a href="#12-cherry-pick">1.2 Cherry-pick</a></li>
+        <li><a href="#13-interactive-rebase-git-rebase--i">1.3 Interactive Rebase (git rebase -i)</a></li>
+        <li><a href="#14-squash-merge">1.4 Squash Merge</a></li>
+        <li><a href="#15-rewriting-history-cuándo-usar-qué">1.5 Rewriting History: ¿Cuándo usar qué?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-rewriting-history-en-git">
+  <strong>1 Rewriting History en Git</strong>
+  <a class="anchor" href="#1-rewriting-history-en-git">#</a>
+</h2>
+<p>Reescribir la historia en Git permite modificar commits existentes, ya sea para corregir errores, pulir el historial, simplificar la integración, o preparar el proyecto para revisión o publicación. Esta sección cubre:</p>
+<ul>
+<li><code>git commit --amend</code></li>
+<li><code>git rebase -i</code> (interactivo)</li>
+<li>Squash merge (<code>--squash</code>)</li>
+<li>Commits seleccionados (<code>cherry-pick</code>)</li>
+</ul>
+<h3 id="11-amending">
+  1.1 Amending
+  <a class="anchor" href="#11-amending">#</a>
+</h3>
+<h4 id="qué-es-amend">
+  ¿Qué es Amend?
+  <a class="anchor" href="#qu%c3%a9-es-amend">#</a>
+</h4>
+<p><code>git commit --amend</code> permite modificar el último commit sin crear uno nuevo. Puede usarse para:</p>
+<ul>
+<li>Agregar archivos olvidados (-a)</li>
+<li>Corregir el mensaje</li>
+<li>Editar el contenido (manteniendo o cambiando el mensaje)</li>
+</ul>
+<h4 id="ejemplo-de-amend">
+  Ejemplo de Amend
+  <a class="anchor" href="#ejemplo-de-amend">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Olvidaste agregar un archivo</span>
+</span></span><span style="display:flex;"><span>git add archivo-extra.md
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reemplazas el commit anterior incluyendo el archivo</span>
+</span></span><span style="display:flex;"><span>git commit --amend -a
+</span></span></code></pre></div><p>Si deseas mantener el mensaje sin editarlo:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit --amend --no-edit
+</span></span></code></pre></div><p>Esto genera un nuevo commit con nuevo ID SHA. Ejemplo:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git log --oneline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Anterior: abc123 Fix typos
+</span></span><span style="display:flex;"><span>Actual:   def456 Fix typos   ← nuevo ID
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Antes:
+</span></span><span style="display:flex;"><span>A---B---C   ← HEAD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Después:
+</span></span><span style="display:flex;"><span>A---B---C<span style="color:#e6db74">&#39;  ← C fue reemplazado por C&#39;</span>
+</span></span></code></pre></div><h3 id="12-cherry-pick">
+  1.2 Cherry-pick
+  <a class="anchor" href="#12-cherry-pick">#</a>
+</h3>
+<h4 id="qué-es-cherry-pick">
+  ¿Qué es Cherry-pick?
+  <a class="anchor" href="#qu%c3%a9-es-cherry-pick">#</a>
+</h4>
+<p><code>git cherry-pick &lt;commit&gt;</code> aplica un commit específico desde otra rama sin reescribir o fusionar el resto del historial. Es útil para:</p>
+<ul>
+<li>Recuperar un commit puntual</li>
+<li>Integrar cambios específicos sin traer toda la rama</li>
+<li>Resolver integración puntual entre ramas paralelas</li>
+</ul>
+<h4 id="ejemplo-de-cherry-pick">
+  Ejemplo de Cherry-pick
+  <a class="anchor" href="#ejemplo-de-cherry-pick">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Desde main, aplicar un commit de featureX</span>
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git cherry-pick abc123
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># También puedes aplicar varios:</span>
+</span></span><span style="display:flex;"><span>git cherry-pick abc123 def456
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Rama featureX:    A---B---C
+</span></span><span style="display:flex;"><span>Rama main:        D---E
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Cherry-picked:    D---E---C<span style="color:#960050;background-color:#1e0010">&#39;</span>   ← solo C es traído como nuevo commit
+</span></span></code></pre></div><p>El commit C&rsquo; es una copia de C, con nuevo SHA e independiente del historial original.</p>
+<h3 id="13-interactive-rebase-git-rebase--i">
+  1.3 Interactive Rebase (git rebase -i)
+  <a class="anchor" href="#13-interactive-rebase-git-rebase--i">#</a>
+</h3>
+<h4 id="qué-permite">
+  ¿Qué permite?
+  <a class="anchor" href="#qu%c3%a9-permite">#</a>
+</h4>
+<p>Modificar múltiples commits con control granular. Opciones disponibles:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Acción</th>
+          <th>Descripción</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>pick</td>
+          <td>Usar el commit tal cual</td>
+      </tr>
+      <tr>
+          <td>reword</td>
+          <td>Editar el mensaje del commit</td>
+      </tr>
+      <tr>
+          <td>edit</td>
+          <td>Detener y modificar contenido del commit</td>
+      </tr>
+      <tr>
+          <td>drop</td>
+          <td>Eliminar el commit</td>
+      </tr>
+      <tr>
+          <td>squash</td>
+          <td>Fusionar con el anterior (mantiene mensaje combinado)</td>
+      </tr>
+      <tr>
+          <td>fixup</td>
+          <td>Fusionar sin conservar mensaje (silencioso)</td>
+      </tr>
+      <tr>
+          <td>exec</td>
+          <td>Ejecutar comandos Shell durante el rebase</td>
+      </tr>
+      <tr>
+          <td>Reordenar</td>
+          <td>Cambiar el orden de los commits</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="cuándo-usarlo">
+  Cuándo usarlo
+  <a class="anchor" href="#cu%c3%a1ndo-usarlo">#</a>
+</h4>
+<ul>
+<li>Limpiar historial antes de enviar a remoto</li>
+<li>Preparar presentación del trabajo</li>
+<li>Agrupar o eliminar commits irrelevantes</li>
+</ul>
+<h4 id="ejemplo-de-rebase-interactivo">
+  Ejemplo de Rebase interactivo
+  <a class="anchor" href="#ejemplo-de-rebase-interactivo">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase -i HEAD~4
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Abre el editor:</span>
+</span></span><span style="display:flex;"><span>pick abc123 Agrega login
+</span></span><span style="display:flex;"><span>pick def456 Corrige error ortográfico
+</span></span><span style="display:flex;"><span>pick ghi789 Refactoriza validación
+</span></span><span style="display:flex;"><span>pick jkl012 Elimina consola
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Modificable:</span>
+</span></span><span style="display:flex;"><span>reword    → Cambiar mensaje
+</span></span><span style="display:flex;"><span>edit      → Detener y modificar contenido
+</span></span><span style="display:flex;"><span>squash    → Fusionar con anterior <span style="color:#f92672">(</span>mantiene mensajes<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>fixup     → Fusionar sin mensaje
+</span></span><span style="display:flex;"><span>drop      → Eliminar el commit
+</span></span><span style="display:flex;"><span>exec echo → Ejecuta comando Shell
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Original:
+</span></span><span style="display:flex;"><span>A---B---C---D
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Interactivo con squash y drop:
+</span></span><span style="display:flex;"><span>A---B+C---D<span style="color:#960050;background-color:#1e0010">&#39;</span>     <span style="color:#f92672">(</span>C fue fusionado, D modificado<span style="color:#f92672">)</span>
+</span></span></code></pre></div><h3 id="14-squash-merge">
+  1.4 Squash Merge
+  <a class="anchor" href="#14-squash-merge">#</a>
+</h3>
+<h4 id="qué-es-un-squash-merge">
+  ¿Qué es un Squash Merge?
+  <a class="anchor" href="#qu%c3%a9-es-un-squash-merge">#</a>
+</h4>
+<p><code>git merge --squash</code> fusiona los cambios de una rama sin conservar sus commits individuales. Se usa para:</p>
+<ul>
+<li>Integrar múltiples commits como uno solo</li>
+<li>Mantener historia limpia en ramas principales</li>
+</ul>
+<h4 id="ejemplo-de-squash-merge">
+  Ejemplo de Squash Merge
+  <a class="anchor" href="#ejemplo-de-squash-merge">#</a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Estás en main y quieres fusionar feature</span>
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git merge --squash feature
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Feature integrada en un solo commit&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Los commits de feature no se muestran como parte del historial; solo el resultado final aparece.</span>
+</span></span><span style="display:flex;"><span>Antes:
+</span></span><span style="display:flex;"><span>main:    A---B
+</span></span><span style="display:flex;"><span>feature:     C---D---E
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Después del squash merge:
+</span></span><span style="display:flex;"><span>main:    A---B---F   ← F <span style="color:#f92672">=</span> resultado consolidado
+</span></span></code></pre></div><h3 id="15-rewriting-history-cuándo-usar-qué">
+  1.5 Rewriting History: ¿Cuándo usar qué?
+  <a class="anchor" href="#15-rewriting-history-cu%c3%a1ndo-usar-qu%c3%a9">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Técnica</th>
+          <th>Uso principal</th>
+          <th>Riesgos o cuidados</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>amend</code></td>
+          <td>Corregir el último commit</td>
+          <td>Reescribe historia; evita si ya se hizo push</td>
+      </tr>
+      <tr>
+          <td><code>rebase -i</code></td>
+          <td>Limpiar, reordenar, eliminar commits</td>
+          <td>Reescribe múltiples commits</td>
+      </tr>
+      <tr>
+          <td><code>--squash</code></td>
+          <td>Fusionar múltiples commits como uno solo</td>
+          <td>No conserva el historial original</td>
+      </tr>
+      <tr>
+          <td><code>cherry-pick</code></td>
+          <td>Tomar commits puntuales de otra rama</td>
+          <td>Duplica commits (nuevo SHA)</td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="cuándo-y-por-qué-reescribir">
+  ¿Cuándo y por qué reescribir?
+  <a class="anchor" href="#cu%c3%a1ndo-y-por-qu%c3%a9-reescribir">#</a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Situación</th>
+          <th>Herramienta sugerida</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Olvidaste incluir un archivo</td>
+          <td><code>git commit --amend</code></td>
+      </tr>
+      <tr>
+          <td>Quieres modificar varios commits</td>
+          <td><code>git rebase -i</code></td>
+      </tr>
+      <tr>
+          <td>Deseas fusionar todos los commits de una rama</td>
+          <td><code>git merge --squash</code></td>
+      </tr>
+      <tr>
+          <td>Necesitas extraer un commit puntual</td>
+          <td><code>git cherry-pick &lt;SHA&gt;</code></td>
+      </tr>
+  </tbody>
+</table>
+<h4 id="comparación-entre-técnicas">
+  Comparación entre técnicas
+  <a class="anchor" href="#comparaci%c3%b3n-entre-t%c3%a9cnicas">#</a>
+</h4>
+<table>
+  <thead>
+      <tr>
+          <th>Técnica</th>
+          <th>¿Reescribe SHA?</th>
+          <th>¿Afecta historial?</th>
+          <th>Uso ideal</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>amend</code></td>
+          <td>✅ Sí</td>
+          <td>✅ Último commit</td>
+          <td>Corrige último commit</td>
+      </tr>
+      <tr>
+          <td><code>rebase -i</code></td>
+          <td>✅ Sí</td>
+          <td>✅ Varios commits</td>
+          <td>Limpiar o reestructurar historial</td>
+      </tr>
+      <tr>
+          <td><code>merge --squash</code></td>
+          <td>✅ Sí (nuevo)</td>
+          <td>❌ Preserva main</td>
+          <td>Integrar cambios sin comprometer historial fuente</td>
+      </tr>
+      <tr>
+          <td><code>cherry-pick</code></td>
+          <td>✅ Sí</td>
+          <td>❌ Crea duplicado</td>
+          <td>Extraer commits específicos</td>
+      </tr>
+  </tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-rewriting-history-en-git"><strong>1 Rewriting History en Git</strong></a>
+      <ul>
+        <li><a href="#11-amending">1.1 Amending</a></li>
+        <li><a href="#12-cherry-pick">1.2 Cherry-pick</a></li>
+        <li><a href="#13-interactive-rebase-git-rebase--i">1.3 Interactive Rebase (git rebase -i)</a></li>
+        <li><a href="#14-squash-merge">1.4 Squash Merge</a></li>
+        <li><a href="#15-rewriting-history-cuándo-usar-qué">1.5 Rewriting History: ¿Cuándo usar qué?</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
