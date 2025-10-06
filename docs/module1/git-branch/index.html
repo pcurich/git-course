@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1 ¿Qué es una rama (branch)?
+  #
+
+Una rama es un puntero móvil que representa una línea de desarrollo dentro de tu proyecto. Permite trabajar en paralelo, experimentar funcionalidades o aislar correcciones sin alterar la rama principal (main).
+
+  
+      
+          Término
+          Descripción
+      
+  
+  
+      
+          main
+          Rama principal del proyecto.
+      
+      
+          HEAD
+          Puntero que indica el commit actual, normalmente sobre una rama.
+      
+      
+          branch
+          Puntero a un commit, que avanza a medida que se hacen nuevos commits.
+      
+  
+
+
+  2 Crear y gestionar ramas (local)
+  #
+
+# Crear una nueva rama local
+git branch nombre-rama
+
+# Crear y cambiar a la nueva rama directamente
+git checkout -b nombre-rama
+
+  
+      
+          Acción
+          Comando
+      
+  
+  
+      
+          Crear rama local
+          git branch nueva-rama
+      
+      
+          Crear y cambiar a nueva rama
+          git checkout -b nueva-rama
+      
+      
+          Listar ramas locales
+          git branch
+      
+      
+          Ver rama actual
+          git branch --show-current
+      
+  
+
+
+  3 Gestión de ramas remotas
+  #
+
+# Subir rama al repositorio remoto
+git push origin nombre-rama
+
+# Ver todas las ramas remotas
+git branch -r
+
+# Ver ramas locales y remotas
+git branch -a
+
+  
+      
+          Acción
+          Comando
+      
+  
+  
+      
+          Subir rama
+          git push origin nombre-rama
+      
+      
+          Ver ramas remotas
+          git branch -r
+      
+      
+          Ver ramas locales&#43;remotas
+          git branch -a
+      
+  
+
+
+  4 Cambio entre ramas (checkout)
+  #
+
+git checkout permite cambiar el contenido del área de trabajo. Su uso más común es cambiar de rama, pero también puede:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="http://localhost:1313/docs/module1/git-branch/">
+  <meta property="og:site_name" content="My New Hugo Site">
+  <meta property="og:title" content="Git Branch">
+  <meta property="og:description" content="1 ¿Qué es una rama (branch)?#Una rama es un puntero móvil que representa una línea de desarrollo dentro de tu proyecto. Permite trabajar en paralelo, experimentar funcionalidades o aislar correcciones sin alterar la rama principal (main).
+Término Descripción main Rama principal del proyecto. HEAD Puntero que indica el commit actual, normalmente sobre una rama. branch Puntero a un commit, que avanza a medida que se hacen nuevos commits. 2 Crear y gestionar ramas (local)## Crear una nueva rama local git branch nombre-rama # Crear y cambiar a la nueva rama directamente git checkout -b nombre-rama Acción Comando Crear rama local git branch nueva-rama Crear y cambiar a nueva rama git checkout -b nueva-rama Listar ramas locales git branch Ver rama actual git branch --show-current 3 Gestión de ramas remotas## Subir rama al repositorio remoto git push origin nombre-rama # Ver todas las ramas remotas git branch -r # Ver ramas locales y remotas git branch -a Acción Comando Subir rama git push origin nombre-rama Ver ramas remotas git branch -r Ver ramas locales&#43;remotas git branch -a 4 Cambio entre ramas (checkout)#git checkout permite cambiar el contenido del área de trabajo. Su uso más común es cambiar de rama, pero también puede:">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Branch | My New Hugo Site</title>
+<link rel="icon" href="/favicon.png" >
+<link rel="manifest" href="/manifest.json">
+<link rel="canonical" href="http://localhost:1313/docs/module1/git-branch/">
+<link rel="stylesheet" href="/book.min.d5e59cb0aa8d22a5813c62cd5e25d3d172489a369c61dc3f622ee96ae1ebb457.css" integrity="sha256-1eWcsKqNIqWBPGLNXiXT0XJImjacYdw/Yi7pauHrtFc=" crossorigin="anonymous">
+  <script defer src="/fuse.min.js"></script>
+  <script defer src="/en.search.min.74d83436b7c90aac939ed3d35a4cf32490ea250f507401d2cb6012518bf4c0c2.js" integrity="sha256-dNg0NrfJCqyTntPTWkzzJJDqJQ9QdAHSy2ASUYv0wMI=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>My New Hugo Site</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-494ba3d784b4edbfa0d8bfc979335f06" class="toggle" checked />
+    <label for="section-494ba3d784b4edbfa0d8bfc979335f06" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-branch/" class="active">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/module1/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="toggle"  />
+    <label for="section-5fb0aae8bdefbf0da740f5cd5cb58835" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7a2b07237f6d3d5c9f37024350e4fb38" class="toggle"  />
+    <label for="section-7a2b07237f6d3d5c9f37024350e4fb38" class="flex">
+      <a href="/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Branch</h3>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-una-rama-branch"><strong>1 ¿Qué es una rama (branch)?</strong></a></li>
+    <li><a href="#2-crear-y-gestionar-ramas-local"><strong>2 Crear y gestionar ramas (local)</strong></a></li>
+    <li><a href="#3-gestión-de-ramas-remotas"><strong>3 Gestión de ramas remotas</strong></a></li>
+    <li><a href="#4-cambio-entre-ramas-checkout"><strong>4 Cambio entre ramas (checkout)</strong></a>
+      <ul>
+        <li><a href="#41-crear-rama-y-checkout">4.1 Crear Rama y Checkout</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-eliminar-ramas-local-y-remoto"><strong>5 Eliminar ramas (local y remoto)</strong></a></li>
+    <li><a href="#6-casos-comunes"><strong>6 Casos comunes</strong></a>
+      <ul>
+        <li><a href="#61-caso-1-borrado-tras-merge-exitos">6.1 Caso 1: Borrado tras merge exitos</a></li>
+        <li><a href="#62-caso-2-rama-obsoleta-sin-fusionar">6.2 Caso 2: Rama obsoleta sin fusionar</a></li>
+        <li><a href="#63-caso-3-borrar-rama-remota-tras-integración">6.3 Caso 3: Borrar rama remota tras integración</a></li>
+        <li><a href="#64-caso-4-intento-de-eliminar-rama-activa">6.4 Caso 4: Intento de eliminar rama activa</a></li>
+        <li><a href="#65-caso-5-limpieza-mensual-de-ramas-ya-fusionadas">6.5 Caso 5: Limpieza mensual de ramas ya fusionadas</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-qué-es-un-dangling-commit"><strong>7 ¿Qué es un dangling commit?</strong></a>
+      <ul>
+        <li><a href="#71-escenario-1-eliminar-una-rama-sin-hacer-merge">7.1 Escenario 1: Eliminar una rama sin hacer merge</a></li>
+        <li><a href="#72-escenario-2-rebase-interrumpido">7.2 Escenario 2: Rebase interrumpido</a></li>
+        <li><a href="#73-escenario-3-reset-duro">7.3 Escenario 3: Reset duro</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-el-registro-secreto-de-git"><strong>8 El registro secreto de Git</strong></a>
+      <ul>
+        <li><a href="#81-ejemplo-típico">8.1 Ejemplo típico</a></li>
+        <li><a href="#82-resumen-de-usos-de-git-reflog">8.2 Resumen de usos de <code>git reflog</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-qué-es-una-rama-branch">
+  <strong>1 ¿Qué es una rama (branch)?</strong>
+  <a class="anchor" href="#1-qu%c3%a9-es-una-rama-branch">#</a>
+</h2>
+<p>Una rama es un puntero móvil que representa una línea de desarrollo dentro de tu proyecto. Permite trabajar en paralelo, experimentar funcionalidades o aislar correcciones sin alterar la rama principal (main).</p>
+<table>
+  <thead>
+      <tr>
+          <th>Término</th>
+          <th>Descripción</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>main</code></td>
+          <td>Rama principal del proyecto.</td>
+      </tr>
+      <tr>
+          <td><code>HEAD</code></td>
+          <td>Puntero que indica el commit actual, normalmente sobre una rama.</td>
+      </tr>
+      <tr>
+          <td><code>branch</code></td>
+          <td>Puntero a un commit, que avanza a medida que se hacen nuevos commits.</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="2-crear-y-gestionar-ramas-local">
+  <strong>2 Crear y gestionar ramas (local)</strong>
+  <a class="anchor" href="#2-crear-y-gestionar-ramas-local">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span># Crear una nueva rama local
+</span></span><span style="display:flex;"><span>git branch nombre-rama
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Crear y cambiar a la nueva rama directamente
+</span></span><span style="display:flex;"><span>git checkout -b nombre-rama
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Acción</th>
+          <th>Comando</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Crear rama local</td>
+          <td><code>git branch nueva-rama</code></td>
+      </tr>
+      <tr>
+          <td>Crear y cambiar a nueva rama</td>
+          <td><code>git checkout -b nueva-rama</code></td>
+      </tr>
+      <tr>
+          <td>Listar ramas locales</td>
+          <td><code>git branch</code></td>
+      </tr>
+      <tr>
+          <td>Ver rama actual</td>
+          <td><code>git branch --show-current</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-gestión-de-ramas-remotas">
+  <strong>3 Gestión de ramas remotas</strong>
+  <a class="anchor" href="#3-gesti%c3%b3n-de-ramas-remotas">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span># Subir rama al repositorio remoto
+</span></span><span style="display:flex;"><span>git push origin nombre-rama
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Ver todas las ramas remotas
+</span></span><span style="display:flex;"><span>git branch -r
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Ver ramas locales y remotas
+</span></span><span style="display:flex;"><span>git branch -a
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Acción</th>
+          <th>Comando</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Subir rama</td>
+          <td><code>git push origin nombre-rama</code></td>
+      </tr>
+      <tr>
+          <td>Ver ramas remotas</td>
+          <td><code>git branch -r</code></td>
+      </tr>
+      <tr>
+          <td>Ver ramas locales+remotas</td>
+          <td><code>git branch -a</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="4-cambio-entre-ramas-checkout">
+  <strong>4 Cambio entre ramas (checkout)</strong>
+  <a class="anchor" href="#4-cambio-entre-ramas-checkout">#</a>
+</h2>
+<p>git checkout permite cambiar el contenido del área de trabajo. Su uso más común es cambiar de rama, pero también puede:</p>
+<ul>
+<li>Mover HEAD a un commit específico</li>
+<li>Restaurar archivos desde otro commit</li>
+<li>Salir o entrar en estado detached HEAD</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span># Cambia a la rama main
+</span></span><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Crea y cambia a una nueva rama dev
+</span></span><span style="display:flex;"><span>git checkout -b dev
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Ver historial en esa rama
+</span></span><span style="display:flex;"><span>git log --oneline
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Acción</th>
+          <th>Comando</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Cambiar de rama</td>
+          <td><code>git checkout rama</code></td>
+      </tr>
+      <tr>
+          <td>Cambiar y crear</td>
+          <td><code>git checkout -b nueva</code></td>
+      </tr>
+      <tr>
+          <td>Restaurar archivo</td>
+          <td><code>git checkout rama -- archivo.txt</code></td>
+      </tr>
+      <tr>
+          <td>Cambiar a un commit (detached HEAD)</td>
+          <td><code>git checkout a1b2c3d</code></td>
+      </tr>
+      <tr>
+          <td>Restaura el archivo desde el último commit actual</td>
+          <td><code>git checkout HEAD archivo.txt</code></td>
+      </tr>
+      <tr>
+          <td>Extrae style.css desde la rama main al directorio actual</td>
+          <td><code>git checkout main -- style.css</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="41-crear-rama-y-checkout">
+  4.1 Crear Rama y Checkout
+  <a class="anchor" href="#41-crear-rama-y-checkout">#</a>
+</h3>
+<p>Representa el flujo base y la bifurcación de featureX desde master
+
+
+<script src="/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+graph LR
+    A1[commit A] --> B1[commit B] --> C1[commit C] --> D1[commit D]
+    C1 --> FX1["featureX: nuevo puntero"]
+    subgraph Ramas
+        MA1(master)
+        FX1(featureX)
+    end
+    classDef master fill:#f9f,stroke:#333,stroke-width:2px
+    class MA1 master
+</pre>
+</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch featureX
+</span></span><span style="display:flex;"><span>git branch
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># * master</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   featureX</span>
+</span></span></code></pre></div><p>HEAD cambia a la rama featureX</p>
+
+
+<pre class="mermaid">
+graph LR
+    A2[commit A] --> B2[commit B] --> C2[commit C] --> D2[commit D]
+    C2 --> FX2[featureX]
+    subgraph HEAD actual
+        H2(HEAD → featureX)
+    end
+    H2 --> FX2
+    classDef active fill:#cfc,stroke:#333,stroke-width:2px
+    class H2,FX2 active
+</pre>
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout featureX
+</span></span><span style="display:flex;"><span>git branch
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#   master</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># * featureX</span>
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Comando</th>
+          <th>Acción que representa</th>
+          <th>Nodo clave</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>git branch featureX</code></td>
+          <td>Crea rama desde HEAD</td>
+          <td>C</td>
+      </tr>
+      <tr>
+          <td><code>git checkout featureX</code></td>
+          <td>Mueve HEAD a featureX</td>
+          <td>FX</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="5-eliminar-ramas-local-y-remoto">
+  <strong>5 Eliminar ramas (local y remoto)</strong>
+  <a class="anchor" href="#5-eliminar-ramas-local-y-remoto">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span># Borrar rama local (solo si ya fue fusionada)
+</span></span><span style="display:flex;"><span>git branch -d nombre
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Forzar borrado de rama local
+</span></span><span style="display:flex;"><span>git branch -D nombre
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span># Borrar rama remota
+</span></span><span style="display:flex;"><span>git push origin --delete nombre
+</span></span></code></pre></div><table>
+  <thead>
+      <tr>
+          <th>Tipo</th>
+          <th>Comando</th>
+          <th>Uso</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Local</td>
+          <td><code>git branch -d nombre</code></td>
+          <td>Borrado seguro (fusionada)</td>
+      </tr>
+      <tr>
+          <td>Local</td>
+          <td><code>git branch -D nombre</code></td>
+          <td>Borrado forzado</td>
+      </tr>
+      <tr>
+          <td>Remoto</td>
+          <td><code>git push origin --delete nombre</code></td>
+          <td>Elimina rama en servidor</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="6-casos-comunes">
+  <strong>6 Casos comunes</strong>
+  <a class="anchor" href="#6-casos-comunes">#</a>
+</h2>
+<h3 id="61-caso-1-borrado-tras-merge-exitos">
+  6.1 Caso 1: Borrado tras merge exitos
+  <a class="anchor" href="#61-caso-1-borrado-tras-merge-exitos">#</a>
+</h3>
+<p><strong>Situación</strong>: Has completado la rama <code>feature/navbar</code> y la has fusionado con <code>main</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -d feature/navbar
+</span></span></code></pre></div><h3 id="62-caso-2-rama-obsoleta-sin-fusionar">
+  6.2 Caso 2: Rama obsoleta sin fusionar
+  <a class="anchor" href="#62-caso-2-rama-obsoleta-sin-fusionar">#</a>
+</h3>
+<p><strong>Situación</strong>: Se creó <code>feature/old-config</code>, pero nunca se integró ni se volverá a usar.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -D feature/old-config
+</span></span></code></pre></div><h3 id="63-caso-3-borrar-rama-remota-tras-integración">
+  6.3 Caso 3: Borrar rama remota tras integración
+  <a class="anchor" href="#63-caso-3-borrar-rama-remota-tras-integraci%c3%b3n">#</a>
+</h3>
+<p><strong>Situación</strong>: Has fusionado <code>hotfix/login-error</code> en <code>main</code> y subido todo al remoto.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push origin --delete hotfix/login-error
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Complementa con git fetch --prune si se quiere limpiar referencias remotas localmente.</span>
+</span></span></code></pre></div><h3 id="64-caso-4-intento-de-eliminar-rama-activa">
+  6.4 Caso 4: Intento de eliminar rama activa
+  <a class="anchor" href="#64-caso-4-intento-de-eliminar-rama-activa">#</a>
+</h3>
+<p><strong>Situación</strong>: Estás situado en <code>feature/invoice</code>. Intentas borrarla y Git lanza error.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout main
+</span></span><span style="display:flex;"><span>git branch -d feature/invoice
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># recordar el uso de HEAD y cómo Git protege la rama activa</span>
+</span></span></code></pre></div><h3 id="65-caso-5-limpieza-mensual-de-ramas-ya-fusionadas">
+  6.5 Caso 5: Limpieza mensual de ramas ya fusionadas
+  <a class="anchor" href="#65-caso-5-limpieza-mensual-de-ramas-ya-fusionadas">#</a>
+</h3>
+<p><strong>Situación</strong>: Quieres eliminar todas las ramas locales que ya se fusionaron con <code>main</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch --merged main | grep -v <span style="color:#e6db74">&#39;\*&#39;</span> | xargs git branch -d
+</span></span></code></pre></div><h2 id="7-qué-es-un-dangling-commit">
+  <strong>7 ¿Qué es un dangling commit?</strong>
+  <a class="anchor" href="#7-qu%c3%a9-es-un-dangling-commit">#</a>
+</h2>
+<p>Un dangling commit es un commit que no tiene referencias vivas apuntando a él: ninguna rama, tag ni HEAD. Existen en el repositorio, pero están “huérfanos”. Pueden generarse por errores, rebases incompletos o eliminación de ramas sin merge.</p>
+<h3 id="71-escenario-1-eliminar-una-rama-sin-hacer-merge">
+  7.1 Escenario 1: Eliminar una rama sin hacer merge
+  <a class="anchor" href="#71-escenario-1-eliminar-una-rama-sin-hacer-merge">#</a>
+</h3>
+<p><strong>Situación</strong>: Se trabajó en <code>feature/test</code>, se hicieron varios commits, pero luego la rama se elimina sin merge.
+git branch -D feature/test</p>
+<p><strong>Resultado</strong>: Los commits sobreviven temporalmente como dangling, pero no son accesibles por comandos normales.
+Reforzamiento CLI:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git fsck --lost-found
+</span></span><span style="display:flex;"><span>Git no borra los datos inmediatamente, sino que los aparta.
+</span></span></code></pre></div><h3 id="72-escenario-2-rebase-interrumpido">
+  7.2 Escenario 2: Rebase interrumpido
+  <a class="anchor" href="#72-escenario-2-rebase-interrumpido">#</a>
+</h3>
+<p><strong>Situación</strong>: Un rebase falla a mitad de camino y los commits originales quedan sin referencias.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git rebase -i HEAD~3
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># cancelas el rebase a medias</span>
+</span></span></code></pre></div><p><strong>Resultado</strong>: Los commits anteriores pueden quedar como dangling si no se recuperan.</p>
+<h3 id="73-escenario-3-reset-duro">
+  7.3 Escenario 3: Reset duro
+  <a class="anchor" href="#73-escenario-3-reset-duro">#</a>
+</h3>
+<p>Situación: Se hace un hard reset a un commit anterior, eliminando commits recientes.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git reset --hard HEAD~2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># considerar a diferenciar --soft, --mixed, y --hard, y sus efectos en el historial</span>
+</span></span></code></pre></div><p><strong>Resultado</strong>: Los dos commits descartados quedan sin referencias → dangling.
+🧠 Genial para enseñar .</p>
+<h2 id="8-el-registro-secreto-de-git">
+  <strong>8 El registro secreto de Git</strong>
+  <a class="anchor" href="#8-el-registro-secreto-de-git">#</a>
+</h2>
+<p><code>git reflog</code> muestra el historial completo de movimientos de HEAD, incluyendo acciones que no aparecen en <code>git log</code>, como rebases, resets, checkouts, merges fallidos y cambios temporales.
+Es ideal para recuperar commits perdidos, visualizar el flujo reciente del repositorio y diagnosticar errores complejos.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Muestra los cambios recientes en HEAD y otros punteros locales</span>
+</span></span><span style="display:flex;"><span>git reflog
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Reflog de la rama específica featureX</span>
+</span></span><span style="display:flex;"><span>git reflog show featureX
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Revierte el estado del repositorio al punto 2 pasos atrás según el reflog</span>
+</span></span><span style="display:flex;"><span>git reset --hard HEAD@<span style="color:#f92672">{</span>2<span style="color:#f92672">}</span>
+</span></span></code></pre></div><h3 id="81-ejemplo-típico">
+  8.1 Ejemplo típico
+  <a class="anchor" href="#81-ejemplo-t%c3%adpico">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Cambio experimental&#34;</span>
+</span></span><span style="display:flex;"><span>git reset --hard HEAD~1
+</span></span><span style="display:flex;"><span>git reflog
+</span></span></code></pre></div><p>Aunque el commit “Cambio experimental” desaparece del log, ¡aún puedes verlo y restaurarlo con reflog!</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git checkout HEAD@<span style="color:#f92672">{</span>1<span style="color:#f92672">}</span>
+</span></span><span style="display:flex;"><span>git branch restaurada
+</span></span></code></pre></div><h3 id="82-resumen-de-usos-de-git-reflog">
+  8.2 Resumen de usos de <code>git reflog</code>
+  <a class="anchor" href="#82-resumen-de-usos-de-git-reflog">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Caso de uso</th>
+          <th>Comando</th>
+          <th>Resultado</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Ver cambios recientes de HEAD</td>
+          <td><code>git reflog</code></td>
+          <td>Lista numerada de acciones</td>
+      </tr>
+      <tr>
+          <td>Revertir a estado anterior</td>
+          <td><code>git reset --hard HEAD@{n}</code></td>
+          <td>Estado del repo retrocedido</td>
+      </tr>
+      <tr>
+          <td>Recuperar commit huérfano</td>
+          <td><code>git checkout HEAD@{n}</code></td>
+          <td>Permite crear nueva rama</td>
+      </tr>
+  </tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-qué-es-una-rama-branch"><strong>1 ¿Qué es una rama (branch)?</strong></a></li>
+    <li><a href="#2-crear-y-gestionar-ramas-local"><strong>2 Crear y gestionar ramas (local)</strong></a></li>
+    <li><a href="#3-gestión-de-ramas-remotas"><strong>3 Gestión de ramas remotas</strong></a></li>
+    <li><a href="#4-cambio-entre-ramas-checkout"><strong>4 Cambio entre ramas (checkout)</strong></a>
+      <ul>
+        <li><a href="#41-crear-rama-y-checkout">4.1 Crear Rama y Checkout</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-eliminar-ramas-local-y-remoto"><strong>5 Eliminar ramas (local y remoto)</strong></a></li>
+    <li><a href="#6-casos-comunes"><strong>6 Casos comunes</strong></a>
+      <ul>
+        <li><a href="#61-caso-1-borrado-tras-merge-exitos">6.1 Caso 1: Borrado tras merge exitos</a></li>
+        <li><a href="#62-caso-2-rama-obsoleta-sin-fusionar">6.2 Caso 2: Rama obsoleta sin fusionar</a></li>
+        <li><a href="#63-caso-3-borrar-rama-remota-tras-integración">6.3 Caso 3: Borrar rama remota tras integración</a></li>
+        <li><a href="#64-caso-4-intento-de-eliminar-rama-activa">6.4 Caso 4: Intento de eliminar rama activa</a></li>
+        <li><a href="#65-caso-5-limpieza-mensual-de-ramas-ya-fusionadas">6.5 Caso 5: Limpieza mensual de ramas ya fusionadas</a></li>
+      </ul>
+    </li>
+    <li><a href="#7-qué-es-un-dangling-commit"><strong>7 ¿Qué es un dangling commit?</strong></a>
+      <ul>
+        <li><a href="#71-escenario-1-eliminar-una-rama-sin-hacer-merge">7.1 Escenario 1: Eliminar una rama sin hacer merge</a></li>
+        <li><a href="#72-escenario-2-rebase-interrumpido">7.2 Escenario 2: Rebase interrumpido</a></li>
+        <li><a href="#73-escenario-3-reset-duro">7.3 Escenario 3: Reset duro</a></li>
+      </ul>
+    </li>
+    <li><a href="#8-el-registro-secreto-de-git"><strong>8 El registro secreto de Git</strong></a>
+      <ul>
+        <li><a href="#81-ejemplo-típico">8.1 Ejemplo típico</a></li>
+        <li><a href="#82-resumen-de-usos-de-git-reflog">8.2 Resumen de usos de <code>git reflog</code></a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en-es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1. Instalación y Verificación de Versión
+  #
+
+Git es una herramienta de control de versiones distribuido. Para comenzar, se debe instalar Git en el sistema operativo correspondiente.
+# En sistemas Debian/Ubuntu
+sudo apt update
+sudo apt install git
+
+# En macOS con Homebrew
+brew install git
+
+# En Windows
+# Usar el instalador desde: https://git-scm.com/download/win
+Verificar instalación
+git --version
+
+#resultado
+git version 2.38.1.windows.1
+
+  2. Sintaxis General de Git
+  #
+
+La sintaxis de Git sigue esta estructura:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://pcurich.github.io/git-course/docs/module1/git-started/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
+  <meta property="og:title" content="Git Started">
+  <meta property="og:description" content="1. Instalación y Verificación de Versión # Git es una herramienta de control de versiones distribuido. Para comenzar, se debe instalar Git en el sistema operativo correspondiente.
+# En sistemas Debian/Ubuntu sudo apt update sudo apt install git # En macOS con Homebrew brew install git # En Windows # Usar el instalador desde: https://git-scm.com/download/win Verificar instalación
+git --version #resultado git version 2.38.1.windows.1 2. Sintaxis General de Git # La sintaxis de Git sigue esta estructura:">
+  <meta property="og:locale" content="en_es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Started | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="https://pcurich.github.io/git-course/docs/module1/git-started/">
+<link rel="stylesheet" href="/git-course/book.min.aa960edff0d323115794a139959a7ff8216cd0ab3e9b0cfa19a5f5632706f065.css" integrity="sha256-qpYO3/DTIxFXlKE5lZp/&#43;CFs0Ks&#43;mwz6GaX1YycG8GU=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.c005432891098f70c1186f3af3f6af0dabf9bf493f457711d25a7c63d6ec0504.js" integrity="sha256-wAVDKJEJj3DBGG868/avDav5v0k/RXcR0lp8Y9bsBQQ=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0583d809ff828f7ece682637ad51710f" class="toggle" checked />
+    <label for="section-0583d809ff828f7ece682637ad51710f" class="flex">
+      <a role="button" class="flex-auto ">Modulo 1</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-started/" class="active">Git Started</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-new-repo/" class="">Git New Repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-recovery/" class="">Git Recovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-diff/" class="">Git Diff</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4f3421012f8885d45c66914026960960" class="toggle"  />
+    <label for="section-4f3421012f8885d45c66914026960960" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="toggle"  />
+    <label for="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d7fb35025025d7ea65ade35b112be037" class="toggle"  />
+    <label for="section-d7fb35025025d7ea65ade35b112be037" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rebase/" class="">Git Rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rewriting-history/" class="">Git Rewriting History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="toggle"  />
+    <label for="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="flex">
+      <a role="button" class="flex-auto ">Modulo 4</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-introduction/" class="">Git Flow Introduccion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-install/" class="">Git Flow Install</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-branch/" class="">Git Flow Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-cycle/" class="">Git Flow Ciclo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-ae3c858bb40a920b01a03f7a5c536629" class="toggle"  />
+    <label for="section-ae3c858bb40a920b01a03f7a5c536629" class="flex">
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/git-course/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Started</h3>
+
+  <label for="toc-control">
+    
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-instalación-y-verificación-de-versión"><strong>1. Instalación y Verificación de Versión</strong></a></li>
+    <li><a href="#2-sintaxis-general-de-git"><strong>2. Sintaxis General de Git</strong></a></li>
+    <li><a href="#3-obtener-ayuda"><strong>3. Obtener Ayuda</strong></a></li>
+    <li><a href="#4-configuración-de-usuario-y-editor"><strong>4. Configuración de Usuario y Editor</strong></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-instalación-y-verificación-de-versión">
+  <strong>1. Instalación y Verificación de Versión</strong>
+  <a class="anchor" href="#1-instalaci%c3%b3n-y-verificaci%c3%b3n-de-versi%c3%b3n">#</a>
+</h2>
+<p>Git es una herramienta de control de versiones distribuido. Para comenzar, se debe instalar Git en el sistema operativo correspondiente.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># En sistemas Debian/Ubuntu</span>
+</span></span><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># En macOS con Homebrew</span>
+</span></span><span style="display:flex;"><span>brew install git
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># En Windows</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Usar el instalador desde: https://git-scm.com/download/win</span>
+</span></span></code></pre></div><p>Verificar instalación</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git --version
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#resultado</span>
+</span></span><span style="display:flex;"><span>git version 2.38.1.windows.1
+</span></span></code></pre></div><h2 id="2-sintaxis-general-de-git">
+  <strong>2. Sintaxis General de Git</strong>
+  <a class="anchor" href="#2-sintaxis-general-de-git">#</a>
+</h2>
+<p>La sintaxis de Git sigue esta estructura:</p>
+<pre tabindex="0"><code class="language-cpl" data-lang="cpl">git [comando] [--flags] [argumentos]
+</code></pre><p>Git utiliza convenciones para representar opciones, argumentos y valores:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Símbolo</th>
+          <th>Significado</th>
+          <th>Ejemplo</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--flag</code></td>
+          <td>Opción larga</td>
+          <td><code>git config --global user.name &quot;Pedro&quot;</code></td>
+      </tr>
+      <tr>
+          <td><code>-f</code></td>
+          <td>Opción corta</td>
+          <td><code>git commit -m &quot;mensaje&quot;</code></td>
+      </tr>
+      <tr>
+          <td><code>&lt;valor&gt;</code></td>
+          <td>Argumento obligatorio</td>
+          <td><code>git checkout &lt;branch&gt;</code></td>
+      </tr>
+      <tr>
+          <td><code>[&lt;valor&gt;]</code></td>
+          <td>Argumento opcional</td>
+          <td><code>git log [&lt;archivo&gt;]</code></td>
+      </tr>
+      <tr>
+          <td><code>()</code></td>
+          <td>Agrupación o precedencia</td>
+          <td><code>git log --pretty=(oneline|short)</code></td>
+      </tr>
+      <tr>
+          <td>|</td>
+          <td>Alternativa entre opciones</td>
+          <td><code>git config --local | --global</code></td>
+      </tr>
+      <tr>
+          <td>&hellip;</td>
+          <td>Repetición o múltiples valores</td>
+          <td><code>git add archivo1 archivo2 archivo3 ...</code></td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="3-obtener-ayuda">
+  <strong>3. Obtener Ayuda</strong>
+  <a class="anchor" href="#3-obtener-ayuda">#</a>
+</h2>
+<p>Git incluye documentación integrada accesible desde la línea de comandos.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git config -h
+</span></span></code></pre></div><h2 id="4-configuración-de-usuario-y-editor">
+  <strong>4. Configuración de Usuario y Editor</strong>
+  <a class="anchor" href="#4-configuraci%c3%b3n-de-usuario-y-editor">#</a>
+</h2>
+<p>Git permite configurar datos del usuario y preferencias como el editor de texto. Las configuraciones pueden aplicarse a nivel:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Nivel</th>
+          <th>Alcance</th>
+          <th>Ubicación del archivo de configuración</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--system</code></td>
+          <td>Todo el sistema</td>
+          <td><code>C:\ProgramData\Git\config</code></td>
+      </tr>
+      <tr>
+          <td><code>--global</code></td>
+          <td>Usuario actual</td>
+          <td><code>C:\Users\Usuario1\.gitconfig</code></td>
+      </tr>
+      <tr>
+          <td><code>--local</code></td>
+          <td>Repositorio actual</td>
+          <td><code>D:\Proyectos\MiRepo\.git\config</code></td>
+      </tr>
+  </tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Configuración de Git con config</span>
+</span></span><span style="display:flex;"><span>git config <span style="color:#f92672">[</span>--local | --global | --system<span style="color:#f92672">]</span> &lt;clave&gt; <span style="color:#f92672">[</span>&lt;valor&gt;<span style="color:#f92672">]</span> 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configurar nombre y correo</span>
+</span></span><span style="display:flex;"><span>git config --global user.name <span style="color:#e6db74">&#34;Usuario1&#34;</span>
+</span></span><span style="display:flex;"><span>git config --global user.email <span style="color:#e6db74">&#34;Usuario1@example.com&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Configurar editor por defecto</span>
+</span></span><span style="display:flex;"><span>git config --global core.editor <span style="color:#f92672">[</span><span style="color:#e6db74">&#34;nano&#34;</span> | <span style="color:#e6db74">&#34;code --wait&#34;</span><span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mejora las salidas de color en el editor</span>
+</span></span><span style="display:flex;"><span>git config --global color.ui true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Al hacer checkout: Convierte automáticamente los finales de línea LF (Linux/Mac) a CRLF (Windows)</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Al hacer commit: Convierte automáticamente los finales de línea CRLF (Windows) a LF (Linux/Mac)</span>
+</span></span><span style="display:flex;"><span>git config --global core.autocrlf true
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Establece el identificador del commit (hash) a los primeros 7 caracteres</span>
+</span></span><span style="display:flex;"><span>git config --global core.abbrev <span style="color:#ae81ff">7</span>
+</span></span></code></pre></div><p>Ver configuración actual</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Ver toda la configuración (combina system + global + local)</span>
+</span></span><span style="display:flex;"><span>git config --list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver toda la configuración mostrando de dónde viene cada valor</span>
+</span></span><span style="display:flex;"><span>git config --list --show-origin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver toda la configuración con el alcance (system/global/local)</span>
+</span></span><span style="display:flex;"><span>git config --list --show-scope
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver configuración del sistema (--system)</span>
+</span></span><span style="display:flex;"><span>git config --system --list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver configuración global del usuario (--global)</span>
+</span></span><span style="display:flex;"><span>git config --global --list
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver configuración local del repositorio (--local)</span>
+</span></span><span style="display:flex;"><span>git config --local --list
+</span></span></code></pre></div></article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-instalación-y-verificación-de-versión"><strong>1. Instalación y Verificación de Versión</strong></a></li>
+    <li><a href="#2-sintaxis-general-de-git"><strong>2. Sintaxis General de Git</strong></a></li>
+    <li><a href="#3-obtener-ayuda"><strong>3. Obtener Ayuda</strong></a></li>
+    <li><a href="#4-configuración-de-usuario-y-editor"><strong>4. Configuración de Usuario y Editor</strong></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

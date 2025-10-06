@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="en-es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  Introducción a Git Flow
+  #
+
+
+  1.1 ¿Qué es Git Flow?
+  #
+
+Git Flow es una extensión de Git que define un modelo de ramificación estructurado para gestionar el ciclo de vida de un proyecto de software. Fue propuesto por Vincent Driessen en 2010 y se ha convertido en una práctica común en equipos que trabajan con versiones, despliegues y mantenimiento contin
+Características clave:
+
+Define roles específicos para cada tipo de rama.
+Automatiza la creación, fusión y eliminación de ramas.
+Facilita la organización del trabajo en equipo.
+
+Ejemplo visual de ramas:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://pcurich.github.io/git-course/docs/module4/git-flow-introduction/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
+  <meta property="og:title" content="Git Flow Introduccion">
+  <meta property="og:description" content="Introducción a Git Flow # 1.1 ¿Qué es Git Flow? # Git Flow es una extensión de Git que define un modelo de ramificación estructurado para gestionar el ciclo de vida de un proyecto de software. Fue propuesto por Vincent Driessen en 2010 y se ha convertido en una práctica común en equipos que trabajan con versiones, despliegues y mantenimiento contin
+Características clave:
+Define roles específicos para cada tipo de rama. Automatiza la creación, fusión y eliminación de ramas. Facilita la organización del trabajo en equipo. Ejemplo visual de ramas:">
+  <meta property="og:locale" content="en_es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Flow Introduccion | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="https://pcurich.github.io/git-course/docs/module4/git-flow-introduction/">
+<link rel="stylesheet" href="/git-course/book.min.aa960edff0d323115794a139959a7ff8216cd0ab3e9b0cfa19a5f5632706f065.css" integrity="sha256-qpYO3/DTIxFXlKE5lZp/&#43;CFs0Ks&#43;mwz6GaX1YycG8GU=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.c005432891098f70c1186f3af3f6af0dabf9bf493f457711d25a7c63d6ec0504.js" integrity="sha256-wAVDKJEJj3DBGG868/avDav5v0k/RXcR0lp8Y9bsBQQ=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0583d809ff828f7ece682637ad51710f" class="toggle"  />
+    <label for="section-0583d809ff828f7ece682637ad51710f" class="flex">
+      <a role="button" class="flex-auto ">Modulo 1</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-started/" class="">Git Started</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-new-repo/" class="">Git New Repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-recovery/" class="">Git Recovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-diff/" class="">Git Diff</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4f3421012f8885d45c66914026960960" class="toggle"  />
+    <label for="section-4f3421012f8885d45c66914026960960" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="toggle"  />
+    <label for="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d7fb35025025d7ea65ade35b112be037" class="toggle"  />
+    <label for="section-d7fb35025025d7ea65ade35b112be037" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rebase/" class="">Git Rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rewriting-history/" class="">Git Rewriting History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="toggle" checked />
+    <label for="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="flex">
+      <a role="button" class="flex-auto ">Modulo 4</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-introduction/" class="active">Git Flow Introduccion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-install/" class="">Git Flow Install</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-branch/" class="">Git Flow Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-cycle/" class="">Git Flow Ciclo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-ae3c858bb40a920b01a03f7a5c536629" class="toggle"  />
+    <label for="section-ae3c858bb40a920b01a03f7a5c536629" class="flex">
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/git-course/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Flow Introduccion</h3>
+
+  <label for="toc-control">
+    
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introducción-a-git-flow">Introducción a Git Flow</a>
+      <ul>
+        <li><a href="#11-qué-es-git-flow">1.1 ¿Qué es Git Flow?</a></li>
+        <li><a href="#12-por-qué-usarlo-en-proyectos-colaborativos">1.2 ¿Por qué usarlo en proyectos colaborativos?</a></li>
+        <li><a href="#13-comparación-con-otros-flujos">1.3 Comparación con otros flujos</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="introducción-a-git-flow">
+  Introducción a Git Flow
+  <a class="anchor" href="#introducci%c3%b3n-a-git-flow">#</a>
+</h2>
+<h3 id="11-qué-es-git-flow">
+  1.1 ¿Qué es Git Flow?
+  <a class="anchor" href="#11-qu%c3%a9-es-git-flow">#</a>
+</h3>
+<p>Git Flow es una extensión de Git que define un modelo de ramificación estructurado para gestionar el ciclo de vida de un proyecto de software. Fue propuesto por Vincent Driessen en 2010 y se ha convertido en una práctica común en equipos que trabajan con versiones, despliegues y mantenimiento contin</p>
+<p><strong>Características clave:</strong></p>
+<ul>
+<li>Define roles específicos para cada tipo de rama.</li>
+<li>Automatiza la creación, fusión y eliminación de ramas.</li>
+<li>Facilita la organización del trabajo en equipo.</li>
+</ul>
+<p><strong>Ejemplo visual de ramas:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>master
+</span></span><span style="display:flex;"><span>│
+</span></span><span style="display:flex;"><span>├── develop
+</span></span><span style="display:flex;"><span>│   ├── feature/login
+</span></span><span style="display:flex;"><span>│   ├── feature/payment
+</span></span><span style="display:flex;"><span>│   └── release/1.0.0
+</span></span><span style="display:flex;"><span>│       └── hotfix/fix-login-error
+</span></span></code></pre></div><h3 id="12-por-qué-usarlo-en-proyectos-colaborativos">
+  1.2 ¿Por qué usarlo en proyectos colaborativos?
+  <a class="anchor" href="#12-por-qu%c3%a9-usarlo-en-proyectos-colaborativos">#</a>
+</h3>
+<p>Git Flow aporta orden y claridad en entornos donde múltiples desarrolladores trabajan simultáneamente. Sus ventajas incluyen:</p>
+<p><strong>Separación de responsabilidades:</strong></p>
+<ul>
+<li>
+<p>Cada rama tiene un propósito claro (desarrollo, corrección, lanzamiento).
+<strong>Facilita la colaboración:</strong></p>
+</li>
+<li>
+<p>Los desarrolladores pueden trabajar en feature sin afectar la rama principal.</p>
+</li>
+<li>
+<p>Los testers pueden validar en release antes de pasar a producción.
+<strong>Control de versiones:</strong></p>
+</li>
+<li>
+<p>Permite preparar lanzamientos (release) y corregir errores urgentes (hotfix) sin interrumpir el desarrollo.
+<strong>Automatización y consistencia:</strong></p>
+</li>
+<li>
+<p>Reduce errores humanos al seguir un flujo predefinido</p>
+</li>
+</ul>
+<h3 id="13-comparación-con-otros-flujos">
+  1.3 Comparación con otros flujos
+  <a class="anchor" href="#13-comparaci%c3%b3n-con-otros-flujos">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Flujo</th>
+          <th>Características principales</th>
+          <th>Ideal para&hellip;</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Git Flow</td>
+          <td>Modelo estructurado con ramas dedicadas (<code>feature</code>, <code>release</code>, <code>hotfix</code>)</td>
+          <td>Proyectos con versiones, despliegues y mantenimiento</td>
+      </tr>
+      <tr>
+          <td>GitHub Flow</td>
+          <td>Basado en <code>main</code> + ramas de funcionalidad + Pull Requests</td>
+          <td>Desarrollo continuo, integración rápida</td>
+      </tr>
+      <tr>
+          <td>GitLab Flow</td>
+          <td>Combina Git Flow con entornos de producción y staging</td>
+          <td>Equipos con CI/CD y múltiples entornos</td>
+      </tr>
+  </tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#introducción-a-git-flow">Introducción a Git Flow</a>
+      <ul>
+        <li><a href="#11-qué-es-git-flow">1.1 ¿Qué es Git Flow?</a></li>
+        <li><a href="#12-por-qué-usarlo-en-proyectos-colaborativos">1.2 ¿Por qué usarlo en proyectos colaborativos?</a></li>
+        <li><a href="#13-comparación-con-otros-flujos">1.3 Comparación con otros flujos</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,1178 @@
+<!DOCTYPE html>
+<html lang="en-es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1. Exploración y Comparación de Cambios en Git
+  #
+
+
+  1.1. Definiciones generales
+  #
+
+
+  
+      
+          Comando
+          Descripción
+      
+  
+  
+      
+          git diff
+          Muestra diferencias entre archivos, commits o el staging
+      
+      
+          git show
+          Muestra detalles de un commit específico
+      
+      
+          git log
+          Muestra el historial de commits
+      
+  
+
+
+  2. git diff
+  #
+
+git diff compara contenido entre distintas Git locations:
+
+Working Directory vs Staging Area
+Staging Area vs Local Repository
+Entre commits específico
+
+
+
+
+
+  
+
+
+
+
+
+flowchart LR
+    WD[&#34;📂 Working Directory&#34;]
+    SA[&#34;📥 Staging Area (Index)&#34;]
+    LR[&#34;📦 Local Repository (HEAD)&#34;]
+    WD --&gt;|git diff| SA
+    SA --&gt;|git diff --cached| LR
+
+
+
+  2.1 Ejemplos de uso
+  #
+
+# Cambios no preparados (WD vs Staging)
+git diff
+
+# Cambios preparados (Staging vs Repo)
+git diff --cached
+
+# Comparar dos commits
+git diff HEAD~1 HEAD
+
+# Mostrar solo nombres de archivos modificados
+git diff --name-only
+
+# Mostrar diferencias palabra por palabra
+git diff --word-diff
+
+  2.2 Ejercicio
+  #
+
+
+Modifique un archivo sin hacer add, luego ejecuta git diff.
+Hacer git add, luego ejecuta git diff --cached.
+Compara dos commits con git diff HEAD~2 HEAD
+
+
+  3. git show
+  #
+
+git show muestra el contenido y metadatos de un commit específico">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://pcurich.github.io/git-course/docs/module1/git-diff/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
+  <meta property="og:title" content="Git Diff">
+  <meta property="og:description" content="1. Exploración y Comparación de Cambios en Git # 1.1. Definiciones generales # Comando Descripción git diff Muestra diferencias entre archivos, commits o el staging git show Muestra detalles de un commit específico git log Muestra el historial de commits 2. git diff # git diff compara contenido entre distintas Git locations:
+Working Directory vs Staging Area Staging Area vs Local Repository Entre commits específico flowchart LRWD[&#34;📂 Working Directory&#34;]SA[&#34;📥 Staging Area (Index)&#34;]LR[&#34;📦 Local Repository (HEAD)&#34;]WD --&gt;|git diff| SASA --&gt;|git diff --cached| LR2.1 Ejemplos de uso # # Cambios no preparados (WD vs Staging) git diff # Cambios preparados (Staging vs Repo) git diff --cached # Comparar dos commits git diff HEAD~1 HEAD # Mostrar solo nombres de archivos modificados git diff --name-only # Mostrar diferencias palabra por palabra git diff --word-diff 2.2 Ejercicio # Modifique un archivo sin hacer add, luego ejecuta git diff. Hacer git add, luego ejecuta git diff --cached. Compara dos commits con git diff HEAD~2 HEAD 3. git show # git show muestra el contenido y metadatos de un commit específico">
+  <meta property="og:locale" content="en_es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Diff | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="https://pcurich.github.io/git-course/docs/module1/git-diff/">
+<link rel="stylesheet" href="/git-course/book.min.aa960edff0d323115794a139959a7ff8216cd0ab3e9b0cfa19a5f5632706f065.css" integrity="sha256-qpYO3/DTIxFXlKE5lZp/&#43;CFs0Ks&#43;mwz6GaX1YycG8GU=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.c005432891098f70c1186f3af3f6af0dabf9bf493f457711d25a7c63d6ec0504.js" integrity="sha256-wAVDKJEJj3DBGG868/avDav5v0k/RXcR0lp8Y9bsBQQ=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0583d809ff828f7ece682637ad51710f" class="toggle" checked />
+    <label for="section-0583d809ff828f7ece682637ad51710f" class="flex">
+      <a role="button" class="flex-auto ">Modulo 1</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-started/" class="">Git Started</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-new-repo/" class="">Git New Repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-recovery/" class="">Git Recovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-diff/" class="active">Git Diff</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4f3421012f8885d45c66914026960960" class="toggle"  />
+    <label for="section-4f3421012f8885d45c66914026960960" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="toggle"  />
+    <label for="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d7fb35025025d7ea65ade35b112be037" class="toggle"  />
+    <label for="section-d7fb35025025d7ea65ade35b112be037" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rebase/" class="">Git Rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rewriting-history/" class="">Git Rewriting History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="toggle"  />
+    <label for="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="flex">
+      <a role="button" class="flex-auto ">Modulo 4</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-introduction/" class="">Git Flow Introduccion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-install/" class="">Git Flow Install</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-branch/" class="">Git Flow Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-cycle/" class="">Git Flow Ciclo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-ae3c858bb40a920b01a03f7a5c536629" class="toggle"  />
+    <label for="section-ae3c858bb40a920b01a03f7a5c536629" class="flex">
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/git-course/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Diff</h3>
+
+  <label for="toc-control">
+    
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-exploración-y-comparación-de-cambios-en-git"><strong>1. Exploración y Comparación de Cambios en Git</strong></a>
+      <ul>
+        <li><a href="#11-definiciones-generales">1.1. Definiciones generales</a></li>
+      </ul>
+    </li>
+    <li><a href="#2"><strong>2. <code>git diff</code></strong></a>
+      <ul>
+        <li><a href="#21-ejemplos-de-uso">2.1 Ejemplos de uso</a></li>
+        <li><a href="#22-ejercicio">2.2 Ejercicio</a></li>
+      </ul>
+    </li>
+    <li><a href="#3"><strong>3. <code>git show</code></strong></a>
+      <ul>
+        <li><a href="#31-ejemplos-de-uso">3.1 Ejemplos de uso</a></li>
+        <li><a href="#32--ejercicio">3.2  Ejercicio</a></li>
+      </ul>
+    </li>
+    <li><a href="#4"><strong>4. <code>git log</code></strong></a>
+      <ul>
+        <li><a href="#41-ejemplos-de-uso">4.1 Ejemplos de uso</a></li>
+        <li><a href="#42--ejercicio">4.2  Ejercicio</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-tabla-comparativa-de-opciones"><strong>5. Tabla comparativa de opciones</strong></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-exploración-y-comparación-de-cambios-en-git">
+  <strong>1. Exploración y Comparación de Cambios en Git</strong>
+  <a class="anchor" href="#1-exploraci%c3%b3n-y-comparaci%c3%b3n-de-cambios-en-git">#</a>
+</h2>
+<h3 id="11-definiciones-generales">
+  1.1. Definiciones generales
+  <a class="anchor" href="#11-definiciones-generales">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>Comando</th>
+          <th>Descripción</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>git diff</code></td>
+          <td>Muestra diferencias entre archivos, commits o el staging</td>
+      </tr>
+      <tr>
+          <td><code>git show</code></td>
+          <td>Muestra detalles de un commit específico</td>
+      </tr>
+      <tr>
+          <td><code>git log</code></td>
+          <td>Muestra el historial de commits</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="2">
+  <strong>2. <code>git diff</code></strong>
+  <a class="anchor" href="#2">#</a>
+</h2>
+<p><code>git diff</code> compara contenido entre distintas Git locations:</p>
+<ul>
+<li>Working Directory vs Staging Area</li>
+<li>Staging Area vs Local Repository</li>
+<li>Entre commits específico</li>
+</ul>
+
+
+<script src="/git-course/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+flowchart LR
+    WD["📂 Working Directory"]
+    SA["📥 Staging Area (Index)"]
+    LR["📦 Local Repository (HEAD)"]
+    WD -->|git diff| SA
+    SA -->|git diff --cached| LR
+</pre>
+
+<h3 id="21-ejemplos-de-uso">
+  2.1 Ejemplos de uso
+  <a class="anchor" href="#21-ejemplos-de-uso">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Cambios no preparados (WD vs Staging)</span>
+</span></span><span style="display:flex;"><span>git diff
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Cambios preparados (Staging vs Repo)</span>
+</span></span><span style="display:flex;"><span>git diff --cached
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Comparar dos commits</span>
+</span></span><span style="display:flex;"><span>git diff HEAD~1 HEAD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar solo nombres de archivos modificados</span>
+</span></span><span style="display:flex;"><span>git diff --name-only
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar diferencias palabra por palabra</span>
+</span></span><span style="display:flex;"><span>git diff --word-diff
+</span></span></code></pre></div><h3 id="22-ejercicio">
+  2.2 Ejercicio
+  <a class="anchor" href="#22-ejercicio">#</a>
+</h3>
+<ul>
+<li>Modifique un archivo sin hacer <code>add</code>, luego ejecuta <code>git diff</code>.</li>
+<li>Hacer <code>git add</code>, luego ejecuta <code>git diff --cached</code>.</li>
+<li>Compara dos commits con <code>git diff HEAD~2 HEAD</code></li>
+</ul>
+<h2 id="3">
+  <strong>3. <code>git show</code></strong>
+  <a class="anchor" href="#3">#</a>
+</h2>
+<p><code>git show</code> muestra el contenido y metadatos de un commit específico</p>
+<h3 id="31-ejemplos-de-uso">
+  3.1 Ejemplos de uso
+  <a class="anchor" href="#31-ejemplos-de-uso">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Mostrar último commit</span>
+</span></span><span style="display:flex;"><span>git show
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar commit específico</span>
+</span></span><span style="display:flex;"><span>git show abc1234
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar solo nombres de archivos modificados</span>
+</span></span><span style="display:flex;"><span>git show --name-only abc1234
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar diferencias palabra por palabra</span>
+</span></span><span style="display:flex;"><span>git show --word-diff abc1234
+</span></span></code></pre></div><h3 id="32--ejercicio">
+  3.2  Ejercicio
+  <a class="anchor" href="#32--ejercicio">#</a>
+</h3>
+<ul>
+<li>Ejecuta <code>git log --oneline</code> y copia un hash.</li>
+<li>Usa <code>git show &lt;hash&gt;</code> para ver el contenido del commit.</li>
+<li>Usa <code>--name-only</code> y <code>--word-diff</code> para ver variantes</li>
+</ul>
+<h2 id="4">
+  <strong>4. <code>git log</code></strong>
+  <a class="anchor" href="#4">#</a>
+</h2>
+<p><code>git log</code> muestra el historial de commits. Puede filtrarse y formatearse</p>
+<h3 id="41-ejemplos-de-uso">
+  4.1 Ejemplos de uso
+  <a class="anchor" href="#41-ejemplos-de-uso">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Historial completo</span>
+</span></span><span style="display:flex;"><span>git log
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Versión compacta</span>
+</span></span><span style="display:flex;"><span>git log --oneline
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar cambios con cada commit</span>
+</span></span><span style="display:flex;"><span>git log -p
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar solo nombres de archivos modificados</span>
+</span></span><span style="display:flex;"><span>git log --name-only
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Mostrar diferencias palabra por palabra</span>
+</span></span><span style="display:flex;"><span>git log --word-diff
+</span></span></code></pre></div><h3 id="42--ejercicio">
+  4.2  Ejercicio
+  <a class="anchor" href="#42--ejercicio">#</a>
+</h3>
+<ul>
+<li>Ejecuta <code>git log --oneline</code> y observa los identificadores.</li>
+<li>Usa <code>git log -p</code> para ver los cambios línea por línea.</li>
+<li>Usa <code>--name-only</code> y <code>--word-diff</code> para comparar salidas</li>
+</ul>
+<h2 id="5-tabla-comparativa-de-opciones">
+  <strong>5. Tabla comparativa de opciones</strong>
+  <a class="anchor" href="#5-tabla-comparativa-de-opciones">#</a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Comando</th>
+          <th>Opción</th>
+          <th>Descripción</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>git diff</td>
+          <td><code>--cached</code></td>
+          <td>Compara staging vs repo</td>
+      </tr>
+      <tr>
+          <td>git diff</td>
+          <td><code>--name-only</code></td>
+          <td>Muestra solo nombres</td>
+      </tr>
+      <tr>
+          <td>git diff</td>
+          <td><code>--word-diff</code></td>
+          <td>Muestra cambios por palabra</td>
+      </tr>
+      <tr>
+          <td>git show</td>
+          <td><code>&lt;commit&gt;</code></td>
+          <td>Muestra contenido del commit</td>
+      </tr>
+      <tr>
+          <td>git show</td>
+          <td><code>--name-only</code></td>
+          <td>Archivos modificados</td>
+      </tr>
+      <tr>
+          <td>git show</td>
+          <td><code>--word-diff</code></td>
+          <td>Cambios por palabra</td>
+      </tr>
+      <tr>
+          <td>git log</td>
+          <td><code>--oneline</code></td>
+          <td>Historial compacto</td>
+      </tr>
+      <tr>
+          <td>git log</td>
+          <td><code>-p</code></td>
+          <td>Historial con diferencias</td>
+      </tr>
+      <tr>
+          <td>git log</td>
+          <td><code>--name-only</code></td>
+          <td>Archivos por commit</td>
+      </tr>
+      <tr>
+          <td>git log</td>
+          <td><code>--word-diff</code></td>
+          <td>Cambios por palabra</td>
+      </tr>
+  </tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-exploración-y-comparación-de-cambios-en-git"><strong>1. Exploración y Comparación de Cambios en Git</strong></a>
+      <ul>
+        <li><a href="#11-definiciones-generales">1.1. Definiciones generales</a></li>
+      </ul>
+    </li>
+    <li><a href="#2"><strong>2. <code>git diff</code></strong></a>
+      <ul>
+        <li><a href="#21-ejemplos-de-uso">2.1 Ejemplos de uso</a></li>
+        <li><a href="#22-ejercicio">2.2 Ejercicio</a></li>
+      </ul>
+    </li>
+    <li><a href="#3"><strong>3. <code>git show</code></strong></a>
+      <ul>
+        <li><a href="#31-ejemplos-de-uso">3.1 Ejemplos de uso</a></li>
+        <li><a href="#32--ejercicio">3.2  Ejercicio</a></li>
+      </ul>
+    </li>
+    <li><a href="#4"><strong>4. <code>git log</code></strong></a>
+      <ul>
+        <li><a href="#41-ejemplos-de-uso">4.1 Ejemplos de uso</a></li>
+        <li><a href="#42--ejercicio">4.2  Ejercicio</a></li>
+      </ul>
+    </li>
+    <li><a href="#5-tabla-comparativa-de-opciones"><strong>5. Tabla comparativa de opciones</strong></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

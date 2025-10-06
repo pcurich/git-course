@@ -1,0 +1,1410 @@
+<!DOCTYPE html>
+<html lang="en-es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1 Git Networking: clone, fetch, pull, push
+  #
+
+Estos comandos controlan la comunicación entre tu repositorio local y el remoto (origin). Cada uno tiene un rol específico en la sincronización de datos:
+
+  
+      
+          Comando
+          ¿Qué hace?
+          ¿Modifica el árbol de trabajo local?
+      
+  
+  
+      
+          git clone
+          Crea una copia del repositorio remoto en local
+          ✅ Sí
+      
+      
+          git fetch
+          Trae los cambios del remoto pero no los aplica
+          ❌ No
+      
+      
+          git pull
+          Equivale a fetch &#43; merge o rebase
+          ✅ Sí
+      
+      
+          git push
+          Envía tus commits locales al repositorio remoto
+          ❌ No (actúa sobre el remoto)
+      
+  
+
+
+  1.1 Escenario base: git clone
+  #
+
+# Clonar un repositorio remoto
+git clone https://github.com/usuario/mi-repo.git
+cd mi-repo
+
+# Ver ramas remotas
+git branch -r
+
+
+
+
+  
+
+
+
+
+
+gitGraph
+   commit id: &#34;Commit remoto A&#34; tag: &#34;origin/main&#34;
+   checkout main
+   commit id: &#34;Commit local A (copiado por clone)&#34; tag: &#34;HEAD ➜ main&#34;
+
+
+
+  1.2 Sincronización: fetch
+  #
+
+
+  ¿Qué es git fetch?
+  #
+
+git fetch es un comando que sincroniza tu repositorio local con el remoto sin alterar tu historial local. Es una forma segura de actualizar tus referencias a lo que ha ocurrido en el repositorio remoto (como nuevos commits o ramas), sin aplicar esos cambios directamente en tu trabajo actual.">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://pcurich.github.io/git-course/docs/module3/git-networking/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
+  <meta property="og:title" content="Git Networking">
+  <meta property="og:description" content="1 Git Networking: clone, fetch, pull, push # Estos comandos controlan la comunicación entre tu repositorio local y el remoto (origin). Cada uno tiene un rol específico en la sincronización de datos:
+Comando ¿Qué hace? ¿Modifica el árbol de trabajo local? git clone Crea una copia del repositorio remoto en local ✅ Sí git fetch Trae los cambios del remoto pero no los aplica ❌ No git pull Equivale a fetch &#43; merge o rebase ✅ Sí git push Envía tus commits locales al repositorio remoto ❌ No (actúa sobre el remoto) 1.1 Escenario base: git clone # # Clonar un repositorio remoto git clone https://github.com/usuario/mi-repo.git cd mi-repo # Ver ramas remotas git branch -r gitGraph commit id: &#34;Commit remoto A&#34; tag: &#34;origin/main&#34; checkout main commit id: &#34;Commit local A (copiado por clone)&#34; tag: &#34;HEAD ➜ main&#34; 1.2 Sincronización: fetch # ¿Qué es git fetch? # git fetch es un comando que sincroniza tu repositorio local con el remoto sin alterar tu historial local. Es una forma segura de actualizar tus referencias a lo que ha ocurrido en el repositorio remoto (como nuevos commits o ramas), sin aplicar esos cambios directamente en tu trabajo actual.">
+  <meta property="og:locale" content="en_es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Git Networking | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="https://pcurich.github.io/git-course/docs/module3/git-networking/">
+<link rel="stylesheet" href="/git-course/book.min.aa960edff0d323115794a139959a7ff8216cd0ab3e9b0cfa19a5f5632706f065.css" integrity="sha256-qpYO3/DTIxFXlKE5lZp/&#43;CFs0Ks&#43;mwz6GaX1YycG8GU=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.c005432891098f70c1186f3af3f6af0dabf9bf493f457711d25a7c63d6ec0504.js" integrity="sha256-wAVDKJEJj3DBGG868/avDav5v0k/RXcR0lp8Y9bsBQQ=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0583d809ff828f7ece682637ad51710f" class="toggle"  />
+    <label for="section-0583d809ff828f7ece682637ad51710f" class="flex">
+      <a role="button" class="flex-auto ">Modulo 1</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-started/" class="">Git Started</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-new-repo/" class="">Git New Repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-recovery/" class="">Git Recovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-diff/" class="">Git Diff</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4f3421012f8885d45c66914026960960" class="toggle"  />
+    <label for="section-4f3421012f8885d45c66914026960960" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="toggle"  />
+    <label for="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d7fb35025025d7ea65ade35b112be037" class="toggle" checked />
+    <label for="section-d7fb35025025d7ea65ade35b112be037" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="active">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rebase/" class="">Git Rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rewriting-history/" class="">Git Rewriting History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="toggle"  />
+    <label for="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="flex">
+      <a role="button" class="flex-auto ">Modulo 4</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-introduction/" class="">Git Flow Introduccion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-install/" class="">Git Flow Install</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-branch/" class="">Git Flow Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-cycle/" class="">Git Flow Ciclo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-ae3c858bb40a920b01a03f7a5c536629" class="toggle"  />
+    <label for="section-ae3c858bb40a920b01a03f7a5c536629" class="flex">
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/git-course/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Git Networking</h3>
+
+  <label for="toc-control">
+    
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-git-networking-clone-fetch-pull-push"><strong>1 Git Networking: clone, fetch, pull, push</strong></a></li>
+    <li><a href="#11-escenario-base-git-clone">1.1 Escenario base: <code>git clone</code></a></li>
+    <li><a href="#12-sincronización-fetch">1.2 Sincronización: <code>fetch</code></a>
+      <ul>
+        <li><a href="#qué-es-git-fetch">¿Qué es <code>git fetch</code>?</a></li>
+        <li><a href="#qué-hace-exactamente">¿Qué hace exactamente?</a></li>
+        <li><a href="#ejemplo-usando-git-fetch">Ejemplo: usando <code>git fetch</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#13-sincronización-git-pull">1.3 Sincronización: <code>git pull</code></a>
+      <ul>
+        <li><a href="#qué-es-git-pull">¿Qué es <code>git pull</code>?</a></li>
+        <li><a href="#ejemplo-usando-pull">Ejemplo: usando <code>pull</code></a></li>
+        <li><a href="#ejemplo-cli-flujo-interno-de-git-pull">Ejemplo CLI: flujo interno de <code>git pull</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#14-opciones-de-fusión-local-en-git-pull-y-git-merge">1.4 Opciones de fusión local en <code>git pull</code> y <code>git merge</code></a>
+      <ul>
+        <li><a href="#ejemplo-cli-uso-de-opciones">Ejemplo CLI: uso de opciones</a></li>
+        <li><a href="#141-git-pull-usando-fast-forward">1.4.1 Git pull usando fast-forward</a></li>
+        <li><a href="#142-git-pull-con-conflictos-de-cambios-no-comiteados">1.4.2 Git pull con conflictos de cambios no comiteados</a></li>
+        <li><a href="#143-git-pull-con-merge---no-ff">1.4.3 Git pull con merge (<code>--no-ff</code>)</a></li>
+      </ul>
+    </li>
+    <li><a href="#15-sincronización-push">1.5 Sincronización: push</a>
+      <ul>
+        <li><a href="#151-qué-hace-la-opción--u-">1.5.1 ¿Qué hace la opción <code>-u</code> ?</a></li>
+        <li><a href="#152-diagnóstico-de-seguimiento-con--vv">1.5.2 Diagnóstico de seguimiento con <code>-vv</code></a></li>
+        <li><a href="#153-buenas-prácticas">1.5.3 Buenas prácticas</a></li>
+        <li><a href="#154-errores-frecuentes-en-git-push">1.5.4 Errores frecuentes en <code>git push</code></a></li>
+        <li><a href="#155-alternativas-de-push-para-casos-conflictivos">1.5.5 Alternativas de push para casos conflictivos</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-git-networking-clone-fetch-pull-push">
+  <strong>1 Git Networking: clone, fetch, pull, push</strong>
+  <a class="anchor" href="#1-git-networking-clone-fetch-pull-push">#</a>
+</h2>
+<p>Estos comandos controlan la comunicación entre tu repositorio local y el remoto (origin). Cada uno tiene un rol específico en la sincronización de datos:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Comando</th>
+          <th>¿Qué hace?</th>
+          <th>¿Modifica el árbol de trabajo local?</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>git clone</td>
+          <td>Crea una copia del repositorio remoto en local</td>
+          <td>✅ Sí</td>
+      </tr>
+      <tr>
+          <td>git fetch</td>
+          <td>Trae los cambios del remoto pero no los aplica</td>
+          <td>❌ No</td>
+      </tr>
+      <tr>
+          <td>git pull</td>
+          <td>Equivale a fetch + merge o rebase</td>
+          <td>✅ Sí</td>
+      </tr>
+      <tr>
+          <td>git push</td>
+          <td>Envía tus commits locales al repositorio remoto</td>
+          <td>❌ No (actúa sobre el remoto)</td>
+      </tr>
+  </tbody>
+</table>
+<h2 id="11-escenario-base-git-clone">
+  1.1 Escenario base: <code>git clone</code>
+  <a class="anchor" href="#11-escenario-base-git-clone">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Clonar un repositorio remoto</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/usuario/mi-repo.git
+</span></span><span style="display:flex;"><span>cd mi-repo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver ramas remotas</span>
+</span></span><span style="display:flex;"><span>git branch -r
+</span></span></code></pre></div>
+
+<script src="/git-course/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+gitGraph
+   commit id: "Commit remoto A" tag: "origin/main"
+   checkout main
+   commit id: "Commit local A (copiado por clone)" tag: "HEAD ➜ main"
+</pre>
+
+<h2 id="12-sincronización-fetch">
+  1.2 Sincronización: <code>fetch</code>
+  <a class="anchor" href="#12-sincronizaci%c3%b3n-fetch">#</a>
+</h2>
+<h3 id="qué-es-git-fetch">
+  ¿Qué es <code>git fetch</code>?
+  <a class="anchor" href="#qu%c3%a9-es-git-fetch">#</a>
+</h3>
+<p><code>git fetch</code> es un comando que sincroniza tu repositorio local con el remoto sin alterar tu historial local. Es una forma segura de actualizar tus referencias a lo que ha ocurrido en el repositorio remoto (como nuevos <code>commits</code> o <code>ramas</code>), sin aplicar esos cambios directamente en tu trabajo actual.</p>
+<h3 id="qué-hace-exactamente">
+  ¿Qué hace exactamente?
+  <a class="anchor" href="#qu%c3%a9-hace-exactamente">#</a>
+</h3>
+<ul>
+<li>Contacta el remoto (<code>origin</code>, por ejemplo) y descarga nuevos <code>commits</code>, <code>ramas</code> o <code>etiquetas</code>.</li>
+<li>Actualiza las referencias remotas como <code>origin/main</code>, <code>origin/feature-x</code>, etc.</li>
+<li>No modifica tu rama actual (<code>main</code>, por ejemplo), ni realiza fusiones automáticamente.</li>
+<li>Ideal para revisar antes de tomar decisiones: puedes inspeccionar los cambios antes de <code>merge</code> o <code>rebase</code>.</li>
+</ul>
+<h3 id="ejemplo-usando-git-fetch">
+  Ejemplo: usando <code>git fetch</code>
+  <a class="anchor" href="#ejemplo-usando-git-fetch">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Traer referencias remotas sin modificar el árbol local</span>
+</span></span><span style="display:flex;"><span>git fetch origin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver diferencias</span>
+</span></span><span style="display:flex;"><span>git log HEAD..origin/main --oneline
+</span></span></code></pre></div><h2 id="13-sincronización-git-pull">
+  1.3 Sincronización: <code>git pull</code>
+  <a class="anchor" href="#13-sincronizaci%c3%b3n-git-pull">#</a>
+</h2>
+<h3 id="qué-es-git-pull">
+  ¿Qué es <code>git pull</code>?
+  <a class="anchor" href="#qu%c3%a9-es-git-pull">#</a>
+</h3>
+<p><code>git pull</code> es un comando compuesto que sincroniza una rama local con su contraparte remota. Internamente, Git lo descompone así:</p>
+<ul>
+<li><code>git fetch</code>: descarga los últimos cambios del remoto, sin aplicarlos.</li>
+<li><code>git merge FETCH_HEAD</code>: aplica (fusiona) esos cambios sobre la rama local activa</li>
+</ul>
+<blockquote class="book-hint info">
+  
+`FETCH_HEAD` es un puntero temporal que Git usa para referenciar los datos recién traídos por fetch.
+
+</blockquote>
+
+<h3 id="ejemplo-usando-pull">
+  Ejemplo: usando <code>pull</code>
+  <a class="anchor" href="#ejemplo-usando-pull">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Obtener y fusionar cambios</span>
+</span></span><span style="display:flex;"><span>git pull origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Ver historial</span>
+</span></span><span style="display:flex;"><span>git log --oneline --graph --decorate
+</span></span></code></pre></div><h3 id="ejemplo-cli-flujo-interno-de-git-pull">
+  Ejemplo CLI: flujo interno de <code>git pull</code>
+  <a class="anchor" href="#ejemplo-cli-flujo-interno-de-git-pull">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Paso explícito (fetch manual)</span>
+</span></span><span style="display:flex;"><span>git fetch origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># `FETCH_HEAD` ahora apunta al último commit remoto</span>
+</span></span><span style="display:flex;"><span>cat .git/FETCH_HEAD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Fusionamos manualmente los cambios traídos</span>
+</span></span><span style="display:flex;"><span>git merge FETCH_HEAD
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Esto es exactamente lo que hace</span>
+</span></span><span style="display:flex;"><span>git pull origin main
+</span></span></code></pre></div><h2 id="14-opciones-de-fusión-local-en-git-pull-y-git-merge">
+  1.4 Opciones de fusión local en <code>git pull</code> y <code>git merge</code>
+  <a class="anchor" href="#14-opciones-de-fusi%c3%b3n-local-en-git-pull-y-git-merge">#</a>
+</h2>
+<p>Las opciones de merging strategy determinan cómo Git fusiona los commits locales y remotos cuando hay diferencias.</p>
+<table>
+  <thead>
+      <tr>
+          <th>Opción</th>
+          <th>Comportamiento</th>
+          <th>¿Cuándo usarlo?</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>--ff</code></td>
+          <td>Fast-forward si es posible (default); no crea commit de merge</td>
+          <td>Historial lineal, sin conflictos</td>
+      </tr>
+      <tr>
+          <td><code>--no-ff</code></td>
+          <td>Siempre crea commit de merge, incluso si puede hacer fast-forward</td>
+          <td>Para preservar historia de integración</td>
+      </tr>
+      <tr>
+          <td><code>--ff-only</code></td>
+          <td>Solo acepta fast-forward; falla si requiere merge</td>
+          <td>Evita commits de merge</td>
+      </tr>
+      <tr>
+          <td><code>--rebase</code></td>
+          <td>Reescribe historial local encima de los commits remotos</td>
+          <td>Para mantener un historial limpio</td>
+      </tr>
+      <tr>
+          <td><code>--rebase=merges</code> / <code>--rebase --preserve-merges</code></td>
+          <td>Reescribe con conservación de merges</td>
+          <td>Útil en equipos que usan integración estructurada</td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="ejemplo-cli-uso-de-opciones">
+  Ejemplo CLI: uso de opciones
+  <a class="anchor" href="#ejemplo-cli-uso-de-opciones">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Pull con fast-forward automático (default)</span>
+</span></span><span style="display:flex;"><span>git pull --ff origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pull con commit de merge forzado</span>
+</span></span><span style="display:flex;"><span>git pull --no-ff origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pull solo si se puede fast-forward (falla si hay divergencia)</span>
+</span></span><span style="display:flex;"><span>git pull --ff-only origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Pull con rebase (evita commits de merge)</span>
+</span></span><span style="display:flex;"><span>git pull --rebase origin main
+</span></span></code></pre></div><h3 id="141-git-pull-usando-fast-forward">
+  1.4.1 Git pull usando fast-forward
+  <a class="anchor" href="#141-git-pull-usando-fast-forward">#</a>
+</h3>
+<p><strong>¿Cuándo ocurre un fast-forward?</strong></p>
+<p>Git puede aplicar un fast-forward si:</p>
+<ul>
+<li>Estás en una rama local (ej. main) sin commits nuevos.</li>
+<li>La rama remota (origin/main) tiene commits más avanzados.</li>
+<li>Ambas ramas comparten un historial lineal sin divergencia.
+El pull se resuelve avanzando el puntero local al nuevo commit remoto, sin crear un commit de merge.</li>
+</ul>
+<p><strong>Escenario típico:</strong></p>
+<p>Tu rama local está desactualizada pero intacta. Al ejecutar:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Ver estado actual</span>
+</span></span><span style="display:flex;"><span>git status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Actualizar con fast-forward</span>
+</span></span><span style="display:flex;"><span>git pull --ff origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Confirmar resultado</span>
+</span></span><span style="display:flex;"><span>git log --oneline --graph
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>Antes del pull:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>origin/main:  A---B---C
+</span></span><span style="display:flex;"><span>local:        A
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Después del pull (fast-forward aplicado):
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>origin/main:  A---B---C
+</span></span><span style="display:flex;"><span>local:        A---B---C   ← HEAD actualizado
+</span></span></code></pre></div><blockquote class="book-hint info">
+  
+La rama local simplemente avanzó. No hay commit extra ni línea de fusión. Esto es lo que representa --ff: un avance limpio del puntero.
+
+</blockquote>
+
+<h3 id="142-git-pull-con-conflictos-de-cambios-no-comiteados">
+  1.4.2 Git pull con conflictos de cambios no comiteados
+  <a class="anchor" href="#142-git-pull-con-conflictos-de-cambios-no-comiteados">#</a>
+</h3>
+<p><strong>¿Cuándo ocurre este escenario?</strong>
+Sucede cuando:</p>
+<ul>
+<li>Tu rama local está detrás de la remota (estado behind).</li>
+<li>Git podría aplicar un fast-forward&hellip;</li>
+<li>&hellip;pero tienes cambios modificados localmente que entran en conflicto con los commits remotos.</li>
+<li>No se puede aplicar el pull hasta que resuelvas los cambios locales (conflicto entre el árbol de trabajo y el historial remoto).</li>
+</ul>
+<p><strong>Escenario típico:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Simulamos una edición local en conflicto</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Cambios locales&#34;</span> &gt;&gt; index.html
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Estado antes del pull</span>
+</span></span><span style="display:flex;"><span>git status
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Intentar hacer un pull fast-forward</span>
+</span></span><span style="display:flex;"><span>git pull --ff origin main
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">### Merge commit (--no-ff)</span>
+</span></span></code></pre></div><p>🔴 Resultado:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>error: Your local changes to the following files would be overwritten by merge:
+</span></span><span style="display:flex;"><span>    index.html
+</span></span><span style="display:flex;"><span>Please commit your changes or stash them before you merge.
+</span></span><span style="display:flex;"><span>Aborting
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>Remoto:        A---B---C   (origin/main)
+</span></span><span style="display:flex;"><span>Local:         A---(cambios sin confirmar)
+</span></span><span style="display:flex;"><span>                    \
+</span></span><span style="display:flex;"><span>                     \   ← HEAD en A con index.html modificado
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git pull --ff        ✘ error: no se puede avanzar sin perder cambios locales
+</span></span></code></pre></div><p><strong>¿Cómo resolverlo?</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Opción 1: confirmar cambios locales</span>
+</span></span><span style="display:flex;"><span>git add index.html
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Cambios locales&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git pull --ff origin main   <span style="color:#75715e"># Ahora puede hacer merge si es posible</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Opción 2: guardar los cambios temporalmente</span>
+</span></span><span style="display:flex;"><span>git stash
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>git pull --ff origin main   <span style="color:#75715e"># Se aplicará el fast-forward</span>
+</span></span><span style="display:flex;"><span>git stash pop               <span style="color:#75715e"># Recuperas tus ediciones</span>
+</span></span></code></pre></div><h3 id="143-git-pull-con-merge---no-ff">
+  1.4.3 Git pull con merge (<code>--no-ff</code>)
+  <a class="anchor" href="#143-git-pull-con-merge---no-ff">#</a>
+</h3>
+<p><strong>¿Cuándo se usa <code>--no-ff</code>?</strong></p>
+<ul>
+<li>En ramas colaborativas (como feature-x, hotfix, etc.) donde quieres mantener un punto de unión explícito.</li>
+<li>Evita que Git simplemente avance la rama (fast-forward) como si los cambios vinieran del mismo flujo.</li>
+<li>Se crea un commit de merge, incluso si el historial permitiría avanzar directamente</li>
+</ul>
+<p><strong>Escenario típico:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Nos aseguramos de tener una divergencia local/remota</span>
+</span></span><span style="display:flex;"><span>git fetch origin
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Intentamos hacer un pull con merge explícito</span>
+</span></span><span style="display:flex;"><span>git pull --no-ff origin main
+</span></span></code></pre></div><p>🔵 Resultado</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Merge made by the <span style="color:#e6db74">&#39;recursive&#39;</span> strategy.
+</span></span><span style="display:flex;"><span> files changed: <span style="color:#ae81ff">2</span>
+</span></span><span style="display:flex;"><span> create mode: foo.js
+</span></span></code></pre></div><p>Esto crea un commit de tipo &ldquo;merge&rdquo;, agrupando las diferencias locales y remotas.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>Remoto:         A---B---C   (origin/main)
+</span></span><span style="display:flex;"><span>                \
+</span></span><span style="display:flex;"><span>Local:           D---E      (main local)
+</span></span><span style="display:flex;"><span>                 \
+</span></span><span style="display:flex;"><span>                  \__ ⬅️ Merge commit con --no-ff
+</span></span><span style="display:flex;"><span>                         F
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Resultado:       A---B---C---F   (main)
+</span></span><span style="display:flex;"><span>                         /   \
+</span></span><span style="display:flex;"><span>                       D-----E
+</span></span></code></pre></div><blockquote class="book-hint info">
+  
+Aquí, F es un commit de merge explícito, que preserva el origen de los cambios. No se aplastan (squash) ni se avanza en línea recta.
+
+</blockquote>
+
+<p><strong>Ventajas de <code>--no-ff</code></strong></p>
+<ul>
+<li>Historial más legible para auditorías y revisión de código.</li>
+<li>Útil en flujos tipo feature branches donde se quiere conservar el contexto completo de la fusión.</li>
+<li>Permite revertir cambios en bloque (por commit de merge)</li>
+</ul>
+<h2 id="15-sincronización-push">
+  1.5 Sincronización: push
+  <a class="anchor" href="#15-sincronizaci%c3%b3n-push">#</a>
+</h2>
+<p>El comando <code>git push</code> envía los <code>commits</code> locales al repositorio <code>remoto</code>, actualizando la rama correspondiente allí (como <code>origin/main</code>). Es fundamental para compartir tu trabajo con otros colaboradores o simplemente sincronizar tu copia local con el remoto</p>
+<p><strong>Escenario típico:</strong></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># Agregamos un cambio local</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Nueva sección&#34;</span> &gt;&gt; archivo.md
+</span></span><span style="display:flex;"><span>git add archivo.md
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Agrega nueva sección&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># Enviamos al remoto</span>
+</span></span><span style="display:flex;"><span>git push origin main
+</span></span></code></pre></div><h3 id="151-qué-hace-la-opción--u-">
+  1.5.1 ¿Qué hace la opción <code>-u</code> ?
+  <a class="anchor" href="#151-qu%c3%a9-hace-la-opci%c3%b3n--u-">#</a>
+</h3>
+<p>La opción -u (forma corta de &ndash;set-upstream) define una relación de seguimiento entre tu rama local y la remota. Esta relación hace que futuros git push y git pull se puedan ejecutar sin especificar la rama:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git push -u origin main
+</span></span></code></pre></div><p>Este comando:</p>
+<ul>
+<li>Envía la rama main al remoto origin.</li>
+<li>Configura main como tracking branch de origin/main.</li>
+<li>Permite usar simplemente git pull o git push en adelante, sin indicar origin main</li>
+</ul>
+<h3 id="152-diagnóstico-de-seguimiento-con--vv">
+  1.5.2 Diagnóstico de seguimiento con <code>-vv</code>
+  <a class="anchor" href="#152-diagn%c3%b3stico-de-seguimiento-con--vv">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -vv
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>* main  abc1234 <span style="color:#f92672">[</span>origin/main<span style="color:#f92672">]</span> Agrega nueva sección
+</span></span></code></pre></div><blockquote class="book-hint info">
+  
+Aquí el [origin/main] indica que main sigue a la rama remota, gracias al -u
+
+</blockquote>
+
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>Antes del push:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Local:   A---B   (main)
+</span></span><span style="display:flex;"><span>Remoto:  A       (origin/main)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Después del push -u:
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Local:   A---B   (main &lt;-&gt; origin/main)
+</span></span><span style="display:flex;"><span>Remoto:  A---B   (origin/main)
+</span></span></code></pre></div><blockquote class="book-hint info">
+  
+El símbolo <-> representa la relación de seguimiento establecida por `-u`
+
+</blockquote>
+
+<h3 id="153-buenas-prácticas">
+  1.5.3 Buenas prácticas
+  <a class="anchor" href="#153-buenas-pr%c3%a1cticas">#</a>
+</h3>
+<ul>
+<li>Usa <code>git push -u origin &lt;branch&gt;</code> al crear una rama nueva, para facilitar futuras operaciones.</li>
+<li>Si ya hiciste push, puedes agregar el upstream con:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch --set-upstream-to<span style="color:#f92672">=</span>origin/main
+</span></span></code></pre></div><h3 id="154-errores-frecuentes-en-git-push">
+  1.5.4 Errores frecuentes en <code>git push</code>
+  <a class="anchor" href="#154-errores-frecuentes-en-git-push">#</a>
+</h3>
+<table>
+  <thead>
+      <tr>
+          <th>🔍 Mensaje CLI</th>
+          <th>💬 Explicación clara</th>
+          <th>💡 Solución didáctica</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>rejected</td>
+          <td>El remoto tiene commits que tú no tienes.</td>
+          <td>Usa <code>git pull</code> primero para sincronizar.</td>
+      </tr>
+      <tr>
+          <td>non-fast-forward</td>
+          <td>Tu push sobrescribe historia existente. Git lo bloquea por seguridad.</td>
+          <td>Usa <code>git pull --rebase</code> o <code>git push --force-with-lease</code> con cautela.</td>
+      </tr>
+      <tr>
+          <td>no upstream configured</td>
+          <td>La rama local no tiene una rama remota asociada.</td>
+          <td>Añade upstream: <code>git push -u origin &lt;branch&gt;</code></td>
+      </tr>
+      <tr>
+          <td>permission denied</td>
+          <td>No tienes acceso al remoto (credenciales, permisos, SSH).</td>
+          <td>Verifica token de acceso, SSH keys o tus privilegios.</td>
+      </tr>
+      <tr>
+          <td>fatal: repository not found</td>
+          <td>URL incorrecta o el repo no existe (a veces error de autenticación).</td>
+          <td>Verifica la URL del remoto: <code>git remote -v</code></td>
+      </tr>
+  </tbody>
+</table>
+<h3 id="155-alternativas-de-push-para-casos-conflictivos">
+  1.5.5 Alternativas de push para casos conflictivos
+  <a class="anchor" href="#155-alternativas-de-push-para-casos-conflictivos">#</a>
+</h3>
+<p><strong><code>git push --force</code></strong>
+✅ Reescribe la rama remota sin pedir permiso.
+⛔ Puede borrar commits ajenos: peligroso para repos colaborativos.</p>
+<p><strong><code>git push --force-with-lease</code></strong>
+✅ Fuerza el push solo si nadie más ha actualizado el remoto desde tu último pull.
+👍 Más seguro: evita sobrescribir trabajo reciente de otros</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-tpl" data-lang="tpl"><span style="display:flex;"><span>Situación: conflicto de ramas
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Local:    A---B---C   (main)
+</span></span><span style="display:flex;"><span>Remoto:   A---B---X   (origin/main)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Intento de push:
+</span></span><span style="display:flex;"><span>        ❌ rejected (non-fast-forward)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Resolución:
+</span></span><span style="display:flex;"><span>        ✅ pull --rebase
+</span></span><span style="display:flex;"><span>        ✅ push --force-with-lease
+</span></span></code></pre></div><blockquote class="book-hint info">
+  
+El commit X en remoto no está en local. Por eso el push se rechaza hasta resolver el conflicto
+
+</blockquote>
+
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-git-networking-clone-fetch-pull-push"><strong>1 Git Networking: clone, fetch, pull, push</strong></a></li>
+    <li><a href="#11-escenario-base-git-clone">1.1 Escenario base: <code>git clone</code></a></li>
+    <li><a href="#12-sincronización-fetch">1.2 Sincronización: <code>fetch</code></a>
+      <ul>
+        <li><a href="#qué-es-git-fetch">¿Qué es <code>git fetch</code>?</a></li>
+        <li><a href="#qué-hace-exactamente">¿Qué hace exactamente?</a></li>
+        <li><a href="#ejemplo-usando-git-fetch">Ejemplo: usando <code>git fetch</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#13-sincronización-git-pull">1.3 Sincronización: <code>git pull</code></a>
+      <ul>
+        <li><a href="#qué-es-git-pull">¿Qué es <code>git pull</code>?</a></li>
+        <li><a href="#ejemplo-usando-pull">Ejemplo: usando <code>pull</code></a></li>
+        <li><a href="#ejemplo-cli-flujo-interno-de-git-pull">Ejemplo CLI: flujo interno de <code>git pull</code></a></li>
+      </ul>
+    </li>
+    <li><a href="#14-opciones-de-fusión-local-en-git-pull-y-git-merge">1.4 Opciones de fusión local en <code>git pull</code> y <code>git merge</code></a>
+      <ul>
+        <li><a href="#ejemplo-cli-uso-de-opciones">Ejemplo CLI: uso de opciones</a></li>
+        <li><a href="#141-git-pull-usando-fast-forward">1.4.1 Git pull usando fast-forward</a></li>
+        <li><a href="#142-git-pull-con-conflictos-de-cambios-no-comiteados">1.4.2 Git pull con conflictos de cambios no comiteados</a></li>
+        <li><a href="#143-git-pull-con-merge---no-ff">1.4.3 Git pull con merge (<code>--no-ff</code>)</a></li>
+      </ul>
+    </li>
+    <li><a href="#15-sincronización-push">1.5 Sincronización: push</a>
+      <ul>
+        <li><a href="#151-qué-hace-la-opción--u-">1.5.1 ¿Qué hace la opción <code>-u</code> ?</a></li>
+        <li><a href="#152-diagnóstico-de-seguimiento-con--vv">1.5.2 Diagnóstico de seguimiento con <code>-vv</code></a></li>
+        <li><a href="#153-buenas-prácticas">1.5.3 Buenas prácticas</a></li>
+        <li><a href="#154-errores-frecuentes-en-git-push">1.5.4 Errores frecuentes en <code>git push</code></a></li>
+        <li><a href="#155-alternativas-de-push-para-casos-conflictivos">1.5.5 Alternativas de push para casos conflictivos</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

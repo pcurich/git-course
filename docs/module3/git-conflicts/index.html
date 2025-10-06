@@ -1,0 +1,1108 @@
+<!DOCTYPE html>
+<html lang="en-es" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="
+  1 Revisión de los merges en los conflictos
+  #
+
+
+  1.1 ¿Por qué ocurren los conflictos?
+  #
+
+Los conflictos de merge se presentan cuando Git no puede aplicar automáticamente los cambios porque dos ramas han editado la misma línea o zona de un archivo, y no sabe cuál conservar. Git detiene el merge e indica que el usuario debe intervenir manualmente.
+
+  1.2 Comprobación de estado antes del merge
+  #
+
+git status
+Git indica los archivos con conflictos usando mensajes como:">
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#343a40">
+<meta name="color-scheme" content="light dark"><meta property="og:url" content="https://pcurich.github.io/git-course/docs/module3/git-conflicts/">
+  <meta property="og:site_name" content="Aprendiendo GIT">
+  <meta property="og:title" content="Resolving Merge Conflicts">
+  <meta property="og:description" content="1 Revisión de los merges en los conflictos # 1.1 ¿Por qué ocurren los conflictos? # Los conflictos de merge se presentan cuando Git no puede aplicar automáticamente los cambios porque dos ramas han editado la misma línea o zona de un archivo, y no sabe cuál conservar. Git detiene el merge e indica que el usuario debe intervenir manualmente.
+1.2 Comprobación de estado antes del merge # git status Git indica los archivos con conflictos usando mensajes como:">
+  <meta property="og:locale" content="en_es">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="docs">
+<title>Resolving Merge Conflicts | Aprendiendo GIT</title>
+<link rel="icon" href="/git-course/favicon.png" >
+<link rel="manifest" href="/git-course/manifest.json">
+<link rel="canonical" href="https://pcurich.github.io/git-course/docs/module3/git-conflicts/">
+<link rel="stylesheet" href="/git-course/book.min.aa960edff0d323115794a139959a7ff8216cd0ab3e9b0cfa19a5f5632706f065.css" integrity="sha256-qpYO3/DTIxFXlKE5lZp/&#43;CFs0Ks&#43;mwz6GaX1YycG8GU=" crossorigin="anonymous">
+  <script defer src="/git-course/fuse.min.js"></script>
+  <script defer src="/git-course/en.search.min.c005432891098f70c1186f3af3f6af0dabf9bf493f457711d25a7c63d6ec0504.js" integrity="sha256-wAVDKJEJj3DBGG868/avDav5v0k/RXcR0lp8Y9bsBQQ=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/git-course/"><span>Aprendiendo GIT</span>
+  </a>
+</h2>
+
+
+<div class="book-search hidden">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+<script>document.querySelector(".book-search").classList.remove("hidden")</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-0583d809ff828f7ece682637ad51710f" class="toggle"  />
+    <label for="section-0583d809ff828f7ece682637ad51710f" class="flex">
+      <a role="button" class="flex-auto ">Modulo 1</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-started/" class="">Git Started</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-new-repo/" class="">Git New Repo</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-locations/" class="">Git Locations</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-graph-model/" class="">Git Graph Model</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-id/" class="">Git ID</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-recovery/" class="">Git Recovery</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module1/git-diff/" class="">Git Diff</a>
+  
+
+        </li>
+      
+    
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/" class="">Example Site</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/" class="">Table of Contents</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/with-toc/" class="">With ToC</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/table-of-contents/without-toc/" class="">Without ToC</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-4f3421012f8885d45c66914026960960" class="toggle"  />
+    <label for="section-4f3421012f8885d45c66914026960960" class="flex">
+      <a role="button" class="flex-auto ">Collapsed</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/" class="">3rd Level</a>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/example/collapsed/3rd-level/4th-level/" class="">4th Level</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="toggle"  />
+    <label for="section-18b5d91ac9c82da0c7ef76eda35b39c3" class="flex">
+      <a role="button" class="flex-auto ">Modulo 2</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-references/" class="">Git References</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-branch/" class="">Git Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module2/git-merge-i/" class="">Git Merge I</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-d7fb35025025d7ea65ade35b112be037" class="toggle" checked />
+    <label for="section-d7fb35025025d7ea65ade35b112be037" class="flex">
+      <a role="button" class="flex-auto ">Modulo 3</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-conflicts/" class="active">Resolving Merge Conflicts</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-tracking-branch/" class="">Git Tracking Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-networking/" class="">Git Networking</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rebase/" class="">Git Rebase</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module3/git-rewriting-history/" class="">Git Rewriting History</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="toggle"  />
+    <label for="section-e6cdc3b0621b6b86a0f99ed67f747d41" class="flex">
+      <a role="button" class="flex-auto ">Modulo 4</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-introduction/" class="">Git Flow Introduccion</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-install/" class="">Git Flow Install</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-branch/" class="">Git Flow Branch</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/module4/git-flow-cycle/" class="">Git Flow Ciclo</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>Shortcodes</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/buttons/" class="">Buttons</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/columns/" class="">Columns</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/details/" class="">Details</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/expand/" class="">Expand</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/hints/" class="">Hints</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/katex/" class="">Katex</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/mermaid/" class="">Mermaid</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-ae3c858bb40a920b01a03f7a5c536629" class="toggle"  />
+    <label for="section-ae3c858bb40a920b01a03f7a5c536629" class="flex">
+      <a href="/git-course/docs/shortcodes/section/" class="flex-auto ">Section</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/first-page/" class="">First Page</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/section/second-page/" class="">Second Page</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/git-course/docs/shortcodes/tabs/" class="">Tabs</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/git-course/posts/"  >
+        Blog
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/git-course/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <h3>Resolving Merge Conflicts</h3>
+
+  <label for="toc-control">
+    
+    <img src="/git-course/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-revisión-de-los-merges-en-los-conflictos"><strong>1 Revisión de los merges en los conflictos</strong></a>
+      <ul>
+        <li><a href="#11-por-qué-ocurren-los-conflictos">1.1 ¿Por qué ocurren los conflictos?</a></li>
+        <li><a href="#12-comprobación-de-estado-antes-del-merge">1.2 Comprobación de estado antes del merge</a></li>
+        <li><a href="#13-opciones-de-inspección-visual">1.3 Opciones de inspección visual</a></li>
+        <li><a href="#14-buenas-prácticas-para-revisión">1.4 Buenas prácticas para revisión</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-resolviendo-un-conflicto-de-merge"><strong>2 Resolviendo un conflicto de merge</strong></a></li>
+    <li><a href="#simulación-de-conflicto-de-merge-flujo-completo-desde-github"><strong>Simulación de conflicto de merge: flujo completo desde GitHub</strong></a>
+      <ul>
+        <li><a href="#rama-master-flujo-y-cambio">Rama master: flujo y cambio</a></li>
+        <li><a href="#rama-featurex-creación-y-cambio">Rama featureX: creación y cambio</a></li>
+        <li><a href="#intento-de-merge-y-resolución-del-conflicto-en-master">Intento de merge y resolución del conflicto (en master)</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-tabla-resumen"><strong>4 Tabla resumen</strong></a></li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown book-article"><h2 id="1-revisión-de-los-merges-en-los-conflictos">
+  <strong>1 Revisión de los merges en los conflictos</strong>
+  <a class="anchor" href="#1-revisi%c3%b3n-de-los-merges-en-los-conflictos">#</a>
+</h2>
+<h3 id="11-por-qué-ocurren-los-conflictos">
+  1.1 ¿Por qué ocurren los conflictos?
+  <a class="anchor" href="#11-por-qu%c3%a9-ocurren-los-conflictos">#</a>
+</h3>
+<p>Los conflictos de merge se presentan cuando Git no puede aplicar automáticamente los cambios porque dos ramas han editado la misma línea o zona de un archivo, y no sabe cuál conservar. Git detiene el merge e indica que el usuario debe intervenir manualmente.</p>
+<h3 id="12-comprobación-de-estado-antes-del-merge">
+  1.2 Comprobación de estado antes del merge
+  <a class="anchor" href="#12-comprobaci%c3%b3n-de-estado-antes-del-merge">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git status
+</span></span></code></pre></div><p>Git indica los archivos con conflictos usando mensajes como:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>Unmerged paths:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">(</span>use <span style="color:#e6db74">&#34;git restore --staged &lt;file&gt;...&#34;</span> to unstage<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        both modified:   archivo.txt
+</span></span></code></pre></div><p>Ver los cambios implicados</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git diff
+</span></span></code></pre></div><p>O para ver el conflicto directamente en el archivo:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; HEAD
+</span></span><span style="display:flex;"><span>Contenido desde rama base <span style="color:#f92672">(</span>ej. main<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=======</span>
+</span></span><span style="display:flex;"><span>Contenido desde rama fusionada <span style="color:#f92672">(</span>ej. featureX<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt;&gt;&gt;&gt;&gt; featureX
+</span></span></code></pre></div><p>Este marcador indica el área del conflicto.</p>
+<h3 id="13-opciones-de-inspección-visual">
+  1.3 Opciones de inspección visual
+  <a class="anchor" href="#13-opciones-de-inspecci%c3%b3n-visual">#</a>
+</h3>
+<ul>
+<li>git log &ndash;merge: muestra los commits en conflicto.</li>
+<li>gitk o herramientas GUI (Visual Studio Code, GitKraken) pueden facilitar la comparación visual.</li>
+</ul>
+<h3 id="14-buenas-prácticas-para-revisión">
+  1.4 Buenas prácticas para revisión
+  <a class="anchor" href="#14-buenas-pr%c3%a1cticas-para-revisi%c3%b3n">#</a>
+</h3>
+<ul>
+<li>Confirmar en qué parte del código se superponen los cambios.</li>
+<li>Evitar resolver el conflicto sin comprender su causa.</li>
+<li>Consultar al autor del otro cambio si es necesario.</li>
+</ul>
+<h2 id="2-resolviendo-un-conflicto-de-merge">
+  <strong>2 Resolviendo un conflicto de merge</strong>
+  <a class="anchor" href="#2-resolviendo-un-conflicto-de-merge">#</a>
+</h2>
+<p>Cuando Git detecta un conflicto al intentar fusionar dos ramas, intervienen tres commits fundamentales:</p>
+<ul>
+<li>Commit B – El último commit en la rama actual (ej. main). También conocido como &ldquo;ours&rdquo; o &ldquo;mine&rdquo;</li>
+<li>Commit C – El último commit en la rama que se desea integrar (ej. featureX). Refiere a &ldquo;theirs&rdquo;</li>
+<li>Commit A – El antecesor común de ambas ramas. Conocido como &ldquo;merge base&rdquo;
+Git utiliza estos tres puntos para calcular las diferencias y generar los marcadores de conflicto en los archivos afectados.</li>
+</ul>
+
+
+<script src="/git-course/mermaid.min.js"></script>
+
+  <script>mermaid.initialize({
+  "flowchart": {
+    "useMaxWidth":true
+  },
+  "theme": "default"
+}
+)</script>
+
+
+
+
+<pre class="mermaid">
+graph LR
+    HEAD[HEAD]:::puntero --> master[master]:::rama
+    master --> A[Commit A - Merge Base]:::base
+    A --> B[Commit B - Ours]:::actual
+    A --> C[Commit C - Theirs]:::externa
+    C --> featureX[featureX]:::rama
+    %% Etiquetas explicativas
+    A -->|merge base| A
+    B -->|ours| B
+    C -->|theirs| C
+    %% Estilos personalizados
+    classDef puntero fill:#fff3e0,stroke:#ff6f00,stroke-width:2px,rx:10
+    classDef rama fill:#e8f5e9,stroke:#388e3c,stroke-width:2px,rx:10
+    classDef base fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10
+    classDef actual fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,rx:10
+    classDef externa fill:#fce4ec,stroke:#c2185b,stroke-width:2px,rx:10
+</pre>
+
+<p>Pasos para resolver conflictos manualmente:</p>
+<ul>
+<li>Editar el archivo afectado (fileA.txt). Revisa el contenido conflictivo y decide qué fragmentos conservar: los tuyos (ours), los externos (theirs), o una mezcla de ambos.</li>
+<li>Eliminar los marcadores de conflicto. Borra las líneas especiales que Git inserta:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#f92672">&lt;&lt;&lt;&lt;&lt;&lt;</span>&lt; HEAD
+</span></span><span style="display:flex;"><span>...tu contenido...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=======</span>
+</span></span><span style="display:flex;"><span>...contenido de featureX...
+</span></span><span style="display:flex;"><span>&gt;&gt;&gt;&gt;&gt;&gt;&gt; featureX
+</span></span></code></pre></div><ul>
+<li>Guardar los cambios y preparar el archivo para el commit. Agrega el archivo al staging area con:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git add fileA.txt
+</span></span></code></pre></div><ul>
+<li>Completar el merge con un commit. Git reconocerá que el conflicto fue resuelto y permitirá finalizar la fusión:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Conflicto resuelto entre master y featureX&#34;</span>
+</span></span></code></pre></div><ul>
+<li>(Opcional) Eliminar la rama featureX si ya no se necesita</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git branch -d featureX
+</span></span></code></pre></div><h2 id="simulación-de-conflicto-de-merge-flujo-completo-desde-github">
+  <strong>Simulación de conflicto de merge: flujo completo desde GitHub</strong>
+  <a class="anchor" href="#simulaci%c3%b3n-de-conflicto-de-merge-flujo-completo-desde-github">#</a>
+</h2>
+<h3 id="rama-master-flujo-y-cambio">
+  Rama master: flujo y cambio
+  <a class="anchor" href="#rama-master-flujo-y-cambio">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 🌐 Clonar repo remoto y entrar al proyecto</span>
+</span></span><span style="display:flex;"><span>git clone https://github.com/tuusuario/conflicto-demo.git
+</span></span><span style="display:flex;"><span>cd conflicto-demo
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 📝 Crear archivo base en master</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Línea original&#34;</span> &gt; archivo.txt
+</span></span><span style="display:flex;"><span>git add archivo.txt
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Commit inicial en master&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ✏️ Realizar cambio divergente en master</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Cambio desde master&#34;</span> &gt; archivo.txt
+</span></span><span style="display:flex;"><span>git commit -am <span style="color:#e6db74">&#34;Cambio desde master&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 🚀 Push hacia remoto</span>
+</span></span><span style="display:flex;"><span>git push origin master
+</span></span></code></pre></div><h3 id="rama-featurex-creación-y-cambio">
+  Rama featureX: creación y cambio
+  <a class="anchor" href="#rama-featurex-creaci%c3%b3n-y-cambio">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 🌿 Crear rama featureX desde master</span>
+</span></span><span style="display:flex;"><span>git checkout -b featureX
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ✏️ Realizar cambio distinto en featureX</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Cambio desde featureX&#34;</span> &gt; archivo.txt
+</span></span><span style="display:flex;"><span>git commit -am <span style="color:#e6db74">&#34;Cambio desde featureX&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 🚀 Push hacia remoto</span>
+</span></span><span style="display:flex;"><span>git push origin featureX
+</span></span></code></pre></div><h3 id="intento-de-merge-y-resolución-del-conflicto-en-master">
+  Intento de merge y resolución del conflicto (en master)
+  <a class="anchor" href="#intento-de-merge-y-resoluci%c3%b3n-del-conflicto-en-master">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e"># 📍 Volver a master y traer cambios remotos</span>
+</span></span><span style="display:flex;"><span>git checkout master
+</span></span><span style="display:flex;"><span>git pull origin master
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 🔄 Intentar merge con featureX</span>
+</span></span><span style="display:flex;"><span>git merge featureX
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># ⛔ Aparece conflicto en archivo.txt</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 🛠️ Resolver manualmente el conflicto</span>
+</span></span><span style="display:flex;"><span>echo <span style="color:#e6db74">&#34;Resolución combinada del conflicto&#34;</span> &gt; archivo.txt
+</span></span><span style="display:flex;"><span>git add archivo.txt
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#e6db74">&#34;Conflicto resuelto manualmente entre master y featureX&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 🚀 Push del merge resuelto al remoto</span>
+</span></span><span style="display:flex;"><span>git push origin master
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># 🧹 (Opcional) Eliminar rama integrada</span>
+</span></span><span style="display:flex;"><span>git branch -d featureX
+</span></span><span style="display:flex;"><span>git push origin --delete featureX
+</span></span></code></pre></div>
+
+<pre class="mermaid">
+graph TD
+    RemoteRepo["🌐 Repositorio remoto en GitHub"]:::remoto
+    LocalClone["🖥️ Clonación en local"]:::local
+    A["🟠 Commit A - Línea original"]:::base
+    B["🔵 Commit B - Cambio en master"]:::master
+    C["🟣 Commit C - Cambio en featureX"]:::featureX
+    Merge["⛔ Merge con conflicto"]:::error
+    RemoteRepo --> LocalClone
+    LocalClone --> A
+    A --> B
+    A --> C
+    B --> Merge
+    C --> Merge
+    classDef remoto fill:#e1f5fe,stroke:#0277bd,stroke-width:2px,rx:10
+    classDef local fill:#f3e5f5,stroke:#6a1b9a,stroke-width:2px,rx:10
+    classDef base fill:#e0f7fa,stroke:#00796b,stroke-width:2px,rx:10
+    classDef master fill:#e3f2fd,stroke:#1565c0,stroke-width:2px,rx:10
+    classDef featureX fill:#fce4ec,stroke:#c2185b,stroke-width:2px,rx:10
+    classDef error fill:#ffebee,stroke:#c62828,stroke-width:2px,rx:10
+</pre>
+
+<h2 id="4-tabla-resumen">
+  <strong>4 Tabla resumen</strong>
+  <a class="anchor" href="#4-tabla-resumen">#</a>
+</h2>
+<table>
+  <thead>
+      <tr>
+          <th>Acción</th>
+          <th>Comando CLI</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Ver archivos en conflicto</td>
+          <td><code>git status</code></td>
+      </tr>
+      <tr>
+          <td>Identificar diferencias</td>
+          <td><code>git diff</code></td>
+      </tr>
+      <tr>
+          <td>Resolver manualmente</td>
+          <td>Editar + <code>git add</code></td>
+      </tr>
+      <tr>
+          <td>Confirmar resolución</td>
+          <td><code>git commit</code></td>
+      </tr>
+      <tr>
+          <td>Cancelar el merge</td>
+          <td><code>git merge --abort</code></td>
+      </tr>
+      <tr>
+          <td>Forzar contenido de rama actual</td>
+          <td><code>git checkout --ours &lt;archivo&gt;</code></td>
+      </tr>
+      <tr>
+          <td>Forzar contenido fusionado</td>
+          <td><code>git checkout --theirs &lt;archivo&gt;</code></td>
+      </tr>
+  </tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-revisión-de-los-merges-en-los-conflictos"><strong>1 Revisión de los merges en los conflictos</strong></a>
+      <ul>
+        <li><a href="#11-por-qué-ocurren-los-conflictos">1.1 ¿Por qué ocurren los conflictos?</a></li>
+        <li><a href="#12-comprobación-de-estado-antes-del-merge">1.2 Comprobación de estado antes del merge</a></li>
+        <li><a href="#13-opciones-de-inspección-visual">1.3 Opciones de inspección visual</a></li>
+        <li><a href="#14-buenas-prácticas-para-revisión">1.4 Buenas prácticas para revisión</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-resolviendo-un-conflicto-de-merge"><strong>2 Resolviendo un conflicto de merge</strong></a></li>
+    <li><a href="#simulación-de-conflicto-de-merge-flujo-completo-desde-github"><strong>Simulación de conflicto de merge: flujo completo desde GitHub</strong></a>
+      <ul>
+        <li><a href="#rama-master-flujo-y-cambio">Rama master: flujo y cambio</a></li>
+        <li><a href="#rama-featurex-creación-y-cambio">Rama featureX: creación y cambio</a></li>
+        <li><a href="#intento-de-merge-y-resolución-del-conflicto-en-master">Intento de merge y resolución del conflicto (en master)</a></li>
+      </ul>
+    </li>
+    <li><a href="#4-tabla-resumen"><strong>4 Tabla resumen</strong></a></li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
