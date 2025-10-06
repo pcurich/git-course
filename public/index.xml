@@ -5,7 +5,7 @@
     <link>http://localhost:1313/git-course/</link>
     <description>Recent content in Introduction on Aprendiendo GIT</description>
     <generator>Hugo</generator>
-    <language>en-us</language>
+    <language>en-es</language>
     <lastBuildDate>Sun, 28 Sep 2014 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/git-course/index.xml" rel="self" type="application/rss+xml" />
     <item>
@@ -147,6 +147,13 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/git-course/docs/module3/git-rewriting-history/</guid>
       <description>&lt;h2 id=&#34;1-rewriting-history-en-git&#34;&gt;&#xD;&#xA;  &lt;strong&gt;1 Rewriting History en Git&lt;/strong&gt;&#xD;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#1-rewriting-history-en-git&#34;&gt;#&lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;p&gt;Reescribir la historia en Git permite modificar commits existentes, ya sea para corregir errores, pulir el historial, simplificar la integración, o preparar el proyecto para revisión o publicación. Esta sección cubre:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;code&gt;git commit --amend&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;code&gt;git rebase -i&lt;/code&gt; (interactivo)&lt;/li&gt;&#xA;&lt;li&gt;Squash merge (&lt;code&gt;--squash&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;Commits seleccionados (&lt;code&gt;cherry-pick&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;h3 id=&#34;11-amending&#34;&gt;&#xD;&#xA;  1.1 Amending&#xD;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#11-amending&#34;&gt;#&lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;h4 id=&#34;qué-es-amend&#34;&gt;&#xD;&#xA;  ¿Qué es Amend?&#xD;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#qu%c3%a9-es-amend&#34;&gt;#&lt;/a&gt;&#xD;&#xA;&lt;/h4&gt;&#xD;&#xA;&lt;p&gt;&lt;code&gt;git commit --amend&lt;/code&gt; permite modificar el último commit sin crear uno nuevo. Puede usarse para:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Git Flow Introduccion</title>
+      <link>http://localhost:1313/git-course/docs/module4/git-flow-introduction/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/git-course/docs/module4/git-flow-introduction/</guid>
+      <description>&lt;h2 id=&#34;introducción-a-git-flow&#34;&gt;&#xD;&#xA;  Introducción a Git Flow&#xD;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#introducci%c3%b3n-a-git-flow&#34;&gt;#&lt;/a&gt;&#xD;&#xA;&lt;/h2&gt;&#xD;&#xA;&lt;h3 id=&#34;11-qué-es-git-flow&#34;&gt;&#xD;&#xA;  1.1 ¿Qué es Git Flow?&#xD;&#xA;  &lt;a class=&#34;anchor&#34; href=&#34;#11-qu%c3%a9-es-git-flow&#34;&gt;#&lt;/a&gt;&#xD;&#xA;&lt;/h3&gt;&#xD;&#xA;&lt;p&gt;Git Flow es una extensión de Git que define un modelo de ramificación estructurado para gestionar el ciclo de vida de un proyecto de software. Fue propuesto por Vincent Driessen en 2010 y se ha convertido en una práctica común en equipos que trabajan con versiones, despliegues y mantenimiento contin&lt;/p&gt;&#xA;&lt;p&gt;&lt;strong&gt;Características clave:&lt;/strong&gt;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Define roles específicos para cada tipo de rama.&lt;/li&gt;&#xA;&lt;li&gt;Automatiza la creación, fusión y eliminación de ramas.&lt;/li&gt;&#xA;&lt;li&gt;Facilita la organización del trabajo en equipo.&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&lt;strong&gt;Ejemplo visual de ramas:&lt;/strong&gt;&lt;/p&gt;</description>
     </item>
     <item>
       <title>(Hu)go Template Primer</title>
